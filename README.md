@@ -1,23 +1,26 @@
-# TÍTULO DO PROJETO
+# RELATOS BH
+`Curso: Análise e Desenvolvimento de Sistemas`
 
-`CURSO`
+`Disciplina:TRABALHO INTERDISCIPLINAR: APLICAÇÔES MÓVEIS`
 
-`DISCIPLINA`
+`Périodo: 4° SEMESTRE`
 
-`SEMESTRE`
-
-Descrever resumidamente, em um ou dois parágrafos, o projeto que está sendo desenvolvido.
+O APP Relatos BH serve como uma plataforma colaborativa para que os moradores de Belo Horizonte possam relatar problemas estruturais na cidade e validar a veracidade das informações compartilhadas, por meio de fotos, vídeos e de comentarios ajudar a prefeitura identificar os problemas com maior facilidade e agilizar o processo de manutenção o quanto antes.
 
 ## Integrantes
 
-* Nome completo do aluno 1
-* Nome completo do aluno 2
-* Nome completo do aluno 3
-* Nome completo do aluno 4
+* Gabriel Santos Serafim
+* Leandro Augusto Lino Da Costa
+* Armintas Fernandes da Silva Filho
+* Arthur Trindade Bicalho Magalhaes
+* João Lucas De Almeida Menezes
+* Gustavo Soares de Oliveira
+* Matheus Roberto Almeida Sacramento
+
 
 ## Orientador
 
-* Nome completo do professor 1
+* Pedro Felipe Alves de Oliveira
 
 ## Instruções de utilização
 
