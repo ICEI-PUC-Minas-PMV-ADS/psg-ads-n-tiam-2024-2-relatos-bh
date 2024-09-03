@@ -1,11 +1,23 @@
 # Introdução
 
-Texto descritivo com a visão geral do projeto abordado. Inclui o contexto, o problema, os objetivos, a justificativa e o público-alvo do projeto.
+O Relatos BH é um aplicativo que será desenvolvdo para enfrentar os desafios estruturais da Belo Horizonte, proporcionando uma plataforma acessível e colaborativa onde os cidadãos podem reportar problemas como buracos, lixo, falta de iluminação, entre outros quaisquer outros problemas estruturais que a cidade venha a ter. O app busca fomentar a participação cidadã, permitindo que moradores registrem ocorrências através de fotos e vídeos e validem informações já postadas para garantir a veracidade da mesma, contribuindo para uma cidade mais organizada e eficiente. Essas informações são úteis principalmente para que os orgãos responsaveis possam agilizar uma solução para os problemas da cidade, não deixando assim a população aguardando dias para tal solução.
 
 ## Problema
-Nesse momento você deve apresentar o problema que a sua aplicação deve  resolver. No entanto, não é a hora de comentar sobre a aplicação.
+O Relatos BH surge para enfrentar a falta de um canal eficiente e acessível para os moradores de Belo Horizonte reportarem problemas urbanos do dia a dia, como buracos nas ruas, falhas na iluminação pública, acúmulo de lixo, vandalismo e outros danos ao espaço público. Atualmente, muitos cidadãos enfrentam dificuldades para comunicar esses problemas às autoridades competentes de forma rápida e eficaz, uma vez que essas não facilitam o atendimento e demoram até de fato identificarem o problema, o que frequentemente resulta em atrasos na resolução e no agravamento das situações, gerando doenças, problemas de mobilidade, acumulos de sujeira, animais indesejaveis nas vizinhaças entre ouros problemas.
 
-Descreva também o contexto em que essa aplicação será usada, se  houver: empresa, tecnologias, etc. Novamente, descreva apenas o que de  fato existir, pois ainda não é a hora de apresentar requisitos  detalhados ou projetos.
+Além disso, a falta de transparência e de validação das informações compartilhadas dificulta a priorização e o gerenciamento desses problemas por parte das administrações municipais, levando a uma percepção de ineficiência e falta de resposta adequada. Quando se tem certeza do que de fato é o problema a ser resolvido, 50% da solução do problema já está encaminhada.  
+
+O APP Relatos BH visa resolver esses problemas ao criar uma plataforma colaborativa onde os moradores podem não apenas reportar, mas também validar relatos, garantindo a precisão das informações compartilhadas. Com isso, o aplicativo facilita a comunicação direta entre a comunidade, incentivando soluções rápidas e eficientes para os problemas que afetam a qualidade de vida urbana, pois será mais fácil se comunicar posteriormente com as autoridades e demonstrar os problemas existentes. 
+
+## Exemplos
+
+> -Manutenção de Infraestrutura: Moradores podem reportar problemas como buracos nas vias, semáforos quebrados ou sinalização danificada, permitindo uma rápida comunicação com a prefeitura e agilizando a manutenção necessária.
+
+> -Saúde Pública e Limpeza Urbana: O app pode ser usado para relatar acúmulo de lixo, entulho ou focos de insetos e pragas, contribuindo para a higiene da cidade e a prevenção de doenças.
+
+> -Segurança e Ordem Pública: Cidadãos podem usar o app para denunciar situações de vandalismo, iluminação pública apagada ou problemas em áreas de lazer, ajudando a garantir espaços públicos mais seguros e bem cuidados.
+
+
 
 Nesse momento, o grupo pode optar por fazer uso  de ferramentas como Design Thinking, que permite um olhar de ponta a ponta para o problema.
 
