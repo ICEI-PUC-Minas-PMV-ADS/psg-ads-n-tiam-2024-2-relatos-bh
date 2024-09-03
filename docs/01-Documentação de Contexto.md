@@ -18,36 +18,39 @@ O APP Relatos BH visa resolver esses problemas ao criar uma plataforma colaborat
 > -Segurança e Ordem Pública: Cidadãos podem usar o app para denunciar situações de vandalismo, iluminação pública apagada ou problemas em áreas de lazer, ajudando a garantir espaços públicos mais seguros e bem cuidados.
 
 
-
-Nesse momento, o grupo pode optar por fazer uso  de ferramentas como Design Thinking, que permite um olhar de ponta a ponta para o problema.
-
-> **Links Úteis**:
-> - [Objetivos, Problema de pesquisa e Justificativa](https://medium.com/@versioparole/objetivos-problema-de-pesquisa-e-justificativa-c98c8233b9c3)
-> - [Matriz Certezas, Suposições e Dúvidas](https://medium.com/educa%C3%A7%C3%A3o-fora-da-caixa/matriz-certezas-suposi%C3%A7%C3%B5es-e-d%C3%BAvidas-fa2263633655)
-> - [Brainstorming](https://www.euax.com.br/2018/09/brainstorming/)
-
 ## Objetivos
 
-Aqui você deve descrever os objetivos do trabalho indicando que o objetivo geral é desenvolver um software para solucionar o problema apresentado acima. 
+O objetivo geral deste projeto é desenvolver um software, na forma de um aplicativo mobile, que permita solucionar o problema de comunicação ineficiente de problemas urbanos em Belo Horizonte. O aplicativo visa oferecer uma plataforma acessível e colaborativa para que os moradores da cidade possam reportar ocorrências estruturais a principio na região da grande Belo Horizonte/MG como buracos nas ruas, falta de iluminação, lixo acumulado, e outros problemas que afetam a qualidade de vida urbana. Com esse app, visamos impactar positivamente a vida de pessoas que passam por esses problemas diariamente, além de fazer com que a população seja um contribuinte mais ativo na solução dos problemas e que sua voz seja ouvida mais comumente pelas autoridades.
 
-Apresente também alguns (pelo menos 2) objetivos específicos dependendo de onde você vai querer concentrar a sua prática investigativa, ou como você vai aprofundar no seu trabalho.
- 
-> **Links Úteis**:
-> - [Objetivo geral e objetivo específico: como fazer e quais verbos utilizar](https://blog.mettzer.com/diferenca-entre-objetivo-geral-e-objetivo-especifico/)
+Pesquisar formas de fazer uma integração com o orgão público para que o mesmo possa receber um relatório de quais problemas estão sendo mais agravantes na vida das pessoas de BH é um objetivo futuro.
+
+Entre os objetivos específicos do projeto estão:
+
+* Facilitar o registro de problemas urbanos por meio de fotos e vídeos, com localização automática para maior precisão.
+* Promover a validação comunitária dos relatos, permitindo que outros usuários confirmem ou denunciem informações incorretas ou desatualizadas.
+* Manter um ambiente de dados sempre atualizado e confiável, removendo conteúdos considerados incorretos após um número relevante de denúncias válidas.
+* Integrar os relatos a um mapa interativo, oferecendo uma visão geral das ocorrências e ajudando as autoridades locais a priorizar ações corretivas com mais eficácia.
+
+Esses objetivos garantem que o APP Relatos BH funcione como uma ferramenta eficaz para melhorar a comunicação entre os cidadãos e as autoridades municipais, contribuindo para uma cidade mais organizada e bem cuidada. 
 
 ## Justificativa
 
-Descreva a importância ou a motivação para trabalhar com esta aplicação que você escolheu. Indique as razões pelas quais você escolheu seus objetivos específicos ou as razões para aprofundar em certos aspectos do software.
+Dado ao tamanho da nossa cidade é plausivel dizer que se cada cidadão por menor que seja sua contribuição, auxiliar na identficação de um problema as autoridades competentes, a chance de se obter uma solução rápida àquele problema aumenta exponencialmente, uma vez que a prefeitura não tem agentes o suficiente para vistoriar cada problema da cidade diariamente. Pensando nessa possibilidade e no aumento da inclusão das pessoas na solução de problemas que lhes afetam frequentemente, foi pensado na solução prática do Relatos BH.
 
-O grupo de trabalho pode fazer uso de questionários, entrevistas e dados estatísticos, que podem ser apresentados, com o objetivo de esclarecer detalhes do problema que será abordado pelo grupo.
+Nos dias atuais é difícil uma pessoa não ter um smartphone pessoal, por este motivo, um aplicativo mobile para essa solução facilitará a utilização do software. No próprio trajeto que a pessoa fará diariamente poderá ter algo que faça sentido a pessoa sacar o celular do bolso e tirar uma foto/vídeo e documentar aquilo no app.
 
-> **Links Úteis**:
-> - [Como montar a justificativa](https://guiadamonografia.com.br/como-montar-justificativa-do-tcc/)
+Contudo, o APP ainda promoverá uma maior interação sócial e contribuição de toda uma população para um bem comum. Acreditamos que o impacto desta aplicação vai além das soluções fisicas que serão proporcionadas. 
 
 ## Público-Alvo
 
-Descreva quem serão as pessoas que usarão a sua aplicação indicando os diferentes perfis. O objetivo aqui não é definir quem serão os clientes ou quais serão os papéis dos usuários na aplicação. A ideia é, dentro do possível, conhecer um pouco mais sobre o perfil dos usuários: conhecimentos prévios, relação com a tecnologia, relações
-hierárquicas, etc.
+aplicação Relatos BH terá diversos perfis de usuários, cada um com características distintas que influenciam como eles interagem com o app. A seguir segue alguns exemplos de possíveis usuários:
+
+* Cidadãos Comuns: Todas as pessoas que possam estar sendo afetadas ou não pelos problemas que a cidade apresenta. Com um nível básico de relação com a tecnólogia já será possível a interação com a aplicação, tendo em vista que está será de fácil utilização.
+
+
+
+
+
 
 Adicione informações sobre o público-alvo por meio de uma descrição textual, diagramas de personas e mapa de stakeholders.
 
