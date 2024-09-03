@@ -2,25 +2,45 @@
 
 <span style="color:red">Pré-requisitos: <a href="1-Documentação de Contexto.md"> Documentação de Contexto</a></span>
 
-Definição do problema e ideia de solução a partir da perspectiva do usuário. É composta pela definição do  diagrama de personas, histórias de usuários, requisitos funcionais e não funcionais além das restrições do projeto.
+Nesta seção da documentação, abordaremos a definição do problema e a ideia de solução a partir da perspectiva do usuário. A especificação do projeto será composta pelas seguintes partes:
 
-Apresente uma visão geral do que será abordado nesta parte do documento, enumerando as técnicas e/ou ferramentas utilizadas para realizar a especificações do projeto
+1- Diagrama De Personas
+2- História de Usuários
+3- Modelagem do Processo de Negócios
+4- Análise da Situação Atual
+5- Descriação Geral Da Proposta
+6- Indicadores de Desempenho
+7- Requisitos Funcionais e Não Funcionais
+8- Restrições Do Projeto
+9- Diagrama de casos de Uso
+10- Gerenciamento geral do projeto
 
-## Personas
+## 1- Personas
 
-Pedro Paulo tem 26 anos, é arquiteto recém-formado e autônomo. Pensa em se desenvolver profissionalmente através de um mestrado fora do país, pois adora viajar, é solteiro e sempre quis fazer um intercâmbio. Está buscando uma agência que o ajude a encontrar universidades na Europa que aceitem alunos estrangeiros.
+1. Ana Beatriz, 32 anos, Professora
 
-Enumere e detalhe as personas da sua solução. Para tanto, baseie-se tanto nos documentos disponibilizados na disciplina e/ou nos seguintes links:
+Ana é uma professora de ensino fundamental que mora em um bairro movimentado de Belo Horizonte. Ela utiliza o Relatos BH para relatar problemas como buracos nas ruas e falta de iluminação em áreas ao redor da escola onde trabalha. Ana é ativa em redes sociais e busca soluções rápidas e eficazes para melhorar a segurança e a qualidade de vida em sua comunidade. Ela valoriza um aplicativo intuitivo que permita reportar problemas com facilidade, utilizando seu smartphone.
 
-> **Links Úteis**:
-> - [Rock Content](https://rockcontent.com/blog/personas/)
-> - [Hotmart](https://blog.hotmart.com/pt-br/como-criar-persona-negocio/)
-> - [O que é persona?](https://resultadosdigitais.com.br/blog/persona-o-que-e/)
-> - [Persona x Público-alvo](https://flammo.com.br/blog/persona-e-publico-alvo-qual-a-diferenca/)
-> - [Mapa de Empatia](https://resultadosdigitais.com.br/blog/mapa-da-empatia/)
-> - [Mapa de Stalkeholders](https://www.racecomunicacao.com.br/blog/como-fazer-o-mapeamento-de-stakeholders/)
->
-Lembre-se que você deve ser enumerar e descrever precisamente e personalizada todos os clientes ideais que sua solução almeja.
+2. Carlos Silva, 45 anos, Empresário
+
+Carlos é um empresário que possui uma pequena empresa de tecnologia e reside em um bairro com infraestrutura antiga. Ele está preocupado com problemas como o acúmulo de lixo e o estado precário das calçadas. Carlos usa o Relatos BH para reportar esses problemas e também para verificar se os problemas relatados por outros usuários estão sendo resolvidos. Ele tem um bom conhecimento técnico e aprecia funcionalidades avançadas, como o acompanhamento do status dos relatos.
+
+3. Juliana Martins, 27 anos, Estudante de Engenharia
+
+Juliana é uma estudante de engenharia civil que reside em uma área universitária. Ela utiliza o Relatos BH para relatar problemas relacionados à infraestrutura, como postes quebrados e sinalização inadequada. Juliana está muito envolvida com sua comunidade acadêmica e utilizaria o aplicativo para colaborar com colegas e grupos de interesse em projetos de melhorias urbanas. Ela valoriza a capacidade do aplicativo de anexar fotos e vídeos sem que isso afete o seu próprio telefone.
+
+4. Roberto Ferreira, 50 anos, Funcionário Público
+
+Roberto é um funcionário público que trabalha em uma agência governamental e vive em um bairro com muitos problemas de descarte inadequado de entulhos e velhos veículos. Ele usa o Relatos BH para relatar questões que afetam a acessibilidade e a sua sáude, como carros esquecidos, lixo e esgoto a céu aberto, fiação de poste caida. Roberto tem um conhecimento razoável em tecnologia e valoriza um aplicativo que seja fácil de usar e que ofereça informações claras de que outros problemas relatados não são falsos.
+
+5. Mariana Souza, 38 anos, Coordenadora de ONG
+
+Mariana, formada em psicologia e se considera perfectionista .Coordena uma ONG que trabalha com projetos de revitalização urbana e inclusão social. Ela  monitorara problemas relatados por moradores e integra essas informações em seus projetos. Mariana  procura um aplicativo que permita a visualizações de problemas e facilite a colaboração com a comunidade e as autoridades locais. Ela valoriza o contato com a sua comunidade para quem tanto trabalha. 
+
+6. Paulo Henrique, 40 anos, Motorista de Aplicativo
+
+Paulo é motorista de aplicativo e enfrenta problemas diários com a infraestrutura urbana, como buracos nas ruas e sinalização inadequada. Ele usa o Relatos BH para reportar esses problemas e garantir que sejam resolvidos, visando melhorar a segurança para ele e seus passageiros. Paulo busca um aplicativo simples e rápido de usar, que permita enviar relatórios enquanto está em movimento. 
+
 
 ## Histórias de Usuários
 
