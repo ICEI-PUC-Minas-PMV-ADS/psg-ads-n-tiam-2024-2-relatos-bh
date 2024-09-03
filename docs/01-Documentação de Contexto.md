@@ -47,15 +47,19 @@ aplicação Relatos BH terá diversos perfis de usuários, cada um com caracter�
 
 * Cidadãos Comuns: Todas as pessoas que possam estar sendo afetadas ou não pelos problemas que a cidade apresenta. Com um nível básico de relação com a tecnólogia já será possível a interação com a aplicação, tendo em vista que está será de fácil utilização.
 
+* Autoridades e Gestores Públicos: possuem conhecimento avançado em tecnologia e utilizam ferramentas digitais para monitorar e gerenciar a cidade. Sua relação com o Relatos BH é crucial, pois eles poderão verificar os relatos submetidos pelos cidadãos, analisarem a prioridade dos problemas e coordenarem as ações necessárias para sua resolução. A eficiência do aplicativo facilita a identificação e a resposta rápida a problemas urbanos, ajudando a manter a cidade organizada e funcionando de forma eficiente.
+
+* Imprensas: Elas utilizam o Relatos BH para monitorar questões relacionadas à infraestrutura urbana, saúde pública e meio ambiente. Essas organizações ajudam a analisar os dados coletados pelo aplicativo, promovem campanhas de conscientização e colaboram com autoridades para implementar soluções. A integração com o Relatos BH permite que as ONGs aumentem a eficácia de suas iniciativas e contribuam diretamente para a melhoria das condições urbanas.
+  
+* Ongs: Elas utilizam o Relatos BH para monitorar questões relacionadas à infraestrutura urbana, saúde pública e meio ambiente. Essas organizações ajudam a analisar os dados coletados pelo aplicativo, promovem campanhas de conscientização e colaboram com autoridades para implementar soluções. A utilização do Relatos BH permite que as ONGs aumentem a eficácia de suas iniciativas e contribuam diretamente para a melhoria das condições urbanas.
+
+* Empresas que prestam serviçso de Reparos: Empresas especializadas em serviços de conserto e manutenção urbana. Com acesso aos relatos do Relatos BH, essas empresas podem receber informações detalhadas sobre problemas específicos, como buracos nas ruas ou iluminação pública defeituosa. Isso permite que elas planejem e priorizem suas atividades de forma mais eficiente, oferencendo seus serviços a quem estará a disposição para contrata-los(principalmente a própria prefeitura), melhorando a resposta e a qualidade dos serviços prestados. 
 
 
 
 
+##Diagrama de Personas
 
 Adicione informações sobre o público-alvo por meio de uma descrição textual, diagramas de personas e mapa de stakeholders.
 
-> **Links Úteis**:
-> - [Público-alvo](https://blog.hotmart.com/pt-br/publico-alvo/)
-> - [Como definir o público alvo](https://exame.com/pme/5-dicas-essenciais-para-definir-o-publico-alvo-do-seu-negocio/)
-> - [Público-alvo: o que é, tipos, como definir seu público e exemplos](https://klickpages.com.br/blog/publico-alvo-o-que-e/)
-> - [Qual a diferença entre público-alvo e persona?](https://rockcontent.com/blog/diferenca-publico-alvo-e-persona/)
+
