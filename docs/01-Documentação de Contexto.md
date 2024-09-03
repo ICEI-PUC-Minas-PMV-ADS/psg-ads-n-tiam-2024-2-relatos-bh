@@ -55,11 +55,3 @@ aplicação Relatos BH terá diversos perfis de usuários, cada um com caracter�
 
 * Empresas que prestam serviçso de Reparos: Empresas especializadas em serviços de conserto e manutenção urbana. Com acesso aos relatos do Relatos BH, essas empresas podem receber informações detalhadas sobre problemas específicos, como buracos nas ruas ou iluminação pública defeituosa. Isso permite que elas planejem e priorizem suas atividades de forma mais eficiente, oferencendo seus serviços a quem estará a disposição para contrata-los(principalmente a própria prefeitura), melhorando a resposta e a qualidade dos serviços prestados. 
 
-
-
-
-##Diagrama de Personas
-
-Adicione informações sobre o público-alvo por meio de uma descrição textual, diagramas de personas e mapa de stakeholders.
-
-
