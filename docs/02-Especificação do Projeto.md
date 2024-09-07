@@ -79,7 +79,7 @@ As tabelas que se seguem apresentam os requisitos funcionais e não funcionais q
 |RF-006| Fazer o perfil do usuário, com uma foto do mesmo, uma breve sua descrição e os relatos feitos   | MÉDIA |
 |RF-007| Dispor os relatos no mapa interativo para que o usuário possa ver   | ALTA |
 |RF-008| Fazer um rápidissimo loading com a logo da Relatos BH toda vez que o usuário entrar no app  | BAIXA |
-|RF-002| Na tela inicial, fazer um footer com 03 botões clicaveis(MAPA, RELATAR E PERFIL   | ALTA |
+|RF-009| Na tela inicial, fazer um footer com 03 botões clicaveis(MAPA, RELATAR E PERFIL)   | ALTA |
 |RF-002| Emitir um relatório de tarefas no mês   | MÉDIA |
 |RF-002| Emitir um relatório de tarefas no mês   | MÉDIA |
 |RF-002| Emitir um relatório de tarefas no mês   | MÉDIA |
@@ -123,6 +123,7 @@ O projeto está restrito pelos itens apresentados na tabela a seguir.
 |02| Todo novo relato feito pelo usuário deve conter 01(uma) ou mais fotos do problema       |
 |03| Todo novo relato feito pelo usuário deve conter uma descrição do problema       |
 |04| Todo novo relato feito pelo usuário deve conter a localização do problema      |
+|05| O projeto não deverá ser feito por terceiros|
 
 Enumere as restrições à sua solução. Lembre-se de que as restrições geralmente limitam a solução candidata.
 
