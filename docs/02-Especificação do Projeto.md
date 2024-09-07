@@ -76,11 +76,12 @@ As tabelas que se seguem apresentam os requisitos funcionais e não funcionais q
 |RF-003| Disponibilizar visualmente um mapa para o cliente visualizar a região   | ALTA |
 |RF-004| Permitir que o usuário faça modificações nos relatos dele mesmo   | MÉDIA |
 |RF-005| Permitir que o usuário visualize os relatos que ele mesmo fez em seu perfil    | MÉDIA |
-|RF-006| Fazer o perfil do usuário, com uma foto do mesmo, uma breve sua descrição e os relatos feitos   | MÉDIA |
-|RF-007| Dispor os relatos no mapa interativo para que o usuário possa ver   | ALTA |
-|RF-008| Fazer um rápidissimo loading com a logo da Relatos BH toda vez que o usuário entrar no app  | BAIXA |
-|RF-009| Na tela inicial, fazer um footer com 03 botões clicaveis(MAPA, RELATAR E PERFIL)   | ALTA |
-|RF-002| Emitir um relatório de tarefas no mês   | MÉDIA |
+|RF-006| Permitir que o usuário exclua o próprio relato | MÉDIA |
+|RF-007| Fazer o perfil do usuário, com uma foto do mesmo, uma breve sua descrição e os relatos feitos   | MÉDIA |
+|RF-008| Dispor os relatos no mapa interativo para que o usuário possa ver   | ALTA |
+|RF-009| Fazer um rápidissimo loading com a logo da Relatos BH toda vez que o usuário entrar no app  | BAIXA |
+|RF-010| Na tela inicial, fazer um footer com 03 botões clicaveis(MAPA, RELATAR E PERFIL)   | ALTA |
+|RF-011| Permitir que o sistema tenha um filtro, para filtrar os relatos por categoria | ALTA |
 |RF-002| Emitir um relatório de tarefas no mês   | MÉDIA |
 |RF-002| Emitir um relatório de tarefas no mês   | MÉDIA |
 |RF-002| Emitir um relatório de tarefas no mês   | MÉDIA |
