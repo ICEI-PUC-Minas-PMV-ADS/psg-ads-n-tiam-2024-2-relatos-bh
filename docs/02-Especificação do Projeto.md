@@ -77,27 +77,30 @@ As tabelas que se seguem apresentam os requisitos funcionais e não funcionais q
 |RF-004| Permitir que o usuário faça modificações nos relatos dele mesmo   | MÉDIA |
 |RF-005| Permitir que o usuário visualize os relatos que ele mesmo fez em seu perfil    | MÉDIA |
 |RF-006| Permitir que o usuário exclua o próprio relato | MÉDIA |
-|RF-007| Fazer o perfil do usuário, com uma foto do mesmo, uma breve sua descrição e os relatos feitos   | MÉDIA |
-|RF-008| Dispor os relatos no mapa interativo para que o usuário possa ver   | ALTA |
-|RF-009| Fazer um rápidissimo loading com a logo da Relatos BH toda vez que o usuário entrar no app  | BAIXA |
-|RF-010| Na tela inicial, fazer um footer com 03 botões clicaveis(MAPA, RELATAR E PERFIL)   | ALTA |
-|RF-011| Permitir que o sistema tenha um filtro, para filtrar os relatos por categoria | ALTA |
-|RF-002| Emitir um relatório de tarefas no mês   | MÉDIA |
-|RF-002| Emitir um relatório de tarefas no mês   | MÉDIA |
-|RF-002| Emitir um relatório de tarefas no mês   | MÉDIA |
-|RF-002| Emitir um relatório de tarefas no mês   | MÉDIA |
-|RF-002| Emitir um relatório de tarefas no mês   | MÉDIA |
-|RF-002| Emitir um relatório de tarefas no mês   | MÉDIA |
-|RF-002| Emitir um relatório de tarefas no mês   | MÉDIA |
-|RF-002| Emitir um relatório de tarefas no mês   | MÉDIA |
-
+|RF-007| O perfil do usuário deverá conter os relatos feitos por ele | MÉDIA |
+|RF-008| Dispor os relatos no mapa interativo para que o usuário possa ver | ALTA |
+|RF-010| A tela inicial deverá conter um botão clicável para acessar a tela de MAPA  | ALTA |
+|RF-011| A tela inicial deverá conter um botão clicável para acessar a tela para ADICIONAR NOVO RELATO  | ALTA |
+|RF-012| A tela inicial deverá conter um botão clicável para acessar a tela de PERFIL  | ALTA |
+|RF-013| Permitir que o sistema tenha um filtro, para filtrar os relatos por categoria | ALTA |
+|RF-014| Permitir que os usuários avaliem outros relatios com um like/deslike | MÉDIA |
+|RF-015| Permitir que os usuários avaliem outros relatios com um like/deslike | MÉDIA |
+|RF-016| Ao tirar uma foto de um problema a partir da câmera, o sistema deve pegar a localização atual e auto completar no campo de localização | MÉDIA |
+|RF-017| Permitir que o usuário selecione no mapa o local desejado para o registro do novo relato | MÉDIA |
+|RF-018| Permitir que o usuário adicione a foto da galeria ao registrar um novo relato | MÉDIA |
+|RF-019| Permitir que o usuário tire uma foto da câmera ao registrar um novo relato | MÉDIA |
+|RF-020| Permitir que os usuários avaliem outros relatios com um like/deslike | MÉDIA |
+|RF-021| Emitir um relatório de tarefas no mês   | BAIXA |
 
 ### Requisitos não Funcionais
 
 |ID     | Descrição do Requisito  |Prioridade |
 |-------|-------------------------|----|
 |RNF-001| O sistema deve ser responsivo para rodar em um dispositivos móvel | MÉDIA | 
+|RNF-009| Fazer uma splash screen com a logo da Relatos BH toda vez que o usuário entrar no app | BAIXA |
 |RNF-002| Deve processar requisições do usuário em no máximo 3s |  BAIXA | 
+|RNF-003| A inicialização do aplicativo deve ser de no máximo 3 segundos | MÉDIA |
+|RNF-004| O aplicativo deve dar suporte para tema claro/escuro | BAIXA |
 
 Com base nas Histórias de Usuário, enumere os requisitos da sua solução. Classifique esses requisitos em dois grupos:
 
@@ -172,4 +175,11 @@ O gerenciamento adequado de tarefas contribuirá para que o projeto alcance alto
 
 O processo de determinar o orçamento do projeto é uma tarefa que depende, além dos produtos (saídas) dos processos anteriores do gerenciamento de custos, também de produtos oferecidos por outros processos de gerenciamento, como o escopo e o tempo.
 
-![Orçamento](img/02-orcamento.png)
+| Recurso Necessário  | (R$) |
+| ------------- | ------------- |
+| Recursos humanos  | 260.000,00  |
+| Hardware  | 5.000,00  |
+| Rede  | 2.000,00  |
+| Software  | 4.500.00  |
+| Serviços  | 6.000.00  |
+| Total  | 277.500,00  |
