@@ -84,13 +84,11 @@ As tabelas que se seguem apresentam os requisitos funcionais e não funcionais q
 |RF-012| A tela inicial deverá conter um botão clicável para acessar a tela de PERFIL  | ALTA |
 |RF-013| Permitir que o sistema tenha um filtro, para filtrar os relatos por categoria | ALTA |
 |RF-014| Permitir que os usuários avaliem outros relatos com um like/deslike | MÉDIA |
-|RF-015| Permitir que os usuários avaliem outros relatos com um like/deslike | MÉDIA |
-|RF-016| Ao tirar uma foto de um problema a partir da câmera, o sistema deve pegar a localização atual e auto completar no campo de localização | MÉDIA |
-|RF-017| Permitir que o usuário selecione no mapa o local desejado para o registro do novo relato | MÉDIA |
-|RF-018| Permitir que o usuário adicione a foto da galeria ao registrar um novo relato | MÉDIA |
-|RF-019| Permitir que o usuário tire uma foto da câmera ao registrar um novo relato | MÉDIA |
-|RF-020| Permitir que os usuários avaliem outros relatios com um like/deslike | MÉDIA |
-|RF-021| Emitir um relatório de tarefas no mês   | BAIXA |
+|RF-015| Ao tirar uma foto de um problema a partir da câmera, o sistema deve pegar a localização atual e auto completar no campo de localização | MÉDIA |
+|RF-016| Permitir que o usuário selecione no mapa o local desejado para o registro do novo relato | MÉDIA |
+|RF-017| Permitir que o usuário adicione a foto da galeria ao registrar um novo relato | MÉDIA |
+|RF-018| Permitir que o usuário tire uma foto da câmera ao registrar um novo relato | MÉDIA |
+|RF-019| Emitir um relatório de tarefas no mês   | BAIXA |
 
 ### Requisitos não Funcionais
 
