@@ -78,15 +78,30 @@ Gerencia de codigo e projeto
 
 ![image](https://github.com/user-attachments/assets/d6e9c017-dd56-403a-83b7-41ee6bda07cc)
 
+**Visual Studio Code**: ferramenta consolidada no mercado para desenvolvimento react native.
 
-- [Visual Studio Code](https://code.visualstudio.com/) Editor de código.
-- [Discord](https://discord.com/)/[WhatsApp](https://web.whatsapp.com/) Ferramentas de comunicação
-- [Excalidraw](https://excalidraw.com/)/[Figma](https://figma.com/) Ferramentas de desenho de tela (_wireframing_)
+**Android Studio**: utilizaremos para possíveis integrações com o Google Maps, permissões de localização, galeria e câmera.
 
-O editor de código foi escolhido porque ele possui uma integração com o sistema de versão. As ferramentas de comunicação utilizadas possuem integração semelhante e por isso foram selecionadas. Por fim, para criar diagramas utilizamos essa ferramenta por melhor captar as necessidades da nossa solução.
+![image](https://github.com/user-attachments/assets/1c443690-4299-46e0-af04-c83f656577be)
 
-Liste quais ferramentas foram empregadas no desenvolvimento do projeto, justificando a escolha delas, sempre que possível.
- 
-> **Possíveis Ferramentas que auxiliarão no gerenciamento**: 
-> - [Slack](https://slack.com/)
-> - [Github](https://github.com/)
+**Azure:** para hospedagem do banco de dados relacional. 
+
+**SQL Server:** como SGBD.
+
+**DBeaver:** para acesso remoto ao banco de dados.
+
+**Firebase:** Gerenciamento de usuários e armazenamento de arquivos de imagem.
+
+![image](https://github.com/user-attachments/assets/40c7742a-8f75-4700-ba4c-a3fca571f793)
+
+**Figma**: prototipação de telas
+
+**Excalidraw**: wireframes e desenhos de arquitetura.
+
+![image](https://github.com/user-attachments/assets/6d09c718-8eab-4cf2-96e5-2efa9cae8024)
+
+**Comunicação com time** será feito via Whatsapp e Discord.
+
+**Comunicação com o stakeholder** será feita via Whatsapp.
+
+
