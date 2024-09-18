@@ -43,7 +43,8 @@ Discuta como a configuração do projeto foi feita na ferramenta de versionament
 
 Utilizaremos o GitFlow para realizar o gerenciamento de branches. Uma vez que a branch `main` será o reflexo de produção e a branch `develop` conterá as funcionalidades desenvolvidas na sprint atual.
 
-![image](https://github.com/user-attachments/assets/623e3431-7ffa-4268-ae96-58248e52c8ce)
+![image](https://github.com/user-attachments/assets/8dca0b32-9683-44e8-80df-0f3eb0fe0a7f)
+
 
 ## Gerenciamento de Projeto
 
@@ -51,18 +52,32 @@ Utilizaremos o GitFlow para realizar o gerenciamento de branches. Uma vez que a 
 
 A equipe utiliza metodologias ágeis, tendo escolhido o Scrum como base para definição do processo de desenvolvimento. A equipe está organizada da seguinte maneira:
 
-- Scrum Master: Gustavo Soares de Oliveira;
-- Product Owner: Leandro Augusto Lino Da Costa;
-- Equipe de Desenvolvimento: João Lucas De Almeida Menezes, Gabriel Santos Serafim;
-- Equipe de Design: Armintas Fernandes da Silva Filho, Arthur Trindade Bicalho Magalhaes, Matheus Roberto Almeida Sacramento.
+- Scrum Master: Gustavo Soares;
+- Product Owner: Gabriel Santos;
+- Equipe de Desenvolvimento: João Lucas, Armintas Fernande, Arthur Trindade, Matheus Roberto;
+- Equipe de Design: Leandro Augusto.
 
 ### Processo
+
+Faremos reuniões **semanais** para reporte de status e alinhamento entre os times. 
+As sprints terão duração de **2 semanas**.
+
+O gerenciamento do projeto seguirá o seguinte fluxo:
+
+![image](https://github.com/user-attachments/assets/4b95a407-682f-4181-b05e-d342ef13e97e)
 
 Coloque  informações sobre detalhes da implementação do Scrum seguido pelo grupo. O grupo deverá fazer uso do recurso de gerenciamento de projeto oferecido pelo GitHub, que permite acompanhar o andamento do projeto, a execução das tarefas e o status de desenvolvimento da solução.
 
 ### Ferramentas
 
 As ferramentas empregadas no projeto são:
+
+Gerencia de codigo e projeto
+
+![image](https://github.com/user-attachments/assets/03c680e7-b092-4445-bf37-7584f6ecc4ad)
+
+![image](https://github.com/user-attachments/assets/d6e9c017-dd56-403a-83b7-41ee6bda07cc)
+
 
 - [Visual Studio Code](https://code.visualstudio.com/) Editor de código.
 - [Discord](https://discord.com/)/[WhatsApp](https://web.whatsapp.com/) Ferramentas de comunicação
