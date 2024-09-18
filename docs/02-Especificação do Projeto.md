@@ -44,21 +44,21 @@ Paulo é motorista de aplicativo e enfrenta problemas diários com a infraestrut
 
 ## Histórias de Usuários
 
-### História 1 - Como usuário, desejo poder visualizar um mapa dinâmico onde eu possa visualizar os problemas apontados pelos outros usuários de uma forma prática e rápida, por região que estou visualizando no mapa no momento. Isso me deixara visualizar os problemas com facilidade.
+### História 1 - Como usuário, desejo visualizar um mapa dinâmico onde eu possa visualizar os problemas apontados pelos outros usuários de uma forma prática e rápida, por região que estou visualizando no mapa no momento. Isso me deixara visualizar os problemas com facilidade.
 
-### História 2 - Como morador de um bairro onde ocorre diversos problemas, eu quero poder inserir diversos problemas no aplicativo e poder visualizar as minhas contribuições, para que eu possa entender melhor quais problemas já foram relatados por mim.
+### História 2 - Como morador de um bairro onde ocorre diversos problemas, eu quero relatar problemas e visualizar as minhas contribuições, para que eu possa entender melhor quais problemas já foram relatados por mim.
 
-### História 3 - Eu como Pedro, quero poder editar os meus relatos(fotos, descrição, tipo e até a localização), as vezes na correria do dia a dia eu posso ter colocado alguma informação errada e gostaria de alterar. Ajudaria inclusive a não ceder informações falsas.
+### História 3 - Eu como usuário final, posso editar os meus relatos(fotos, descrição, tipo e até a localização), as vezes na correria do dia a dia eu posso ter colocado alguma informação errada e gostaria de alterar. Ajudaria inclusive a não ceder informações falsas.
 
-### História 4 - Eu como Gabriel, quero poder ter um perfil onde posso editar minha foto e meu nome para as pessoas saberem que foi eu quem fiz os relatos e assim ajudar minha comunidade.
+### História 4 - Eu como usuário final, quero poder ter um perfil onde posso editar minha foto e meu nome para as pessoas saberem que foi eu quem fiz os relatos e assim ajudar minha comunidade.
 
 ### História 5 - Como utilizador do sistema, gostaria que tivesse um filtro dos relatos que já foram feitos para que eu não ficasse vageando entre os mais de mil relatos e achar o que me interesa visualizar no momento.
 
 ### História 6 - Eu como funcionário público, desejo saber quais áreas tiveram mais relatos e que isso possa me auxiliar na identificação dos problemas na cidade e assim provisionar soluções práticas rapidamente.
 
-### História 7 - Eu como Arthur, quero poder avaliar se algum relato foi feito corretamente, pois se não, quero avaliar que esse relato está errado e até saia da plataforma. Assim, posso garantir se as informações estão sendo inseridas corretamente.
+### História 7 - Eu como usuário final, quero poder avaliar se algum relato foi feito corretamente, pois se não, quero avaliar que esse relato está errado e até saia da plataforma. Assim, posso garantir se as informações estão sendo inseridas corretamente.
 
-### História 8 - Eu como Vitor, quero poder inserir os meus relatos a partir de onde estou no momento, podendo tirar uma foto já pelo app para poder subi-la pra não ficar tirando fotos e depois indo no app para subir.
+### História 8 - Eu como usuário final, quero poder inserir os meus relatos a partir de onde estou no momento, podendo tirar uma foto já pelo app para poder subi-la pra não ficar tirando fotos e depois indo no app para subir.
 
 ### História 9 - Eu como primeiro usuário do sistemas, gostaria de fazer meu cadastro no app por apps como o google para facilitar o processo de cadastro.
 
