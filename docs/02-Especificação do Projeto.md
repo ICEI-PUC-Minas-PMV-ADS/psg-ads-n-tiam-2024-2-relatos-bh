@@ -94,11 +94,14 @@ As tabelas que se seguem apresentam os requisitos funcionais e não funcionais q
 
 |ID     | Descrição do Requisito  |Prioridade |
 |-------|-------------------------|----|
-|RNF-001| O sistema deve ser responsivo para rodar em um dispositivos móvel | MÉDIA | 
-|RNF-009| Fazer uma splash screen com a logo da Relatos BH toda vez que o usuário entrar no app | BAIXA |
-|RNF-002| Deve processar requisições do usuário em no máximo 3s |  BAIXA | 
-|RNF-003| A inicialização do aplicativo deve ser de no máximo 3 segundos | MÉDIA |
-|RNF-004| O aplicativo deve dar suporte para tema claro/escuro | BAIXA |
+|RNF-001| O sistema deve ser responsivo para rodar em um dispositivos Android e IOS | ALTA | 
+|RNF-002| O sistema deve ser protegido contra acesso não autorizado | ALTA |
+|RNF-003| Fazer uma splash screen com a logo da Relatos BH toda vez que o usuário entrar no app | BAIXA |
+|RNF-004| Deve processar requisições do usuário em no máximo 3s |  BAIXA | 
+|RNF-005| A inicialização do aplicativo deve ser de no máximo 3 segundos | MÉDIA |
+|RNF-006| O aplicativo deve dar suporte para tema claro/escuro | BAIXA |
+|RNF-007| O sistema deve ser fácil de usar e entender e seguir padrões de usabilidade consolidadas no mercado | ALTA |
+|RNF-008| O sistema deve estar disponível quando necessário | ALTA | 
 
 Com base nas Histórias de Usuário, enumere os requisitos da sua solução. Classifique esses requisitos em dois grupos:
 
@@ -140,19 +143,24 @@ De acordo com o PMBoK v6 as dez áreas que constituem os pilares para gerenciar 
 
 ## Gerenciamento de Tempo
 
-Com diagramas bem organizados que permitem gerenciar o tempo nos projetos, o gerente de projetos agenda e coordena tarefas dentro de um projeto para estimar o tempo necessário de conclusão.
+O tempo de entrega das tarefas será mensurado a partir do momento em que uma tarefa foi selecionada para desenvolvimento até o momento em que a funcionalidade chegar em produção. Dessa forma o diagrama a seguir fornece uma estimativa máxima em dias desde o primeiro step até a entrega em produção 
 
-![Diagrama de rede simplificado notação francesa (método francês)](img/02-diagrama-rede-simplificado.png)
+![image](https://github.com/user-attachments/assets/1c3800ef-e6b9-45a7-b84c-abf900ae00d4)
 
-O gráfico de Gantt ou diagrama de Gantt também é uma ferramenta visual utilizada para controlar e gerenciar o cronograma de atividades de um projeto. Com ele, é possível listar tudo que precisa ser feito para colocar o projeto em prática, dividir em atividades e estimar o tempo necessário para executá-las.
+O cronograma de atividades do projeto seguirá a seguinte **estimativa**. Com ele, é possível listar tudo que precisa ser feito para colocar o projeto em prática, dividir em atividades e estimar o tempo necessário para executá-las.
 
-![Gráfico de Gantt](img/02-grafico-gantt.png)
+![image](https://github.com/user-attachments/assets/13f03d27-800f-486c-a053-98fb6e785d64)
+
 
 ## Gerenciamento de Equipe
 
-O gerenciamento adequado de tarefas contribuirá para que o projeto alcance altos níveis de produtividade. Por isso, é fundamental que ocorra a gestão de tarefas e de pessoas, de modo que os times envolvidos no projeto possam ser facilmente gerenciados. 
+Chegamos a um acordo de que todos irão mexer no backend e frontend da aplicação. Porém dividimos o grupo em dois times: time 1 e time 2. Inicialmente, o time 1 ficará responsavél por desenvolver atividades relacionadas ao backend e dar suporte nos testes manuais do frontend. Já o time 2 ficará reponsável pelas atividades do frontend e dará suporte nos testes manuais do backend. Quando chegarmos na metade do nosso roadmap, iremos fazer a troca de responsabilidade dos times. Time 1 ficará responsável pelo frontend e o time 2 pelo backend.
+Para melhor entendimento, segue um diagrama das reponsabilidades de cada time.
 
-![Simple Project Timeline](img/02-project-timeline.png)
+![image](https://github.com/user-attachments/assets/6d019954-2930-4922-b283-8f3d4257bcdb)
+
+
+
 
 ## Gestão de Orçamento
 
