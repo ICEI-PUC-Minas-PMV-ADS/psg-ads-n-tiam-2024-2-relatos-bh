@@ -17,27 +17,27 @@ Nesta seção da documentação, abordaremos a definição do problema e a ideia
 
 ## 1- Personas
 
-1. Ana Beatriz, 32 anos, Professora
+1. Ana Beatriz, 32 anos, Professora (Morador Ativo)
 
 Ana é uma professora de ensino fundamental que mora em um bairro movimentado de Belo Horizonte. Ela utiliza o Relatos BH para relatar problemas como buracos nas ruas e falta de iluminação em áreas ao redor da escola onde trabalha. Ana é ativa em redes sociais e busca soluções rápidas e eficazes para melhorar a segurança e a qualidade de vida em sua comunidade. Ela valoriza um aplicativo intuitivo que permita reportar problemas com facilidade, utilizando seu smartphone.
 
-2. Carlos Silva, 45 anos, Empresário
+2. Carlos Silva, 45 anos, Empresário (Usuário engajado)
 
 Carlos é um empresário que possui uma pequena empresa de tecnologia e reside em um bairro com infraestrutura antiga. Ele está preocupado com problemas como o acúmulo de lixo e o estado precário das calçadas. Carlos usa o Relatos BH para reportar esses problemas e também para verificar se os problemas relatados por outros usuários estão sendo resolvidos. Ele tem um bom conhecimento técnico e aprecia funcionalidades avançadas, como o acompanhamento do status dos relatos.
 
-3. Juliana Martins, 27 anos, Estudante de Engenharia
+3. Juliana Martins, 27 anos, Estudante de Engenharia (Pessoa engajada em causas sociais)
 
 Juliana é uma estudante de engenharia civil que reside em uma área universitária. Ela utiliza o Relatos BH para relatar problemas relacionados à infraestrutura, como postes quebrados e sinalização inadequada. Juliana está muito envolvida com sua comunidade acadêmica e utilizaria o aplicativo para colaborar com colegas e grupos de interesse em projetos de melhorias urbanas. Ela valoriza a capacidade do aplicativo de anexar fotos e vídeos sem que isso afete o seu próprio telefone.
 
-4. Roberto Ferreira, 50 anos, Funcionário Público
+4. Roberto Ferreira, 50 anos, Funcionário Público (Pessoa envolvida no transito)
 
 Roberto é um funcionário público que trabalha em uma agência governamental e vive em um bairro com muitos problemas de descarte inadequado de entulhos e velhos veículos. Ele usa o Relatos BH para relatar questões que afetam a acessibilidade e a sua sáude, como carros esquecidos, lixo e esgoto a céu aberto, fiação de poste caida. Roberto tem um conhecimento razoável em tecnologia e valoriza um aplicativo que seja fácil de usar e que ofereça informações claras de que outros problemas relatados não são falsos.
 
-5. Mariana Souza, 38 anos, Coordenadora de ONG
+5. Mariana Souza, 38 anos, Coordenadora de ONG (Pessoa engajada em causas sociais)
 
 Mariana, formada em psicologia e se considera perfectionista .Coordena uma ONG que trabalha com projetos de revitalização urbana e inclusão social. Ela  monitorara problemas relatados por moradores e integra essas informações em seus projetos. Mariana  procura um aplicativo que permita a visualizações de problemas e facilite a colaboração com a comunidade e as autoridades locais. Ela valoriza o contato com a sua comunidade para quem tanto trabalha. 
 
-6. Paulo Henrique, 40 anos, Motorista de Aplicativo
+6. Paulo Henrique, 40 anos, Motorista de Aplicativo (Pessoa envolvida no transito)
 
 Paulo é motorista de aplicativo e enfrenta problemas diários com a infraestrutura urbana, como buracos nas ruas e sinalização inadequada. Ele usa o Relatos BH para reportar esses problemas e garantir que sejam resolvidos, visando melhorar a segurança para ele e seus passageiros. Paulo busca um aplicativo simples e rápido de usar, que permita enviar relatórios enquanto está em movimento. 
 
@@ -135,7 +135,15 @@ O projeto está restrito pelos itens apresentados na tabela a seguir.
 
 O diagrama de casos de uso é o próximo passo após a elicitação de requisitos, que utiliza um modelo gráfico e uma tabela com as descrições sucintas dos casos de uso e dos atores. Ele contempla a fronteira do sistema e o detalhamento dos requisitos funcionais com a indicação dos atores, casos de uso e seus relacionamentos. 
 
-[Casos de Uso Relatos BH](https://lucid.app/lucidchart/3ac88a22-7d09-4376-a1af-741f6842208d/edit?viewport_loc=421%2C-180%2C2845%2C1357%2C.Q4MUjXso07N&invitationId=inv_08de6f33-c566-41ca-b9d2-eceb83fa8d26)
+|  |                                              |
+|--|-------------------------------------------------------|
+|![Use case diagram - Page 1 (1)](https://github.com/user-attachments/assets/cac71766-8af7-43bf-9791-5c55df28bbef)|![Use case diagram - Page 1 (2)](https://github.com/user-attachments/assets/867a3085-d198-4822-8913-ca7e5c8fc816)|
+|![Use case diagram - Page 1 (3)](https://github.com/user-attachments/assets/8cf1e8df-01bb-4c03-8fb0-5c164960abb5)|![Use case diagram - Page 1 (4)](https://github.com/user-attachments/assets/963fd5ee-4850-4e54-88df-531a7f1f28a4)|
+|![Use case diagram - Page 1 (5)](https://github.com/user-attachments/assets/979a3533-076f-4544-8513-72c97b3be8f3)|![Use case diagram - Page 1 (6)](https://github.com/user-attachments/assets/770ca55d-0e98-4a4a-a354-6455540f86f6)|
+|![Use case diagram - Page 1 (7)](https://github.com/user-attachments/assets/8c6d8299-4464-4311-8877-ca831caeba64)|![Use case diagram - Page 1 (8)](https://github.com/user-attachments/assets/b6afaa37-dc01-4ed5-8bcc-e285d5726d37)|
+|![Use case diagram - Page 1 (9)](https://github.com/user-attachments/assets/22711ea3-ac77-44b3-b128-4eddc4a2e816)|![Use case diagram - Page 1 (10)](https://github.com/user-attachments/assets/87351d68-9065-447c-9c24-ae4743222101)|
+|![Use case diagram - Page 1 (11)](https://github.com/user-attachments/assets/bd81fd31-f26b-4458-97d5-b49cb32d3ead)
+||
 
 # Gerenciamento de Projeto
 
@@ -149,7 +157,8 @@ O tempo de entrega das tarefas será mensurado a partir do momento em que uma ta
 
 O cronograma de atividades do projeto seguirá a seguinte **estimativa**. Com ele, é possível listar tudo que precisa ser feito para colocar o projeto em prática, dividir em atividades e estimar o tempo necessário para executá-las.
 
-![image](https://github.com/user-attachments/assets/13f03d27-800f-486c-a053-98fb6e785d64)
+![image](https://github.com/user-attachments/assets/f086ff1f-719c-4629-8a9c-dfbfa7ea11cc)
+
 
 
 ## Gerenciamento de Equipe
@@ -168,9 +177,9 @@ O processo de determinar o orçamento do projeto é uma tarefa que depende, alé
 
 | Recurso Necessário  | (R$) |
 | ------------- | ------------- |
-| Recursos humanos  | 260.000,00  |
+| Recursos humanos  | 100.000,00  |
 | Hardware  | 5.000,00  |
 | Rede  | 2.000,00  |
 | Software  | 4.500.00  |
 | Serviços  | 6.000.00  |
-| Total  | 277.500,00  |
+| Total  | 117.500,00  |
