@@ -1,0 +1,6 @@
+@RelataBH_HostAddress = http://localhost:5098
+
+GET {{RelataBH_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

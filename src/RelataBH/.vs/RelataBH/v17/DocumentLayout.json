@@ -1,0 +1,72 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\react\\psg-ads-n-tiam-2024-2-relatos-bh\\src\\RelataBH\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Gustavo\\AppData\\Roaming\\Microsoft\\UserSecrets\\e0820aab-3853-4ccc-b338-63b3f5aa0a4f\\secrets.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{643E5DA6-397E-47D3-B026-B8FDEF6ABB27}|RelataBH\\RelataBH.csproj|d:\\react\\psg-ads-n-tiam-2024-2-relatos-bh\\src\\relatabh\\relatabh\\service\\auth\\api\\iauthapi.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{643E5DA6-397E-47D3-B026-B8FDEF6ABB27}|RelataBH\\RelataBH.csproj|solutionrelative:relatabh\\service\\auth\\api\\iauthapi.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{643E5DA6-397E-47D3-B026-B8FDEF6ABB27}|RelataBH\\RelataBH.csproj|d:\\react\\psg-ads-n-tiam-2024-2-relatos-bh\\src\\relatabh\\relatabh\\service\\auth\\iauthserviceimpl.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{643E5DA6-397E-47D3-B026-B8FDEF6ABB27}|RelataBH\\RelataBH.csproj|solutionrelative:relatabh\\service\\auth\\iauthserviceimpl.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 30,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "secrets.json",
+              "DocumentMoniker": "C:\\Users\\Gustavo\\AppData\\Roaming\\Microsoft\\UserSecrets\\e0820aab-3853-4ccc-b338-63b3f5aa0a4f\\secrets.json",
+              "ToolTip": "C:\\Users\\Gustavo\\AppData\\Roaming\\Microsoft\\UserSecrets\\e0820aab-3853-4ccc-b338-63b3f5aa0a4f\\secrets.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-09-27T15:06:27.347Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "IAuthServiceImpl.cs",
+              "DocumentMoniker": "D:\\react\\psg-ads-n-tiam-2024-2-relatos-bh\\src\\RelataBH\\RelataBH\\Service\\Auth\\IAuthServiceImpl.cs",
+              "RelativeDocumentMoniker": "RelataBH\\Service\\Auth\\IAuthServiceImpl.cs",
+              "ToolTip": "D:\\react\\psg-ads-n-tiam-2024-2-relatos-bh\\src\\RelataBH\\RelataBH\\Service\\Auth\\IAuthServiceImpl.cs",
+              "RelativeToolTip": "RelataBH\\Service\\Auth\\IAuthServiceImpl.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAqAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-27T15:03:49.108Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "IAuthApi.cs",
+              "DocumentMoniker": "D:\\react\\psg-ads-n-tiam-2024-2-relatos-bh\\src\\RelataBH\\RelataBH\\Service\\Auth\\Api\\IAuthApi.cs",
+              "RelativeDocumentMoniker": "RelataBH\\Service\\Auth\\Api\\IAuthApi.cs",
+              "ToolTip": "D:\\react\\psg-ads-n-tiam-2024-2-relatos-bh\\src\\RelataBH\\RelataBH\\Service\\Auth\\Api\\IAuthApi.cs",
+              "RelativeToolTip": "RelataBH\\Service\\Auth\\Api\\IAuthApi.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAqwBEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-27T15:02:54.764Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
