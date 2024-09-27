@@ -14,8 +14,8 @@ namespace RelataBH.Controllers
         {
             try
             {
-                var userFirebaseResponse = await authService.Register(userRequest);
-                return Ok();
+                var user = await authService.Register(userRequest);
+                return Ok(user);
             }
             catch (Exception exception)
             {
@@ -28,8 +28,8 @@ namespace RelataBH.Controllers
         {
             try
             {
-                var userFirebaseResponse = await authService.Login(userRequest);
-                return Ok(userFirebaseResponse);
+                var user = await authService.Login(userRequest);
+                return Ok(user);
             }
             catch (Exception exception)
             {
