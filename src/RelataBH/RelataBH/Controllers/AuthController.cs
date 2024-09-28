@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using RelataBH.Service.Auth.Domain;
 using RelataBH.Service.Auth;
-using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace RelataBH.Controllers
 {

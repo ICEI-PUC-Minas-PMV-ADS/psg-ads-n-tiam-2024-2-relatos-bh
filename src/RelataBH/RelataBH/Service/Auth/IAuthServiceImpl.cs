@@ -1,4 +1,5 @@
-﻿using RelataBH.Service.Auth.Api;
+﻿using RelataBH.Model;
+using RelataBH.Service.Auth.Api;
 using RelataBH.Service.Auth.Domain;
 
 namespace RelataBH.Service.Auth
