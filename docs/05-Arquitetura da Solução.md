@@ -1,5 +1,8 @@
 # Arquitetura da Solução
 
+![image](https://github.com/user-attachments/assets/3e0ca98e-f3ac-48e3-b254-28996904dd66)
+
+
 <span style="color:red">Pré-requisitos: <a href="3-Projeto de Interface.md"> Projeto de Interface</a></span>
 
 Definição de como o software é estruturado em termos dos componentes que fazem parte da solução e do ambiente de hospedagem da aplicação.
