@@ -1,35 +1,37 @@
 import { StyleSheet, Text, View } from 'react-native';
 import { ThemedView } from '@/components/ThemedView';
 import LoginComponent from '@/components/autentication/loginComponent';
+import LogupComponent from '@/components/autentication/logupComponent';
 import { useState } from 'react';
 import { AutenticationStates } from '@/constants/autenticationStates';
 
+
 export default function AutenticationScreen() {
-  const [screen, setScreen] = useState(AutenticationStates.LOGIN);
+  const [screen, setScreen] = useState(AutenticationStates.LOGUP);
   const renderScreen = () => {
     if (screen == AutenticationStates.LOGIN) {
       return <LoginComponent />
     }
-    else if (screen == AutenticationStates.LOGUP){
+    else if (screen == AutenticationStates.LOGUP) {
+      return <LogupComponent />
+    }
+    else {
       return <View />
     }
-    else
-    {
-      return <View />
-    }
-
   }
 
   return (
     <>
       <ThemedView style={styles.container}>
         <View style={styles.logoContainer}>
-          <Text>
-            qualquer coisa
-          </Text>
+          <View style={styles.tituloComponent}>
+            <Text style={styles.tituloApp}>
+              Relata BH
+            </Text>
+          </View>
         </View>
         <View style={styles.autenticationContainer}>
-            {renderScreen()}
+          {renderScreen()}
         </View>
       </ThemedView>
     </>
@@ -54,6 +56,13 @@ const styles = StyleSheet.create({
     borderTopStartRadius: 30,
     padding: 20
   },
-
+  tituloApp: {
+    fontSize: 30,
+  },
+  tituloComponent:{
+    alignItems:"center",
+    justifyContent: "center",
+    paddingTop: 105,
+  }
 
 });

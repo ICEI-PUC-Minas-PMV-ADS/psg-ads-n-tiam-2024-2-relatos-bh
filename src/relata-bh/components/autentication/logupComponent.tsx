@@ -4,19 +4,28 @@ import { Button, Checkbox, TextInput } from 'react-native-paper';
 import { useState } from 'react';
 import { AuthApiManager } from '@/apiManager/AuthApiManager';
 
-export default function LoginComponent() {
+export default function LogupComponent() {
+    const [name, setName] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    const [confirmarPassword, setConfirmarPassword] = useState("")
 
-    const login = async () => {
-        new AuthApiManager().login(email, password);
+    const register = async () => {
+        new AuthApiManager().register(name,email,password,confirmarPassword)
     }
 
     return (
         <View>
             <Text style={styles.tituloAutentication}>
-                Login
+                Registro
             </Text>
+            <TextInput
+                label="Nome"
+                value={name}
+                mode="outlined"
+                placeholder={"Digite o seu nome"}
+                onChangeText={name => { setName(name) }}
+            />
             <TextInput
                 label="Email"
                 value={email}
@@ -30,32 +39,21 @@ export default function LoginComponent() {
                 mode="outlined"
                 secureTextEntry={true}
                 placeholder={"Digite a senha"}
-                onChangeText={senha => { setPassword(senha) }}
+                onChangeText={password => { setPassword(password) }}
+            />
+            <TextInput
+                label="Confirmar Senha"
+                value={confirmarPassword}
+                mode="outlined"
+                secureTextEntry={true}
+                placeholder={"Confirme a senha"}
+                style = {styles.inputConfirmarPassword}
+                onChangeText={confirmarPassword => { setConfirmarPassword(confirmarPassword) }}
             />
 
-            <View style={styles.row}>
-                <View style={styles.row2}>
-                    <Checkbox
-                        status={'checked'}
-                        onPress={() => { }}
-                    />
-                    <Text>Lembrar senha</Text>
-                </View>
-                <Button mode="text" onPress={() => console.log('Pressed')}>
-                    Esqueci minha senha
-                </Button>
-            </View>
-            <Button mode="contained" onPress={() => login()}>
-                Login
-            </Button>
-            
-            <View style={styles.row3}>
-                <Button mode="text" onPress={() => console.log('Pressed')}>
-                    Não tem uma conta?
-                </Button>
-            </View>
-            <Button mode="outlined" textColor='#000' onPress={() => {}}>
-                    Registre-se
+
+            <Button mode="outlined" textColor='#000' onPress={() => register()}>
+                    Registrar
             </Button>
             
         </View>
@@ -74,14 +72,7 @@ const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "space-between",
     },
-    row2: {
-        flexDirection: "row",
-        alignItems: "center",
-    },
-    row3:{
-        flexDirection: "row",
-        alignItems: "center",
-        justifyContent:"center",
-        paddingTop: 40,
+    inputConfirmarPassword:{
+        marginBottom: 23,
     },
 })

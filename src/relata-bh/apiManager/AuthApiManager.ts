@@ -15,7 +15,13 @@ export class AuthApiManager extends BaseApiManager {
     //esse arquivo vai ter as funcoes que chamam o backend e estao relacionadas a autenticacao
     //login, registro e esqueci minha senha
 
-    register = async () => {}
-
+    register = async (name:string, email: string, password: string, confirmarPassword: string) => {
+        const url = ENDPOINTS.REGISTER();
+        const body = JSON.stringify({name:name, email: email, password: password, confirmarPassword: confirmarPassword, returnSecureToken: true});
+        await this.callApi(url, ApiMethods.POST, body)
+            .then(response => response.text())
+            .then(result => console.log(result))
+    }
+    
     recoverPassword = async () => {}
 }
