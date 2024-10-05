@@ -1,10 +1,13 @@
 import { StyleSheet, Text, View } from 'react-native';
-import { ThemedView } from '@/components/ThemedView';
 import { Button, Checkbox, TextInput } from 'react-native-paper';
 import { useState } from 'react';
 import { AuthApiManager } from '@/apiManager/AuthApiManager';
 
-export default function LoginComponent() {
+export interface loginProps {
+    onSignUp: () => void,
+}
+
+export default function LoginComponent({onSignUp = () => {} }: loginProps) {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
 
@@ -54,7 +57,7 @@ export default function LoginComponent() {
                     Não tem uma conta?
                 </Button>
             </View>
-            <Button mode="outlined" textColor='#000' onPress={() => {}}>
+            <Button mode="outlined" textColor='#000' onPress={() => {onSignUp()}}>
                     Registre-se
             </Button>
             

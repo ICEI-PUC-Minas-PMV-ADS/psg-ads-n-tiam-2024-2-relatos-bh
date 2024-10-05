@@ -1,10 +1,13 @@
 import { StyleSheet, Text, View } from 'react-native';
-import { ThemedView } from '@/components/ThemedView';
-import { Button, Checkbox, TextInput } from 'react-native-paper';
+import { Button, Checkbox, IconButton, MD3Colors, TextInput } from 'react-native-paper';
 import { useState } from 'react';
 import { AuthApiManager } from '@/apiManager/AuthApiManager';
 
-export default function LogupComponent() {
+export interface signUpProps {
+    onBack: () => void,
+}
+
+export default function LogupComponent({onBack = () => {} }: signUpProps) {
     const [name, setName] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
@@ -16,9 +19,16 @@ export default function LogupComponent() {
 
     return (
         <View>
-            <Text style={styles.tituloAutentication}>
-                Registro
-            </Text>
+            <View style={styles.registerHeader}>
+            <IconButton
+                icon="arrow-left"
+                size={20}
+                onPress={() => onBack()}
+            />
+                <Text style={styles.tituloAutentication}>
+                    Registro
+                </Text>
+            </View>
             <TextInput
                 label="Nome"
                 value={name}
@@ -51,7 +61,6 @@ export default function LogupComponent() {
                 onChangeText={confirmarPassword => { setConfirmarPassword(confirmarPassword) }}
             />
 
-
             <Button mode="outlined" textColor='#000' onPress={() => register()}>
                     Registrar
             </Button>
@@ -65,7 +74,9 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         textAlign: "center",
         marginVertical: 22,
-        fontSize: 24
+        fontSize: 24,
+        flex: 1,
+        paddingEnd: 24
     },
     row: {
         flexDirection: "row",
@@ -75,4 +86,8 @@ const styles = StyleSheet.create({
     inputConfirmarPassword:{
         marginBottom: 23,
     },
+    registerHeader: {
+        flexDirection: "row",
+        alignItems: 'center'
+    }
 })

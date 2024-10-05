@@ -5,15 +5,14 @@ import LogupComponent from '@/components/autentication/logupComponent';
 import { useState } from 'react';
 import { AutenticationStates } from '@/constants/autenticationStates';
 
-
 export default function AutenticationScreen() {
-  const [screen, setScreen] = useState(AutenticationStates.LOGUP);
+  const [screen, setScreen] = useState(AutenticationStates.LOGIN);
   const renderScreen = () => {
     if (screen == AutenticationStates.LOGIN) {
-      return <LoginComponent />
+      return <LoginComponent onSignUp={ () => setScreen(AutenticationStates.LOGUP)} />
     }
     else if (screen == AutenticationStates.LOGUP) {
-      return <LogupComponent />
+      return <LogupComponent onBack={() => setScreen(AutenticationStates.LOGIN)} />
     }
     else {
       return <View />
