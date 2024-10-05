@@ -2,26 +2,14 @@ import { StyleSheet, Text, View } from 'react-native';
 import { ThemedView } from '@/components/ThemedView';
 import { Button, Checkbox, TextInput } from 'react-native-paper';
 import { useState } from 'react';
+import { AuthApiManager } from '@/apiManager/AuthApiManager';
 
 export default function LoginComponent() {
     const [email, setEmail] = useState("")
     const [senha, setSenha] = useState("")
+    
     const login = async () => {
-        const Response =
-            await fetch("https://relatabh.azurewebsites.net/auth/login", {
-                method: "POST",
-                mode:"no-cors",
-                headers: {
-                    Accept: 'application/json',
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    email: email,
-                    senha: senha,
-                    returnSecureToken: true
-                })
-            })
-        console.log(Response)
+        new AuthApiManager().login(email, senha);
     }
 
     return (
