@@ -14,6 +14,7 @@ https://lucid.app/lucidspark/74a3b835-4928-40ec-be77-65cfc21c1111/edit?viewport_
 
 ## Wireframes
 
-|  ||           |
-|--||-----------|
-|![Wireframe](img/WireframePart1.png)||![Wireframe](img/WireframePart2.png) |
+|  | 
+| ------------- |
+| ![Wireframe](img/WireframePart1.png)  | 
+| ![Wireframe](img/WireframePart2.png) |
