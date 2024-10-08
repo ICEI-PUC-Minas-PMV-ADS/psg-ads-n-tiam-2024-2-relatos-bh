@@ -5,7 +5,7 @@
 
 Visão geral da interação do usuário pelas telas do sistema e protótipo interativo das telas com as funcionalidades que fazem parte do sistema (wireframes).
 
- Apresente as principais interfaces da plataforma. Discuta como ela foi elaborada de forma a atender os requisitos funcionais, não funcionais e histórias de usuário abordados nas <a href="2-Especificação do Projeto.md"> Documentação de Especificação</a>.
+https://www.figma.com/proto/oyAl1T2O1CkknOallWAoVG/RelataBH?node-id=253-1362&node-type=canvas&t=hhtvXtZP3WYBkls5-1&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=253%3A1362&show-proto-sidebar=1
 
 ## Diagrama de Fluxo
 
