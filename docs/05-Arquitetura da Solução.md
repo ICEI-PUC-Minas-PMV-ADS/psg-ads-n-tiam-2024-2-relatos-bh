@@ -17,6 +17,9 @@ As referências abaixo irão auxiliá-lo na geração do artefato “Diagrama de
 
 ## Modelo ER
 
+![Captura de tela 2024-10-05 195648](https://github.com/user-attachments/assets/387bf077-262e-4fa3-a8b4-83519d3d559d)
+
+
 O Modelo ER representa através de um diagrama como as entidades (coisas, objetos) se relacionam entre si na aplicação interativa.]
 
 As referências abaixo irão auxiliá-lo na geração do artefato “Modelo ER”.
@@ -24,6 +27,9 @@ As referências abaixo irão auxiliá-lo na geração do artefato “Modelo ER�
 > - [Como fazer um diagrama entidade relacionamento | Lucidchart](https://www.lucidchart.com/pages/pt/como-fazer-um-diagrama-entidade-relacionamento)
 
 ## Esquema Relacional
+
+![Captura de tela 2024-10-06 155244](https://github.com/user-attachments/assets/9b47c1ba-8e6e-42b1-bf3d-387122454e32)
+
 
 O Esquema Relacional corresponde à representação dos dados em tabelas juntamente com as restrições de integridade e chave primária.
  
