@@ -26,6 +26,17 @@ builder.Services.AddHealthChecks();
 //Database
 builder.Services.AddDbContext<UserContext>(opt => opt.UseSqlServer("Server=tcp:relatosbh.database.windows.net,1433;Initial Catalog=relatosbh;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;Authentication=\"Active Directory Default\";"));
 
+//CORS
+builder.Services.AddCors(option =>
+{
+    option.AddPolicy("AllowAllHeaders", builder => {
+        builder
+            .WithOrigins("*")
+            .AllowAnyHeader()
+            .AllowAnyMethod();
+    });
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -36,6 +47,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors("AllowAllHeaders");
 
 app.UseAuthorization();
 
