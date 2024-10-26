@@ -10,6 +10,6 @@ namespace RelataBH.Service.Auth.Domain
         public required string Password { get; set; }
         [AliasAs("returnSecureToken")]
         public bool ReturnSecureToken { get; set; } = true;
+        public string? Name { get; set; }
     }
 }
-

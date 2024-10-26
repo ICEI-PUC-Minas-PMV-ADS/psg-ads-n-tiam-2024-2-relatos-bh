@@ -1,9 +1,9 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Refit;
-using RelataBH.Model;
+using RelataBH.database;
 using RelataBH.Service.Auth;
 using RelataBH.Service.Auth.Api;
-using System.IdentityModel.Tokens.Jwt;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,13 +18,22 @@ builder.Services.AddTransient<IAuthService, IAuthServiceImpl>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddAuthentication()
+    .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, token =>
+{
+    token.Authority = "https://securetoken.google.com/relata-bh";
+    token.Audience = "relata-bh";
+    token.TokenValidationParameters.ValidIssuer = "https://securetoken.google.com/relata-bh";
+});
+
+
 builder.Services.AddRefitClient<IAuthApi>().ConfigureHttpClient(
     client => client.BaseAddress = new Uri("https://identitytoolkit.googleapis.com")
 );
 builder.Services.AddHealthChecks();
 
 //Database
-builder.Services.AddDbContext<UserContext>(opt => opt.UseSqlServer("Server=tcp:relatosbh.database.windows.net,1433;Initial Catalog=relatosbh;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;Authentication=\"Active Directory Default\";"));
+builder.Services.AddSqlite<DatabaseContext>(builder.Configuration.GetConnectionString("SqliteConnectionString"));
 
 //CORS
 builder.Services.AddCors(option =>
@@ -51,6 +60,8 @@ app.UseHttpsRedirection();
 app.UseCors("AllowAllHeaders");
 
 app.UseAuthorization();
+
+app.UseAuthentication();
 
 app.MapControllers();
 

@@ -1,11 +1,14 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using RelataBH.Service.Auth.Domain;
 using RelataBH.Service.Auth;
+using RelataBH.Model;
+using Microsoft.AspNetCore.Authorization;
 
 namespace RelataBH.Controllers
 {
     [ApiController]
-    [Route("auth")]
+    [Route("api/auth")]
+    [AllowAnonymous]
     public class AuthController(IAuthService authService): ControllerBase
     {
         [HttpPost("register")]
@@ -13,7 +16,7 @@ namespace RelataBH.Controllers
         {
             try
             {
-                var user = await authService.Register(userRequest);
+                User user = await authService.Register(userRequest);
                 return Ok(user);
             }
             catch (Exception exception)
