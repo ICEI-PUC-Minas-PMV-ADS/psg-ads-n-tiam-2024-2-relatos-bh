@@ -35,6 +35,17 @@ builder.Services.AddHealthChecks();
 //Database
 builder.Services.AddSqlite<DatabaseContext>(builder.Configuration.GetConnectionString("SqliteConnectionString"));
 
+//CORS
+builder.Services.AddCors(option =>
+{
+    option.AddPolicy("AllowAllHeaders", builder => {
+        builder
+            .WithOrigins("*")
+            .AllowAnyHeader()
+            .AllowAnyMethod();
+    });
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -45,6 +56,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors("AllowAllHeaders");
 
 app.UseAuthorization();
 
