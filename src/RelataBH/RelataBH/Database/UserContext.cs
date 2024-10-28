@@ -3,11 +3,8 @@ using RelataBH.Model;
 
 namespace RelataBH.database
 {
-    public class DatabaseContext : DbContext
+    public class UserContext(DbContextOptions<UserContext> options) : DbContext(options)
     {
-        public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options){ }
-
-
         public DbSet<User> User { get; set; } = null;
     }
 }

@@ -6,7 +6,7 @@ using RelataBH.Service.Auth.Mapper;
 
 namespace RelataBH.Service.Auth
 {
-    public class IAuthServiceImpl(IAuthApi authApi, IConfiguration config, DatabaseContext userDatabase): IAuthService
+    public class IAuthServiceImpl(IAuthApi authApi, IConfiguration config, UserContext userDatabase): IAuthService
     {
         private readonly string ApiKey = 
             Environment.GetEnvironmentVariable("FirebaseApiKey", EnvironmentVariableTarget.User) 

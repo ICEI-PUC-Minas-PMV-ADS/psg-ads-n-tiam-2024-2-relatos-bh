@@ -12,7 +12,7 @@ namespace RelataBH.Controllers
     public class AuthController(IAuthService authService): ControllerBase
     {
         [HttpPost("register")]
-        public async Task<IActionResult> Register(AuthUserRequest userRequest)
+        public async Task<ActionResult<User>> Register(AuthUserRequest userRequest)
         {
             try
             {
@@ -26,7 +26,7 @@ namespace RelataBH.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<IActionResult> Login(AuthUserRequest userRequest)
+        public async Task<ActionResult<User>> Login(AuthUserRequest userRequest)
         {
             try
             {
