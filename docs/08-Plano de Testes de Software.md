@@ -6,3 +6,4 @@
 
 ## Ferramentas de Testes
 1 - POSTMAN
+2 - SWAGGER
