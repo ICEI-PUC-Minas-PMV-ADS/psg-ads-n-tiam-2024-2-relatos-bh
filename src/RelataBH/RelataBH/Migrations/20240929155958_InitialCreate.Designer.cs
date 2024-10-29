@@ -9,7 +9,7 @@ using RelataBH.database;
 
 namespace RelataBH.Migrations
 {
-    [DbContext(typeof(DatabaseContext))]
+    [DbContext(typeof(UserContext))]
     [Migration("20240929155958_InitialCreate")]
     partial class InitialCreate
     {

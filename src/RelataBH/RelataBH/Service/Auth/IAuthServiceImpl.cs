@@ -1,12 +1,14 @@
-﻿using RelataBH.database;
+﻿using Microsoft.AspNetCore.Http.HttpResults;
+using RelataBH.database;
 using RelataBH.Model;
 using RelataBH.Service.Auth.Api;
 using RelataBH.Service.Auth.Domain;
+using RelataBH.Service.Auth.Domain.RecoverPassword;
 using RelataBH.Service.Auth.Mapper;
 
 namespace RelataBH.Service.Auth
 {
-    public class IAuthServiceImpl(IAuthApi authApi, IConfiguration config, DatabaseContext userDatabase): IAuthService
+    public class IAuthServiceImpl(IAuthApi authApi, IConfiguration config, UserContext userDatabase): IAuthService
     {
         private readonly string ApiKey = 
             Environment.GetEnvironmentVariable("FirebaseApiKey", EnvironmentVariableTarget.User) 
@@ -27,9 +29,18 @@ namespace RelataBH.Service.Auth
             }
         }
 
-        public Task<AuthUserResponse> RecoverPassword(AuthUserRequest userRequest)
+        public async Task<SendEmailResponse> RecoverPassword(SendEmailRequest sendEmailRequest)
         {
-            throw new NotImplementedException();
+            var apiResponse = await authApi.RecoverPassword(sendEmailRequest: sendEmailRequest, apiKey :ApiKey);
+
+            if (apiResponse.IsSuccessStatusCode)
+            {
+                return apiResponse.Content;
+            }   
+            else
+            {
+                throw new Exception(apiResponse.Error.Content);
+            }
         }
 
         public async Task<User> Register(AuthUserRequest userRequest)
@@ -40,8 +51,8 @@ namespace RelataBH.Service.Auth
             {
                 var user = AuthMapper.AuthUserToUser(userRequest, apiResponse.Content);
 
-                userDatabase.Add(user);
-                var saved = await userDatabase.SaveChangesAsync();
+                 userDatabase.Add(user);
+                 var saved = await userDatabase.SaveChangesAsync();
 
                 return user;
             }

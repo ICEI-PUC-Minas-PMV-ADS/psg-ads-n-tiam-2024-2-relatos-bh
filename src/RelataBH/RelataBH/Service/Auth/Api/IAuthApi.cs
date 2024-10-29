@@ -1,5 +1,6 @@
 ﻿using Refit;
 using RelataBH.Service.Auth.Domain;
+using RelataBH.Service.Auth.Domain.RecoverPassword;
 
 namespace RelataBH.Service.Auth.Api
 {
@@ -11,7 +12,7 @@ namespace RelataBH.Service.Auth.Api
         [Post("/v1/accounts:signInWithPassword?key={apiKey}")]
         Task<ApiResponse<AuthUserResponse>> Login([Body] AuthUserRequest user, string apiKey);
 
-        [Post("")]
-        Task<ApiResponse<AuthUserResponse>> RecoverPassword();
+        [Post("/v1/accounts:sendOobCode?key={apiKey}")]
+        Task<ApiResponse<SendEmailResponse>> RecoverPassword([Body] SendEmailRequest sendEmailRequest, string apiKey);
     }
 }

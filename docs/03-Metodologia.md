@@ -43,15 +43,8 @@ Discuta como a configuração do projeto foi feita na ferramenta de versionament
 
 Utilizaremos o GitFlow para realizar o gerenciamento de branches. Uma vez que a branch `main` será o reflexo de produção e a branch `develop` conterá as funcionalidades desenvolvidas na sprint atual.
 
-![image](https://github.com/user-attachments/assets/623e3431-7ffa-4268-ae96-58248e52c8ce)
+![image](https://github.com/user-attachments/assets/8dca0b32-9683-44e8-80df-0f3eb0fe0a7f)
 
-> **Links Úteis**:
-> - [Microfundamento: Gerência de Configuração](https://pucminas.instructure.com/courses/87878/)
-> - [Tutorial GitHub](https://guides.github.com/activities/hello-world/)
-> - [Git e Github](https://www.youtube.com/playlist?list=PLHz_AreHm4dm7ZULPAmadvNhH6vk9oNZA)
->  - [Comparando fluxos de trabalho](https://www.atlassian.com/br/git/tutorials/comparing-workflows)
-> - [Understanding the GitHub flow](https://guides.github.com/introduction/flow/)
-> - [The gitflow workflow - in less than 5 mins](https://www.youtube.com/watch?v=1SXpE08hvGs)
 
 ## Gerenciamento de Projeto
 
@@ -59,41 +52,56 @@ Utilizaremos o GitFlow para realizar o gerenciamento de branches. Uma vez que a 
 
 A equipe utiliza metodologias ágeis, tendo escolhido o Scrum como base para definição do processo de desenvolvimento. A equipe está organizada da seguinte maneira:
 
-- Scrum Master: Gustavo Soares de Oliveira;
-- Product Owner: Leandro Augusto Lino Da Costa;
-- Equipe de Desenvolvimento: João Lucas De Almeida Menezes, Gabriel Santos Serafim;
-- Equipe de Design: Armintas Fernandes da Silva Filho, Arthur Trindade Bicalho Magalhaes, Matheus Roberto Almeida Sacramento.
-
-
-> **Links Úteis**:
-> - [11 Passos Essenciais para Implantar Scrum no seu Projeto](https://mindmaster.com.br/scrum-11-passos/)
-> - [Scrum em 9 minutos](https://www.youtube.com/watch?v=XfvQWnRgxG0)
-> - [Os papéis do Scrum e a verdade sobre cargos nessa técnica](https://www.atlassian.com/br/agile/scrum/roles)
+- Scrum Master: Gustavo Soares;
+- Product Owner: Gabriel Santos;
+- Equipe de Desenvolvimento: João Lucas, Armintas Fernande, Arthur Trindade, Matheus Roberto;
+- Equipe de Design: Leandro Augusto.
 
 ### Processo
 
+Faremos reuniões **semanais** para reporte de status e alinhamento entre os times. 
+As sprints terão duração de **2 semanas**.
+
+O gerenciamento do projeto seguirá o seguinte fluxo:
+
+![image](https://github.com/user-attachments/assets/4b95a407-682f-4181-b05e-d342ef13e97e)
+
 Coloque  informações sobre detalhes da implementação do Scrum seguido pelo grupo. O grupo deverá fazer uso do recurso de gerenciamento de projeto oferecido pelo GitHub, que permite acompanhar o andamento do projeto, a execução das tarefas e o status de desenvolvimento da solução.
- 
-> **Links Úteis**:
-> - [Planejamento e Gestáo Ágil de Projetos](https://pucminas.instructure.com/courses/87878/pages/unidade-2-tema-2-utilizacao-de-ferramentas-para-controle-de-versoes-de-software)
-> - [Sobre quadros de projeto](https://docs.github.com/pt/issues/organizing-your-work-with-project-boards/managing-project-boards/about-project-boards)
-> - [Project management, made simple](https://github.com/features/project-management/)
-> - [Sobre quadros de projeto](https://docs.github.com/pt/github/managing-your-work-on-github/about-project-boards)
-> - [Como criar Backlogs no Github](https://www.youtube.com/watch?v=RXEy6CFu9Hk)
-> - [Tutorial Slack](https://slack.com/intl/en-br/)
 
 ### Ferramentas
 
 As ferramentas empregadas no projeto são:
 
-- [Visual Studio Code](https://code.visualstudio.com/) Editor de código.
-- [Discord](https://discord.com/)/[WhatsApp](https://web.whatsapp.com/) Ferramentas de comunicação
-- [Excalidraw](https://excalidraw.com/)/[Figma](https://figma.com/) Ferramentas de desenho de tela (_wireframing_)
+Gerencia de codigo e projeto
 
-O editor de código foi escolhido porque ele possui uma integração com o sistema de versão. As ferramentas de comunicação utilizadas possuem integração semelhante e por isso foram selecionadas. Por fim, para criar diagramas utilizamos essa ferramenta por melhor captar as necessidades da nossa solução.
+![image](https://github.com/user-attachments/assets/03c680e7-b092-4445-bf37-7584f6ecc4ad)
 
-Liste quais ferramentas foram empregadas no desenvolvimento do projeto, justificando a escolha delas, sempre que possível.
- 
-> **Possíveis Ferramentas que auxiliarão no gerenciamento**: 
-> - [Slack](https://slack.com/)
-> - [Github](https://github.com/)
+![image](https://github.com/user-attachments/assets/d6e9c017-dd56-403a-83b7-41ee6bda07cc)
+
+**Visual Studio Code**: ferramenta consolidada no mercado para desenvolvimento react native.
+
+**Android Studio**: utilizaremos para possíveis integrações com o Google Maps, permissões de localização, galeria e câmera.
+
+![image](https://github.com/user-attachments/assets/1c443690-4299-46e0-af04-c83f656577be)
+
+**Azure:** para hospedagem do banco de dados relacional. 
+
+**SQL Server:** como SGBD.
+
+**DBeaver:** para acesso remoto ao banco de dados.
+
+**Firebase:** Gerenciamento de usuários e armazenamento de arquivos de imagem.
+
+![image](https://github.com/user-attachments/assets/40c7742a-8f75-4700-ba4c-a3fca571f793)
+
+**Figma**: prototipação de telas
+
+**Excalidraw**: wireframes e desenhos de arquitetura.
+
+![image](https://github.com/user-attachments/assets/6d09c718-8eab-4cf2-96e5-2efa9cae8024)
+
+**Comunicação com time** será feito via Whatsapp e Discord.
+
+**Comunicação com o stakeholder** será feita via Whatsapp.
+
+

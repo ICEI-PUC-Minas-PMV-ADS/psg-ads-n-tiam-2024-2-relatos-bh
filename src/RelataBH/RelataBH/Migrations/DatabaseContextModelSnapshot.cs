@@ -8,7 +8,7 @@ using RelataBH.database;
 
 namespace RelataBH.Migrations
 {
-    [DbContext(typeof(DatabaseContext))]
+    [DbContext(typeof(UserContext))]
     partial class DatabaseContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
