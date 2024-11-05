@@ -56,6 +56,7 @@ const BoxComponent = () => {
             <TouchableOpacity key={item.id} onPress={() => handleItemPress(item.id)}>
               <Text style={[styles.text, selectedItems.includes(item.id) && styles.selectedItem]}>
                 {item.name}
+                
               </Text>
             </TouchableOpacity>
           );
