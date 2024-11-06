@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, StyleSheet, Text, Button } from "react-native"
+import { View, StyleSheet, Text, Button, TouchableOpacity } from "react-native"
 import BoxComponents from './ReportBox'
 const reportScreen = () => {
 
@@ -7,12 +7,13 @@ const reportScreen = () => {
         <View style={[styles.Container, 
         {
             flexDirection: "column",
-        },
-        
-        ]}>
+        },]}>
             <Text style={styles.H1}>RELATAR PROBLEMA</Text>
             <BoxComponents/>
-            <Button title='Salvar'></Button>
+            <TouchableOpacity style={styles.addButton}>
+                <Text style={styles.addButtonText}>Salvar</Text>
+            </TouchableOpacity>
+
         </View>
     )
 }
@@ -28,6 +29,20 @@ const styles = StyleSheet.create({
         padding: 30,
         color: "#8b80ab",
         fontSize: 20,
-    },
+    },addButton: {
+        backgroundColor: '#6f6095',  
+        paddingVertical: 10,
+        paddingHorizontal: 20,
+        borderRadius: 30,            
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginVertical: 10,
+      },
+      addButtonText: {
+        color: '#ffffff',            
+        fontSize: 16,
+        fontWeight: 'bold',
+      },
+      
 })
 export default reportScreen

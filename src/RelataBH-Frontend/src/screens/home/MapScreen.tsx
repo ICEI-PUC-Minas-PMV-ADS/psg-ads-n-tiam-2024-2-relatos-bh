@@ -20,7 +20,7 @@ const MapScreen: React.FC = () => {
                 console.log("no permission.")
                 return;
             }
-
+            
             let currentLocation = await Location.getCurrentPositionAsync({});
             setLocation(currentLocation);
         })();

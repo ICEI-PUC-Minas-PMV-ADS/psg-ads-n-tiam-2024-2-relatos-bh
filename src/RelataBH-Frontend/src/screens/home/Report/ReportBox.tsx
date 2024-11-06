@@ -1,7 +1,13 @@
 import React, { useState } from 'react';
-import { ScrollView, View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
+import { ScrollView, View, Text, StyleSheet, TextInput, TouchableOpacity, Button, Image } from 'react-native';
+import * as ImagePicker from 'expo-image-picker';
+import MapScreen from '../MapScreen';
+import { useNavigation, useRoute } from '@react-navigation/native';
+import { StackTypes } from '../../../routes/app.routes';
 
 const BoxComponent = () => {
+  const navigation = useNavigation<StackTypes>();
+
   const categorys = [
     { id: 1, name: "Buraco" },
     { id: 2, name: "Poste" },
@@ -20,7 +26,8 @@ const BoxComponent = () => {
 
   const [NomeProblema, setNome] = useState('');
   const [Descricao, setDescricao] = useState('');
-  const [selectedItems, setSelectedItems] = useState<number[]>([]); 
+  const [selectedItems, setSelectedItems] = useState<number[]>([]);
+  const [images, setImages] = useState<string[]>([]);
 
   const handleItemPress = (id: number) => {
     if (selectedItems.includes(id)) {
@@ -29,6 +36,25 @@ const BoxComponent = () => {
       setSelectedItems([...selectedItems, id]);
     }
   };
+
+  const pickImages = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: false,
+      quality: 1,
+      allowsMultipleSelection: true,
+      selectionLimit: 10,
+    });
+    if (!result.canceled) {
+      const uris = result.assets.map((asset) => asset.uri);
+      setImages(uris);
+    }
+  };
+
+  const removeImage = (index: number) => {
+    setImages(images.filter((_, i) => i !== index));
+  };
+  
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
@@ -41,6 +67,7 @@ const BoxComponent = () => {
           value={NomeProblema}
           onChangeText={setNome}
         />
+        <Text style={styles.labelDescricao}>Descrição</Text>
         <TextInput
           style={styles.inputDescricaoProblema}
           placeholder="Descrição Do Problema"
@@ -51,19 +78,39 @@ const BoxComponent = () => {
       </View>
       <View style={[styles.box, styles.displayCategorys, { justifyContent: "center", alignItems: "flex-start", paddingTop: 50 }]}>
         <Text style={styles.subtitle}>Categoria Do Problema</Text>
-        {categorys.slice(0, 10).map((item) => {
-          return (
-            <TouchableOpacity key={item.id} onPress={() => handleItemPress(item.id)}>
-              <Text style={[styles.text, selectedItems.includes(item.id) && styles.selectedItem]}>
-                {item.name}
-              </Text>
-            </TouchableOpacity>
-          );
-        })}
+        {categorys.slice(0, 10).map((item) => (
+          <TouchableOpacity key={item.id} onPress={() => handleItemPress(item.id)}>
+            <Text style={[styles.text, selectedItems.includes(item.id) && styles.selectedItem]}>
+              {item.name}
+            </Text>
+          </TouchableOpacity>
+        ))}
+      </View>
+      <View style={styles.box}>
+
+        <Text style={styles.subtitle}>Localização</Text>
+        <TouchableOpacity style={styles.addButton} onPress={() => { navigation.navigate("SelectLocationScreen") }}>
+          <Text style={styles.addButtonText}>Alterar Localização</Text>
+        </TouchableOpacity>
 
       </View>
-        <View style={styles.box}><Text style={styles.subtitle}>Localização</Text></View>
-        <View style={styles.box}><Text style={styles.subtitle}>Fotos</Text></View>
+      <View style={styles.box}>
+        <Text style={styles.subtitle}>Fotos</Text>
+        <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.scrollContainer}>
+          {images.map((uri, index) => (
+            <View key={index} style={styles.imageWrapper}>
+              <TouchableOpacity style={styles.deleteButton} onPress={() => removeImage(index)}>
+                <Text style={styles.deleteText}>X</Text>
+              </TouchableOpacity>
+              <Image source={{ uri }} style={styles.image} />
+            </View>
+          ))}
+        </ScrollView>
+        <TouchableOpacity style={styles.addButton} onPress={pickImages}>
+          <Text style={styles.addButtonText}>Adicionar fotos</Text>
+        </TouchableOpacity>
+
+      </View>
     </ScrollView>
   );
 };
@@ -106,6 +153,16 @@ const styles = StyleSheet.create({
     color: '#6a1b9a',
     zIndex: 1,
   },
+  labelDescricao:{
+    position: 'absolute',
+    top: 92,
+    left: 45,
+    backgroundColor: '#f2defa',
+    paddingHorizontal: 5,
+    fontSize: 12,
+    color: '#6a1b9a',
+    zIndex: 1,
+  },
   inputNomeProblema: {
     width: '80%',
     height: 40,
@@ -140,8 +197,51 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   selectedItem: {
-    backgroundColor: '#d1c4e9', // Cor de fundo do item selecionado
+    backgroundColor: '#d1c4e9', 
   },
+  imageWrapper: {
+    position: 'relative',
+    marginRight: 10,
+  },
+  deleteButton: {
+    position: 'absolute',
+    top: 5,
+    right: 5,
+    backgroundColor: 'white',
+    borderRadius: 15,
+    width: 25,
+    height: 25,
+    justifyContent: 'center',
+    alignItems: 'center',
+    zIndex: 1,
+  },
+  deleteText: {
+    color: 'black',
+    fontWeight: 'bold',
+  },
+  image: {
+    width: 150,
+    height: 200,
+    borderRadius: 5,
+  },
+  scrollContainer: {
+    maxHeight: 150,
+    marginBottom: 10,
+  },
+  addButton: {
+    backgroundColor: '#6f6095', 
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 30,            
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  addButtonText: {
+    color: '#ffffff',            
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+  
 });
 
 export default BoxComponent;
