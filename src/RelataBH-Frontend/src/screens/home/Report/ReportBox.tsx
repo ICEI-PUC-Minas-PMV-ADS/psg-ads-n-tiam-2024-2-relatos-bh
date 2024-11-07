@@ -1,12 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ScrollView, View, Text, StyleSheet, TextInput, TouchableOpacity, Button, Image } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
-import MapScreen from '../MapScreen';
-import { useNavigation, useRoute } from '@react-navigation/native';
-import { StackTypes } from '../../../routes/app.routes';
+import { useNavigation, useRoute, RouteProp } from '@react-navigation/native';
+import { AppStackNavigation } from '../../../routes/app.routes';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import MapView from 'react-native-maps';
 
-const BoxComponent = () => {
-  const navigation = useNavigation<StackTypes>();
+type BoxComponentRouteProp = RouteProp<AppStackNavigation, 'BoxComponent'>;
+type BoxComponentNavigationProp = NativeStackNavigationProp<AppStackNavigation, 'BoxComponent'>;
+
+const BoxComponent : React.FC = () => {
+  const navigation = useNavigation<BoxComponentNavigationProp>();
+  const route = useRoute<BoxComponentRouteProp>();
+  const [region, setRegion] = useState<{ latitude: number; longitude: number; latitudeDelta:number;longitudeDelta:number } | null>(null);
+
+  useEffect(() => {
+    if (route.params?.region) {
+      setRegion(route.params.region);
+    }
+  }, [route.params?.region]);
 
   const categorys = [
     { id: 1, name: "Buraco" },
@@ -57,66 +69,120 @@ const BoxComponent = () => {
   
 
   return (
-    <ScrollView contentContainerStyle={styles.container}>
-      <View style={styles.box}>
-        <Text style={styles.subtitle}>Sobre o Problema</Text>
-        <Text style={styles.label}>Nome</Text>
-        <TextInput
-          style={styles.inputNomeProblema}
-          placeholder="Nome Do problema"
-          value={NomeProblema}
-          onChangeText={setNome}
-        />
-        <Text style={styles.labelDescricao}>Descrição</Text>
-        <TextInput
-          style={styles.inputDescricaoProblema}
-          placeholder="Descrição Do Problema"
-          value={Descricao}
-          multiline={true}
-          onChangeText={setDescricao}
-        />
-      </View>
-      <View style={[styles.box, styles.displayCategorys, { justifyContent: "center", alignItems: "flex-start", paddingTop: 50 }]}>
-        <Text style={styles.subtitle}>Categoria Do Problema</Text>
-        {categorys.slice(0, 10).map((item) => (
-          <TouchableOpacity key={item.id} onPress={() => handleItemPress(item.id)}>
-            <Text style={[styles.text, selectedItems.includes(item.id) && styles.selectedItem]}>
-              {item.name}
-            </Text>
-          </TouchableOpacity>
-        ))}
-      </View>
-      <View style={styles.box}>
-
-        <Text style={styles.subtitle}>Localização</Text>
-        <TouchableOpacity style={styles.addButton} onPress={() => { navigation.navigate("SelectLocationScreen") }}>
-          <Text style={styles.addButtonText}>Alterar Localização</Text>
-        </TouchableOpacity>
-
-      </View>
-      <View style={styles.box}>
-        <Text style={styles.subtitle}>Fotos</Text>
-        <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.scrollContainer}>
-          {images.map((uri, index) => (
-            <View key={index} style={styles.imageWrapper}>
-              <TouchableOpacity style={styles.deleteButton} onPress={() => removeImage(index)}>
-                <Text style={styles.deleteText}>X</Text>
-              </TouchableOpacity>
-              <Image source={{ uri }} style={styles.image} />
-            </View>
+    <View style={[styles.Container, 
+      {
+          flexDirection: "column",
+      },]}>  
+      <Text style={styles.H1}>RELATAR PROBLEMA</Text>
+      <ScrollView contentContainerStyle={styles.container1}>
+        <View style={styles.box}>
+          <Text style={styles.subtitle}>Sobre o Problema</Text>
+          <Text style={styles.label}>Nome</Text>
+          <TextInput
+            style={styles.inputNomeProblema}
+            placeholder="Nome Do problema"
+            value={NomeProblema}
+            onChangeText={setNome}
+          />
+          <Text style={styles.labelDescricao}>Descrição</Text>
+          <TextInput
+            style={styles.inputDescricaoProblema}
+            placeholder="Descrição Do Problema"
+            value={Descricao}
+            multiline={true}
+            onChangeText={setDescricao}
+          />
+        </View>
+        <View style={[styles.box, styles.displayCategorys, { justifyContent: "center", alignItems: "flex-start", paddingTop: 50 }]}>
+          <Text style={styles.subtitle}>Categoria Do Problema</Text>
+          {categorys.slice(0, 10).map((item) => (
+            <TouchableOpacity key={item.id} onPress={() => handleItemPress(item.id)}>
+              <Text style={[styles.text, selectedItems.includes(item.id) && styles.selectedItem]}>
+                {item.name}
+              </Text>
+            </TouchableOpacity>
           ))}
-        </ScrollView>
-        <TouchableOpacity style={styles.addButton} onPress={pickImages}>
-          <Text style={styles.addButtonText}>Adicionar fotos</Text>
-        </TouchableOpacity>
+        </View>
+        <View style={styles.box}>
 
-      </View>
-    </ScrollView>
+          <Text style={styles.subtitle}>Localização</Text>
+          
+          {region && ( 
+              <MapView  style={{ width: '80%', height: 180, marginTop: 35}}
+                cameraZoomRange={{minCenterCoordinateDistance:1, maxCenterCoordinateDistance:3}}
+                zoomEnabled={false}
+                rotateEnabled={false}
+                scrollEnabled={false}
+                showsMyLocationButton={false}
+                showsUserLocation={true}
+                followsUserLocation={true}
+                initialRegion={{
+                latitude: region.latitude,
+                longitude: region.longitude,
+                latitudeDelta: region.latitudeDelta,
+                longitudeDelta: region.longitudeDelta,
+              
+                }}
+              />
+          )}
+          <TouchableOpacity style={styles.addButton} onPress={() => { navigation.navigate("SelectLocationScreen") }}>
+            <Text style={styles.addButtonText}>Alterar Localização</Text>
+          </TouchableOpacity>
+
+        </View>
+        <View style={styles.box}>
+          <Text style={styles.subtitle}>Fotos</Text>
+          <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.scrollContainer}>
+            {images.map((uri, index) => (
+              <View key={index} style={styles.imageWrapper}>
+                <TouchableOpacity style={styles.deleteButton} onPress={() => removeImage(index)}>
+                  <Text style={styles.deleteText}>X</Text>
+                </TouchableOpacity>
+                <Image source={{ uri }} style={styles.image} />
+              </View>
+            ))}
+          </ScrollView>
+          <TouchableOpacity style={styles.addButton} onPress={pickImages}>
+            <Text style={styles.addButtonText}>Adicionar fotos</Text>
+          </TouchableOpacity>
+
+        </View>
+        
+      </ScrollView>
+      <TouchableOpacity style={styles.addButton}>
+        <Text style={styles.addButtonText}>Salvar</Text>
+      </TouchableOpacity>
+    </View>  
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
+  Container: {
+    justifyContent: 'space-between',
+    backgroundColor: "#FFFFFF",
+    flex: 1,
+    padding: 20,
+  },
+H1:{
+    alignSelf: "center",
+    padding: 30,
+    color: "#8b80ab",
+    fontSize: 20,
+},addButton: {
+    backgroundColor: '#6f6095',  
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 30,            
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginVertical: 10,
+  },
+  addButtonText: {
+    color: '#ffffff',            
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+  container1: {
     flexGrow: 1,
     flexDirection: 'column',
     justifyContent: 'space-between',
@@ -227,19 +293,6 @@ const styles = StyleSheet.create({
   scrollContainer: {
     maxHeight: 150,
     marginBottom: 10,
-  },
-  addButton: {
-    backgroundColor: '#6f6095', 
-    paddingVertical: 10,
-    paddingHorizontal: 20,
-    borderRadius: 30,            
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  addButtonText: {
-    color: '#ffffff',            
-    fontSize: 16,
-    fontWeight: 'bold',
   },
   
 });
