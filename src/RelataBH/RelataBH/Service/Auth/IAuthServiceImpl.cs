@@ -8,7 +8,7 @@ using RelataBH.Service.Auth.Mapper;
 
 namespace RelataBH.Service.Auth
 {
-    public class IAuthServiceImpl(IAuthApi authApi, IConfiguration config, UserContext userDatabase): IAuthService
+    public class IAuthServiceImpl(IAuthApi authApi, IConfiguration config, UserContext appUser): IAuthService
     {
         private readonly string ApiKey = 
             Environment.GetEnvironmentVariable("FirebaseApiKey", EnvironmentVariableTarget.User) 
@@ -43,7 +43,7 @@ namespace RelataBH.Service.Auth
             }
         }
 
-        public async Task<User> Register(AuthUserRequest userRequest)
+        public async Task<AppUser> Register(AuthUserRequest userRequest)
         {
             var apiResponse = await authApi.Register(user: userRequest, apiKey: ApiKey);
 
@@ -51,8 +51,8 @@ namespace RelataBH.Service.Auth
             {
                 var user = AuthMapper.AuthUserToUser(userRequest, apiResponse.Content);
 
-                 userDatabase.Add(user);
-                 var saved = await userDatabase.SaveChangesAsync();
+           
+                var saved = await appUser.AddAsync(user); 
 
                 return user;
             }

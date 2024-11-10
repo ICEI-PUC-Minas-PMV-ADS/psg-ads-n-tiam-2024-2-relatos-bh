@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using RelataBH.Authorization;
 using RelataBH.Model;
+using RelataBH.Service.Profile;
+using RelataBH.Service.Profile.Domain;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -12,20 +14,15 @@ namespace RelataBH.Controllers
     [Route("api/user")]
     [ApiController]
     //[Authorize]
-    public class UserController(ILogger<WeatherForecastController> logger) : ControllerBase
+    public class UserController(ILogger<WeatherForecastController> logger, IProfileService profileService) : ControllerBase
     {
 
-        [HttpGet]
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-        public async Task<IActionResult> Get([FromHeader] string Authorization)
+        [HttpPost("/profile")]
+        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        public async Task<ActionResult<AppUser>> Post([FromBody] ProfileRequest profileRequest)
         {
-            var accessToken = await HttpContext.GetTokenAsync("Authorization");
-            User? user = AuthorizationManager.GetUserFromToken(token: Authorization);
-            if (user != null)
-            {
-                return Ok(user);
-            }
-            return Unauthorized();
+           AppUser appUser = await profileService.GetProfile(profileRequest.UserId);
+           return Ok(appUser);
         }
 
         [HttpPut()]

@@ -5,6 +5,6 @@ namespace RelataBH.database
 {
     public class UserContext(DbContextOptions<UserContext> options) : DbContext(options)
     {
-        public DbSet<User> User { get; set; } = null;
+        public DbSet<AppUser> User { get; set; } = null;
     }
 }

@@ -7,6 +7,7 @@ using RelataBH.Database;
 using RelataBH.Service.Auth;
 using RelataBH.Service.Auth.Api;
 using RelataBH.Service.Location;
+using RelataBH.Service.Profile;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,6 +18,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddMvc();
 builder.Services.AddTransient<IAuthService, IAuthServiceImpl>();
 builder.Services.AddTransient<ILocationService, ILocationServiceImpl>();
+builder.Services.AddTransient<IProfileService, IProfileServiceImpl>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -47,6 +49,10 @@ builder.Services.AddDbContext<UserContext>(options =>
 );
 
 builder.Services.AddDbContext<LocationContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
+);
+
+builder.Services.AddDbContext<AppUserContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
 );
 
