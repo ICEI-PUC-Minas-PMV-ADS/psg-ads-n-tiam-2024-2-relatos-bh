@@ -2,10 +2,11 @@ import React from 'react';
 import { SafeAreaView, StatusBar, View } from 'react-native';
 import { BottomNavigation, Text } from 'react-native-paper';
 import MapScreen from './map/MapScreen';
+import Report from './Report/Report';
 
 const MapRoute = () => <MapScreen/>;
 
-const ReportRoute = () => <Text>Report</Text>;
+const ReportRoute = () => <Report/>
 
 const ProfileRoute = () => <Text>Profile</Text>;
 
