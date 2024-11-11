@@ -51,3 +51,15 @@ Assim que a primeira versão do sistema estiver disponível, deverá complementa
 # Apresentação
 
 <li><a href="presentation/README.md"> Apresentação da solução</a></li>
+
+# Rodando o Proejeto
+
+Neste tópico abordaremos os passos para rodar o projeto do Relatos BH:
+<ol>
+<li> Para rodar o projeto, visualizar, codar e testar a aplicação faça um clone do repositório da branch mais atualizada (Develop). Comando no terminal: "git checkout develop"</li>
+<li> No momento, não será necessário ter o android studio entendemos que alguns computadores possam não ter tanta memória. Contudo, baixem no celular o app <a href="https://play.google.com/store/apps/details?id=host.exp.exponent"> Expo Go </a>.</li>
+<li> No computador, entrem na pasta ...src/RelataBH-Frontend e digitem no terminal npm install depois um yarn add expo</li>
+<li> para rodar o projeto digitem npx expo start. No terminal irá aparecer um QrCode, entrem no aplicativo do expo go e façam o scan do qr code.</li>
+</ol>
+Detalhe >> pode acontecer de precisar de instalar alguma dependência como uma biblioteca, caso der erro, basta reinstalar a biblioteca faltante.
+
