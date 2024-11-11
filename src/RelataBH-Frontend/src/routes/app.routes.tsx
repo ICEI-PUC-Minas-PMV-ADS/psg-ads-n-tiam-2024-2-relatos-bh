@@ -8,7 +8,7 @@ import BoxComponent from "../screens/home/Report/ReportBox";
 
 export type AppStackNavigation = {
     BoxComponent: { region?: { latitude: number; longitude: number ; latitudeDelta: number ;longitudeDelta:number} };
-    Home: undefined
+    Home: { searchedPlace: Place | null }
     SearchScreen: undefined
     SelectLocationScreen: undefined 
 }

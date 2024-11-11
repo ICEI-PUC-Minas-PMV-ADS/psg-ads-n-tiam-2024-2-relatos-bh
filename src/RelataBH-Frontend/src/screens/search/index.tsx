@@ -1,16 +1,17 @@
-import { useNavigation } from "@react-navigation/native";
+import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
 import React from "react";
 import { FlatList, SafeAreaView, StatusBar, StyleSheet, View } from "react-native";
 import { Button, Text, Searchbar, IconButton, Divider } from "react-native-paper";
-import { PlacesService } from "../../services/places/PlacesService";
+import {  SearchPlace } from "../../services/places/PlacesService";
+import { AppStackNavigation, StackTypes } from "../../routes/app.routes";
 
 export const SearchScreen: React.FC = () => {
     const [searchQuery, setSearchQuery] = React.useState('');
     const [result, setResult] = React.useState<Place[]>();
-    const navigation = useNavigation();
+    const navigation = useNavigation<StackTypes>();
 
     const search = async () => {
-        let response = await new PlacesService().search(searchQuery)
+        let response = await SearchPlace(searchQuery)
         setResult(response)
     }
 
@@ -36,7 +37,10 @@ export const SearchScreen: React.FC = () => {
                         <Button
                             key={item.id}
                             mode="text"
-                            onPress={() => console.log(item)}>
+                            onPress={() => { 
+                                navigation.setParams({ searchedPlace: item }) 
+                                navigation.goBack()
+                                }}>
                             <Text style={{ textAlign: 'left', flex: 1 }}>{item.name}</Text>
                         </Button>
                         <Divider />

@@ -13,26 +13,26 @@ export const ReportDetail: React.FC<Props> = ({ report, style }) => {
         <View style={[style, styles.container]}>
             {report &&
                 <Card>
-                <Card.Content>
+                    <Card.Content>
 
-                    <ImageViewPager images={report.photos} />
+                        <ImageViewPager images={report.photos} />
 
-                    <View style={{flexDirection: "row"}}>
-                        <View style={{flex: 1}}>
-                        <Text variant="titleMedium" numberOfLines={2} ellipsizeMode='tail' style={styles.bold}>{report.name}</Text>
-                        <Text variant="bodyMedium" style={styles.bold} numberOfLines={2} ellipsizeMode='tail'>{report.description}</Text>
+                        <View style={{ flexDirection: "row" }}>
+                            <View style={{ flex: 1 }}>
+                                <Text variant="titleMedium" numberOfLines={2} ellipsizeMode='tail' style={styles.bold}>{report.name}</Text>
+                                <Text variant="bodyMedium" style={styles.bold} numberOfLines={2} ellipsizeMode='tail'>{report.description}</Text>
+                            </View>
+                            <Text>Desde{"\n"}19/01/2023</Text>
                         </View>
-                        <Text>Desde{"\n"}19/01/2023</Text>
-                    </View>
 
-                    <View style={{flexDirection: "row"}}>
-                        <Text variant="bodyMedium" style={{ color: '#65558F', flex: 1}} numberOfLines={2} ellipsizeMode='tail'>
-                            {report.address}
-                        </Text>
-                        <LikeComponent likeCount={10}/>
-                    </View>
-                </Card.Content>
-            </Card>
+                        <View style={{ flexDirection: "row" }}>
+                            <Text variant="bodyMedium" style={{ color: '#65558F', flex: 1 }} numberOfLines={2} ellipsizeMode='tail'>
+                                {report.address}
+                            </Text>
+                            <LikeComponent likeCount={10} />
+                        </View>
+                    </Card.Content>
+                </Card>
             }
         </View>
     );

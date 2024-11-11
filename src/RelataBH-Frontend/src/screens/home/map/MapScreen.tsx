@@ -1,8 +1,8 @@
 import { View } from "react-native";
 import React, { useEffect, useState } from "react";
-import { Searchbar } from "react-native-paper";
-import { useNavigation } from "@react-navigation/native";
-import { StackTypes } from "../../../routes/app.routes";
+import { Button, Searchbar } from "react-native-paper";
+import { RouteProp, useFocusEffect, useNavigation, useRoute } from "@react-navigation/native";
+import { AppStackNavigation, StackTypes } from "../../../routes/app.routes";
 import { ReportDetail } from "./ReportDetail";
 import { ReportCategoryComponent } from "./components/ReportCategoryComponent";
 import { MapComponent } from "./components/MapComponent";
@@ -12,6 +12,13 @@ const MapScreen: React.FC = () => {
     const navigation = useNavigation<StackTypes>();
     const [userReposts, setUserReports] = useState<UserReport[] | null>(null);
     const [selectedReport, setSelectedReport] = useState<UserReport | null>(null);
+    const [showSearchMap, setShowSearchMap] = useState(false);
+    const route = useRoute<RouteProp<AppStackNavigation, "Home">>();
+    const [searchedPlace, setSearchedPlace] = useState<Place | null>(route.params?.searchedPlace ?? null);
+    
+    useEffect(() => {
+        console.log(searchedPlace)
+    }, [searchedPlace])
 
     useEffect(() => {
         setUserReports(createReportMock());
@@ -31,9 +38,13 @@ const MapScreen: React.FC = () => {
                 <ReportCategoryComponent 
                     style={{position: 'absolute', top: 0, zIndex: 1}} />
 
+                {/* {showSearchMap && 
+                <Button mode="contained" style={{position: 'absolute', top: 0, zIndex: 1, marginTop: 46}} onPress={() => console.log("buscar")}>Buscar nesta área</Button>} */}
+
                 <MapComponent 
                     style={{ width: '100%', height: '100%', zIndex: 0 }}
                     onReportSelected={(report) => { setSelectedReport(report) }}
+                    onRegionChanged={(region) => { setShowSearchMap(true) }}
                     reports={userReposts}
                 />
                 

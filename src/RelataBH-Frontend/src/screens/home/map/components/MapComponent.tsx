@@ -1,18 +1,20 @@
 import { useEffect, useState } from "react";
 import { StyleProp, ViewStyle } from "react-native";
-import MapView, { Marker } from "react-native-maps";
+import MapView, { Marker, Region } from "react-native-maps";
 import * as Location from 'expo-location';
 import React from "react";
 
 type Props = {
     reports: UserReport[] | null,
-    onReportSelected: (report: UserReport | null) => void
+    onReportSelected: (report: UserReport | null) => void,
+    onRegionChanged: (region: Region) => void,
     style?: StyleProp<ViewStyle>
 }
 
 export const MapComponent: React.FC<Props> = ({
     style,
     onReportSelected,
+    onRegionChanged,
     reports
 }) => {
     const [location, setLocation] = useState<Location.LocationObject | null>(null);
@@ -52,6 +54,7 @@ export const MapComponent: React.FC<Props> = ({
             showsMyLocationButton={false}
             showsCompass={false}
             pitchEnabled={false}
+            onRegionChange={onRegionChanged}
         >
             {reports &&
                 reports.map((report: UserReport, index: number) => (

@@ -1,12 +1,12 @@
 import axiosInstance from "../axiosInstance";
+import { ENDPOINTS } from "../Endpoints";
 
-export class PlacesService {
-    search = async (query: string) => {
+export const SearchPlace = async (query: string) =>  {
         try {
-            const response = await axiosInstance.get(`api/Location/search?query=${query}`)
+            let endpoint = ENDPOINTS.SEARCH_PLACES(query)
+            const response = await axiosInstance.get(endpoint)
             return response.data;
         } catch (error) {
             console.error('Error fetching data:', error);
         }
-    }
 }

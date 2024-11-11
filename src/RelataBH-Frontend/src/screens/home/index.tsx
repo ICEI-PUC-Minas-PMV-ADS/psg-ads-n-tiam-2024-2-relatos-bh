@@ -3,14 +3,18 @@ import { SafeAreaView, StatusBar, View } from 'react-native';
 import { BottomNavigation, Text } from 'react-native-paper';
 import MapScreen from './map/MapScreen';
 import Report from './Report/Report';
+import { ProfileScreen } from './profile';
+import { RouteProp, useFocusEffect, useRoute } from '@react-navigation/native';
+import { AppStackNavigation } from '../../routes/app.routes';
 
-const MapRoute = () => <MapScreen/>;
+const MapRoute = () => <MapScreen />;
 
 const ReportRoute = () => <Report/>
 
-const ProfileRoute = () => <Text>Profile</Text>;
+const ProfileRoute = () => <ProfileScreen />;
 
 const HomeScreen: React.FC = () => {
+
     const [index, setIndex] = React.useState(0);
     const [routes] = React.useState([
         { key: 'map', title: 'Mapa', focusedIcon: 'map', unfocusedIcon: 'map-outline' },
@@ -24,13 +28,14 @@ const HomeScreen: React.FC = () => {
         profile: ProfileRoute,
     });
 
-    return (<SafeAreaView style={{flex: 1, paddingTop: StatusBar.currentHeight}}>
-        <BottomNavigation
+    return (
+        <SafeAreaView style={{ flex: 1, paddingTop: StatusBar.currentHeight }}>
+            <BottomNavigation
                 navigationState={{ index, routes }}
                 onIndexChange={setIndex}
                 renderScene={renderScene}
             />
-    </SafeAreaView>
+        </SafeAreaView>
     );
 }
 
