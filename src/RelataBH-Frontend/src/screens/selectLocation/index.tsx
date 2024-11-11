@@ -1,50 +1,117 @@
 import { useNavigation } from "@react-navigation/native";
-import React, { useState } from "react"
-import { View, Text, SafeAreaView, StatusBar, Button, } from "react-native"
-import MapView, { LatLng, Marker, Region } from "react-native-maps"
+import React, { useState, useEffect } from "react";
+import { View, Text, SafeAreaView, StatusBar, Button, Alert } from "react-native";
+import MapView, { LatLng, Marker, Region } from "react-native-maps";
+import * as Location from "expo-location";
 import { StackTypes } from "../../routes/app.routes";
 
 export const SelectLocationScreen: React.FC = () => {
-    const navigation = useNavigation<StackTypes>();
+  const navigation = useNavigation<StackTypes>();
+  const [region, setRegion] = useState<Region | null>(null);
+  const [markerCoordinate, setMarkerCoordinate] = useState<LatLng | null>(null);
+  const [address, setAddress] = useState<string>("");
+  const [city, setCity] = useState<string>("");
 
-    const [region, setRegion] = useState<Region| null>(null)
 
-    const onRegionChange= (region: Region) =>{
-        console.log( region );
-        setRegion(region)
-      }
-      const handleBackButtonPress = () => {
-        if (region) {
-          navigation.navigate({
-            name: "BoxComponent", 
-            params: { region: region }, 
-            merge: true,
-          });
+  const fetchAddress = async (latitude: number, longitude: number) => {
+    try {
+      const response = await fetch(
+        `https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json&addressdetails=1`, 
+        {
+          headers: {
+            'User-Agent': 'SeuAppName/1.0 (email@dominio.com)',  
+          }
         }
-      };
-      let centerMarker =
-      {
-        title:"CenterMarker",
-        location:{
-            latitude: -19.859355925616597,
-            longitude: -43.91911854967475,
-        },
-        description: "Here is the marker on PUCMINAS"
+      );
+      
+      if (!response.ok) {
+        throw new Error("Erro na requisição, status: " + response.status);
+      }
+  
+      const data = await response.json();
+      
+      if (data && data.address) {
+        const road = data.address.road || "Rua não encontrada";
+        const city = data.address.city || "Cidadde Não Encontrada"
+        setAddress(road);
+        setCity(city);
+      } else {
+        setAddress("Endereço não encontrado");
+      }
+    } catch (error) {
+      console.error("Erro ao buscar endereço:", error);
+      setAddress("Erro ao buscar endereço");
+    }
+  };
+  
+  useEffect(() => {
+    (async () => {
+      const { status } = await Location.requestForegroundPermissionsAsync();
+      if (status !== "granted") {
+        Alert.alert("Permissão negada", "Não foi possível acessar a localização.");
+        return;
       }
 
-    return (
-        <SafeAreaView style={{ flex: 1, paddingTop: StatusBar.currentHeight }}>
-            <MapView style={{ flex: 1 }} onRegionChange={onRegionChange} showsUserLocation={true}>
-            <Marker coordinate={centerMarker.location} draggable/>
-            </MapView>
-            
-            
-            <Text style={{position: "absolute",right:"-50%",left:"-50%", top:0, bottom:0}}>LOCATION</Text>
-            
-            <Button title="ABC" onPress={handleBackButtonPress}></Button>
-            
-        </SafeAreaView>
-    )
-}
+      const location = await Location.getCurrentPositionAsync({});
+      const { latitude, longitude } = location.coords;
 
+      setRegion({
+        latitude,
+        longitude,
+        latitudeDelta: 0.005,
+        longitudeDelta: 0.005,
+      });
 
+      setMarkerCoordinate({ latitude, longitude });
+      fetchAddress(latitude, longitude);
+    })();
+  }, []);
+ 
+  const onRegionChangeComplete = (region: Region) => {
+    setRegion(region);
+    const { latitude, longitude } = region;
+    setMarkerCoordinate({ latitude, longitude });
+    fetchAddress(latitude, longitude);
+  };
+
+  const handleBackButtonPress = () => {
+    if (region ) {
+      navigation.navigate({
+        name: "BoxComponent",
+        params: { region: region, address:address},
+        merge: true,
+      });
+    }
+  };
+
+  return (
+    <SafeAreaView style={{ flex: 1, paddingTop: StatusBar.currentHeight }}>
+      <MapView
+        style={{ flex: 1 }}
+        showsUserLocation={true}
+        initialRegion={region || undefined}
+        onRegionChangeComplete={onRegionChangeComplete}
+      >
+      
+        {markerCoordinate && (
+          <Marker
+            coordinate={markerCoordinate}
+            draggable
+            onDragEnd={(e) => {
+              const { latitude, longitude } = e.nativeEvent.coordinate;
+              setMarkerCoordinate({ latitude, longitude });
+              fetchAddress(latitude, longitude);
+            }}
+            title="Posicione o marcador"
+          />
+        )}
+      </MapView>
+      
+      <View style={{ position: "absolute", bottom: 50, alignSelf: "center" }}>
+        <Text>Endereço: {address}, {city}</Text>
+      </View>
+
+      <Button title="Confirmar Localização" onPress={handleBackButtonPress} />
+    </SafeAreaView>
+  );
+};

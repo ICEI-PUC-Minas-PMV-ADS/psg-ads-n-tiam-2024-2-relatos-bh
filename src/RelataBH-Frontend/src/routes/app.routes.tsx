@@ -7,7 +7,7 @@ import { SelectLocationScreen } from "../screens/selectLocation";
 import BoxComponent from "../screens/home/Report/ReportBox";
 
 export type AppStackNavigation = {
-    BoxComponent: { region?: { latitude: number; longitude: number ; latitudeDelta: number ;longitudeDelta:number} };
+    BoxComponent: { region?: { latitude: number; longitude: number ; latitudeDelta: number ;longitudeDelta:number}; address?:string} ;
     Home: { searchedPlace: Place | null }
     SearchScreen: undefined
     SelectLocationScreen: undefined 

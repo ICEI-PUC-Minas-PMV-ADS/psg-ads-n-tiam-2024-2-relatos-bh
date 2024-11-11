@@ -1,5 +1,6 @@
 import { createContext, useState } from "react";
 import { AuthService } from "../services/auth/AuthService";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 interface AuthContextData {
     isLoading: boolean,
@@ -17,6 +18,7 @@ export const AuthProvider: React.FC<any> = ({children}) => {
     async function signIn(email: string, password: string): Promise<Boolean>{
         setLoading(true);
         const response = await new AuthService().login(email, password);
+        AsyncStorage.setItem("token", "faketoken");
         setLoading(false);
     
         return response.success == true;
