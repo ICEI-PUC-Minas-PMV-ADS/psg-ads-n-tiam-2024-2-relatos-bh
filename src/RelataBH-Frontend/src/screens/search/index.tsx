@@ -4,12 +4,6 @@ import { FlatList, SafeAreaView, StatusBar, StyleSheet, View } from "react-nativ
 import { Button, Text, Searchbar, IconButton, Divider } from "react-native-paper";
 import { PlacesService } from "../../services/places/PlacesService";
 
-type Place = {
-    id: number,
-    name: string,
-    type: number
-}
-
 export const SearchScreen: React.FC = () => {
     const [searchQuery, setSearchQuery] = React.useState('');
     const [result, setResult] = React.useState<Place[]>();
