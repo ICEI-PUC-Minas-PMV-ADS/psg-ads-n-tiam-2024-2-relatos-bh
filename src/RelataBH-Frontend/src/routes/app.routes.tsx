@@ -4,7 +4,7 @@ import { SearchScreen } from "../screens/search";
 import HomeScreen from "../screens/home";
 
 export type AppStackNavigation = {
-    Home: undefined,
+    Home: { searchedPlace: Place | null },
     SearchScreen: undefined,
 }
 
