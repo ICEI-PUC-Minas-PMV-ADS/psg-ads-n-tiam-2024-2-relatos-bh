@@ -5,8 +5,9 @@ import HomeScreen from "../screens/home";
 
 export type AppStackNavigation = {
     Home: undefined,
-    SearchScreen: undefined
+    SearchScreen: undefined,
 }
+
 export type StackTypes = NativeStackNavigationProp<AppStackNavigation>;
 
 const AppStack = createNativeStackNavigator();

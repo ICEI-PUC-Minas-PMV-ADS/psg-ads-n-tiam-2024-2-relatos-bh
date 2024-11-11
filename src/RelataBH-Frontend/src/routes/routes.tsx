@@ -1,39 +1,39 @@
-import { useContext, useEffect } from "react"
-import AuthContext, { AuthProvider } from "../context/auth"
-import Home from "../screens/home";
-import Authentication from "../screens/authentication";
+import { useContext, useEffect } from "react";
+import { AuthProvider } from "../context/auth";
 import AppContext from "../context/app";
 import * as SplashScreen from 'expo-splash-screen';
 import { createNativeStackNavigator, NativeStackNavigationProp } from "@react-navigation/native-stack";
 import AuthenticationScreen from "../screens/authentication";
 import HomeStack from "./app.routes";
 import { useNavigation } from "@react-navigation/native";
+import { AppSplashScreen } from "../screens/splash";
 
 export type AppStackNavigation = {
     Home: undefined,
-    Auth: undefined
+    Auth: undefined,
+    Splash: undefined
 }
 export type StackTypes = NativeStackNavigationProp<AppStackNavigation>;
 
 const Stack = createNativeStackNavigator();
 
 const Routes: React.FC = () => {
-    const { isAuthenticated, isLoading } = useContext(AppContext);
+    const { isAuthenticated, isSplashRunning } = useContext(AppContext);
     const navigation = useNavigation<StackTypes>();
 
     useEffect(() => {
-        console.log(isAuthenticated)
-        if (isAuthenticated) {
-            navigation.navigate("Home");
-            SplashScreen.hideAsync();
+        SplashScreen.hideAsync();
+    }, [])
+
+    useEffect(() => {
+        if(!isSplashRunning){
+            isAuthenticated ? navigation.navigate("Home") : navigation.navigate("Auth");
         }
-    }, [isAuthenticated])
+    }, [isSplashRunning])
 
     return (
-        <Stack.Navigator initialRouteName="Auth" screenOptions={{ headerShown: false }}>
-            {/* <AuthProvider>
-                
-            </AuthProvider> */}
+        <Stack.Navigator initialRouteName="Splash" screenOptions={{ headerShown: false }}>
+            <Stack.Screen name="Splash" component={AppSplashScreen}/>
             <Stack.Screen name='Auth' >
                 {() => (
                     <AuthProvider>
