@@ -10,19 +10,6 @@ type LoginResponse = {
     token: string
 }
 
-type ErrorResponse = {
-    error: {
-        response: {
-            data: {
-                error: {
-                    message:string 
-
-                }
-            }
-        }
-    }
-}
-
 export class AuthService {
     login = async (email: string, password: string): Promise<ApiResponse<LoginResponse>> => {
         try {

@@ -1,7 +1,7 @@
 import React from 'react';
 import { SafeAreaView, StatusBar, View } from 'react-native';
 import { BottomNavigation, Text } from 'react-native-paper';
-import MapScreen from './MapScreen';
+import MapScreen from './map/MapScreen';
 import Report from './Report/Report';
 
 const MapRoute = () => <MapScreen/>;
@@ -33,7 +33,5 @@ const HomeScreen: React.FC = () => {
     </SafeAreaView>
     );
 }
-
-
 
 export default HomeScreen;
