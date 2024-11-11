@@ -13,12 +13,14 @@ const BoxComponent : React.FC = () => {
   const navigation = useNavigation<BoxComponentNavigationProp>();
   const route = useRoute<BoxComponentRouteProp>();
   const [region, setRegion] = useState<{ latitude: number; longitude: number; latitudeDelta:number;longitudeDelta:number } | null>(null);
+  const [adress, setAdress] = useState<string | null | undefined>("");
 
   useEffect(() => {
     if (route.params?.region) {
       setRegion(route.params.region);
+      setAdress(route.params.address);
     }
-  }, [route.params?.region]);
+  }, [route.params?.region, route.params?.address]);
 
   const categorys = [
     { id: 1, name: "Buraco" },
@@ -75,6 +77,49 @@ const BoxComponent : React.FC = () => {
       },]}>  
       <Text style={styles.H1}>RELATAR PROBLEMA</Text>
       <ScrollView contentContainerStyle={styles.container1}>
+      <View style={styles.box}>
+
+          <Text style={styles.subtitle}>Localização</Text>
+          <Text style={[styles.textLocalization,{ marginTop: 50, marginBottom: 10}]}> Endereço: {adress} </Text>
+          {region && ( 
+              
+              <MapView  style={{ width: '80%', height: 150,}}
+                cameraZoomRange={{minCenterCoordinateDistance:1, maxCenterCoordinateDistance:3}}
+                zoomEnabled={false}
+                rotateEnabled={false}
+                scrollEnabled={false}
+                showsMyLocationButton={false}
+                showsUserLocation={true}
+                followsUserLocation={true}
+                initialRegion={{
+                latitude: region.latitude,
+                longitude: region.longitude,
+                latitudeDelta: region.latitudeDelta,
+                longitudeDelta: region.longitudeDelta,
+              
+                }}
+                
+              />
+              
+          )}
+          
+          <TouchableOpacity style={styles.addButton} onPress={() => { navigation.navigate("SelectLocationScreen") }}>
+            <Text style={styles.addButtonText}>Alterar Localização</Text>
+          </TouchableOpacity>
+
+      </View>
+        <View style={[styles.box, styles.displayCategorys, { justifyContent: "center", alignItems: "flex-start", paddingTop: 50 }]}>
+          <Text style={styles.subtitle}>Categoria Do Problema</Text>
+          {categorys.slice(0, 10).map((item) => (
+            <TouchableOpacity key={item.id} onPress={() => handleItemPress(item.id)}>
+              <Text style={[styles.text, selectedItems.includes(item.id) && styles.selectedItem]}>
+                {item.name}
+                
+              </Text>
+            </TouchableOpacity>
+          ))}
+        </View>
+        
         <View style={styles.box}>
           <Text style={styles.subtitle}>Sobre o Problema</Text>
           <Text style={styles.label}>Nome</Text>
@@ -92,44 +137,6 @@ const BoxComponent : React.FC = () => {
             multiline={true}
             onChangeText={setDescricao}
           />
-        </View>
-        <View style={[styles.box, styles.displayCategorys, { justifyContent: "center", alignItems: "flex-start", paddingTop: 50 }]}>
-          <Text style={styles.subtitle}>Categoria Do Problema</Text>
-          {categorys.slice(0, 10).map((item) => (
-            <TouchableOpacity key={item.id} onPress={() => handleItemPress(item.id)}>
-              <Text style={[styles.text, selectedItems.includes(item.id) && styles.selectedItem]}>
-                {item.name}
-                
-              </Text>
-            </TouchableOpacity>
-          ))}
-        </View>
-        <View style={styles.box}>
-
-          <Text style={styles.subtitle}>Localização</Text>
-          
-          {region && ( 
-              <MapView  style={{ width: '80%', height: 180, marginTop: 35}}
-                cameraZoomRange={{minCenterCoordinateDistance:1, maxCenterCoordinateDistance:3}}
-                zoomEnabled={false}
-                rotateEnabled={false}
-                scrollEnabled={false}
-                showsMyLocationButton={false}
-                showsUserLocation={true}
-                followsUserLocation={true}
-                initialRegion={{
-                latitude: region.latitude,
-                longitude: region.longitude,
-                latitudeDelta: region.latitudeDelta,
-                longitudeDelta: region.longitudeDelta,
-              
-                }}
-              />
-          )}
-          <TouchableOpacity style={styles.addButton} onPress={() => { navigation.navigate("SelectLocationScreen") }}>
-            <Text style={styles.addButtonText}>Alterar Localização</Text>
-          </TouchableOpacity>
-
         </View>
         <View style={styles.box}>
           <Text style={styles.subtitle}>Fotos</Text>
@@ -295,7 +302,10 @@ H1:{
     maxHeight: 150,
     marginBottom: 10,
   },
-  
+  textLocalization: {
+    color: "#65558f",
+
+  }
 });
 
 export default BoxComponent;
