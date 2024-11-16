@@ -1,18 +1,25 @@
-import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
-import React from "react";
-import { FlatList, SafeAreaView, StatusBar, StyleSheet, View } from "react-native";
-import { Button, Text, Searchbar, IconButton, Divider } from "react-native-paper";
-import {  SearchPlace } from "../../services/places/PlacesService";
-import { AppStackNavigation, StackTypes } from "../../routes/app.routes";
+import {  useNavigation } from "@react-navigation/native";
+import React, { useState } from "react";
+import { FlatList, SafeAreaView, StatusBar, StyleSheet, ToastAndroid, View } from "react-native";
+import { Button, Text, Searchbar, IconButton, Divider, ActivityIndicator } from "react-native-paper";
+import { StackTypes } from "../../routes/app.routes";
+import { PlaceService } from "../../services/places/PlacesService";
 
 export const SearchScreen: React.FC = () => {
-    const [searchQuery, setSearchQuery] = React.useState('');
-    const [result, setResult] = React.useState<Place[]>();
+    const [searchQuery, setSearchQuery] = useState<string>("");
+    const [searchedPlaces, setSearchedPlaces] = useState<Place[] | null>();
+    const [loading, setLoading] = useState<Boolean>(false);
     const navigation = useNavigation<StackTypes>();
 
     const search = async () => {
-        let response = await SearchPlace(searchQuery)
-        setResult(response)
+        setLoading(true);
+        let response = await PlaceService.searchPlaces(searchQuery);
+        if(response.success){
+            setSearchedPlaces(response.data);
+        } else {
+            ToastAndroid.show('Erro! Tente novamente mais tarde.', ToastAndroid.SHORT);
+        }
+        setLoading(false);
     }
 
     return (
@@ -29,24 +36,28 @@ export const SearchScreen: React.FC = () => {
                     value={searchQuery}
                 />
             </View>
-            
-            <FlatList
-                data={result}
-                renderItem={({ item, index, separators }) => (
-                    <View>
-                        <Button
-                            key={item.id}
-                            mode="text"
-                            onPress={() => { 
-                                navigation.setParams({ searchedPlace: item }) 
-                                navigation.goBack()
-                                }}>
-                            <Text style={{ textAlign: 'left', flex: 1 }}>{item.name}</Text>
-                        </Button>
-                        <Divider />
-                    </View>
-                )}
-            />
+
+            {loading ? <ActivityIndicator /> : <View>
+                {searchedPlaces?.length == 0 ?
+                    <Text>Nenhum resultado!</Text>
+                    :
+                    <FlatList
+                        data={searchedPlaces}
+                        renderItem={({ item, index, separators }) => (
+                            <View>
+                                <Button
+                                    key={item.id}
+                                    mode="text"
+                                    onPress={() => { navigation.navigate("HomeScreen", { searchedPlace: item }) }}>
+                                    <Text style={{ textAlign: 'left', flex: 1 }}>{item.name}</Text>
+                                </Button>
+                                <Divider />
+                            </View>
+                        )}
+                    />
+                }
+            </View>}
+
         </SafeAreaView>
     );
 }
