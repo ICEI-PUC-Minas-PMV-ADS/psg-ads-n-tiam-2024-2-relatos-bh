@@ -8,15 +8,14 @@ import BoxComponent from "../screens/home/Report/ReportBox";
 
 export type AppStackNavigation = {
     BoxComponent: { region?: { latitude: number; longitude: number ; latitudeDelta: number ;longitudeDelta:number}; address?:string} ;
-    Home: { searchedPlace: Place | null }
+    HomeScreen: { searchedPlace: Place | null }
     SearchScreen: undefined
     SelectLocationScreen: undefined 
 }
 
-
 export type StackTypes = NativeStackNavigationProp<AppStackNavigation>;
 
-const AppStack = createNativeStackNavigator();
+const AppStack = createNativeStackNavigator<AppStackNavigation>();
 
 const HomeStack: React.FC = () => {
     return (

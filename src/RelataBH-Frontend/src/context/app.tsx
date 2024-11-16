@@ -1,5 +1,5 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { createContext, useEffect, useState } from "react";
+import { TokenService } from "../services/TokenService";
 
 interface AppContext {
     isAuthenticated: boolean,
@@ -26,7 +26,7 @@ export const AppProvider: React.FC<any> = ({children}) => {
     }
 
     useEffect(() => {
-        AsyncStorage.getItem("token").then(token => {
+        TokenService.getUserToken().then(token => {
             setIsAuthenticated(token != null);
         })
     }, []);

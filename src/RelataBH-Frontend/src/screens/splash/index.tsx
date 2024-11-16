@@ -17,7 +17,7 @@ export const AppSplashScreen: React.FC = () => {
     useEffect(() => {
         Animated.timing(animationProgress.current, {
           toValue: 1,
-          duration: 3000,
+          duration: 1500,
           easing: Easing.linear,
           useNativeDriver: false,
         }).start();

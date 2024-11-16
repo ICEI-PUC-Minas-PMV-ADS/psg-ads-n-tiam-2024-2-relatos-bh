@@ -1,4 +1,5 @@
-import axios from "axios";
+import axios, { AxiosResponse, InternalAxiosRequestConfig } from "axios";
+import { TokenService } from "./TokenService";
 
 const api = axios.create({
     baseURL: 'https://relatabh.azurewebsites.net/',
@@ -6,14 +7,12 @@ const api = axios.create({
 });
 
 api.interceptors.request.use(
-    (config) => {
-        console.log('Request:', {
-            url: config.url,
-            method: config.method,
-            headers: config.headers,
-            data: config.data,
-            params: config.params,
-        });
+    async (config) => {
+        let userToken = await TokenService.getUserToken();
+        if(userToken != null){
+            config.headers.Authorization = `Bearer ${userToken}`
+        }
+        logRequest(config);
         return config;
     },
     (error) => {
@@ -24,14 +23,7 @@ api.interceptors.request.use(
 
 api.interceptors.response.use(
     (response) => {
-        // console.log('Interceptor called');
-        // console.log('response:', {
-        //     url: response.config.url,
-        //     method: response.config.method,
-        //     headers: response.config.headers,
-        //     data: response.config.data,
-        //     params: response.config.params,
-        // });
+        logResponse(response);
         return response;
     },
     (error) => {
@@ -40,4 +32,24 @@ api.interceptors.response.use(
     }
 )
 
+const logResponse = (response: AxiosResponse<any, any>) => {
+    if(__DEV__){
+        console.log('Response:', {
+            statusCode: response.status,
+            body: response.data,
+        });
+    }
+}
+
+const logRequest = (request: InternalAxiosRequestConfig<any>) => {
+    if(__DEV__){
+        console.log('Request:', {
+            url: request.url,
+            method: request.method,
+            headers: request.headers,
+            data: request.data,
+            params: request.params,
+        });
+    }
+}
 export default api;
