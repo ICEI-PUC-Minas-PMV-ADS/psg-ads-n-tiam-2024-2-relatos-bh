@@ -1,12 +1,12 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using Refit;
 using RelataBH.database;
 using RelataBH.Database;
 using RelataBH.Service.Auth;
 using RelataBH.Service.Auth.Api;
 using RelataBH.Service.Location;
+using RelataBH.Service.Relato;
 using RelataBH.Service.Relato.Category;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -18,6 +18,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddMvc();
 builder.Services.AddTransient<IAuthService, IAuthServiceImpl>();
 builder.Services.AddTransient<ILocationService, ILocationServiceImpl>();
+builder.Services.AddTransient<IRelatoService, IRelatoServiceImpl>();
 builder.Services.AddTransient<ICategoryService, ICategoryServiceImpl>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
