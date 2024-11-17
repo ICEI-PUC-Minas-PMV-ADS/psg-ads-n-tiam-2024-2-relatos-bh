@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, ImageBackground, KeyboardAvoidingView, TouchableWithoutFeedback, Keyboard, Platform } from 'react-native';
 import LoginComponent from "../authentication/loginComponent";
 import { AuthStates } from "./AuthStates";
 import LogupComponent from "../authentication/logupComponent";
@@ -7,7 +7,7 @@ import { useNavigation } from "@react-navigation/native";
 
 const AuthenticationScreen: React.FC = () => {
   const [screen, setScreen] = useState(AuthStates.LOGIN);
-  
+
   const renderScreen = () => {
     if (screen == AuthStates.LOGIN) {
       return <LoginComponent onSignUp={() => setScreen(AuthStates.LOGUP)} />
@@ -21,18 +21,27 @@ const AuthenticationScreen: React.FC = () => {
   }
 
   return (
-    <View style={styles.container}>
-      <View style={styles.logoContainer}>
-        <View style={styles.tituloComponent}>
-          <Text style={styles.tituloApp}>
-            Relata BH
-          </Text>
-        </View>
-      </View>
-      <View style={styles.autenticationContainer}>
-        {renderScreen()}
-      </View>
-    </View>
+    <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={styles.container} >
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <View style={styles.container}>
+          <ImageBackground
+            source={{
+              uri: 'https://blog.maxmilhas.com.br/wp-content/uploads/2017/09/igrejinha-da-pampulha-em-belo-horizonte.jpg',
+            }}
+            resizeMode="cover"
+            style={styles.image}
+          >
+            <View style={styles.overlay} />
+            <View style={styles.tituloComponent}>
+              <Text style={styles.tituloApp}>Relata BH</Text>
+            </View>
+          </ImageBackground>
+          <View style={styles.autenticationContainer}>
+            {renderScreen()}
+          </View>
+        </View >
+      </TouchableWithoutFeedback>
+    </KeyboardAvoidingView >
   );
 }
 
@@ -40,29 +49,35 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  link: {
-    marginTop: 15,
-    paddingVertical: 15,
-  },
-  logoContainer: {
+  image: {
     flex: 1,
-    backgroundColor: "#ccc",
+    height: '55%',
   },
-  autenticationContainer: {
-    backgroundColor: "#fff",
-    borderTopEndRadius: 30,
-    borderTopStartRadius: 30,
-    padding: 20
+  overlay: {
+    ...StyleSheet.absoluteFillObject,
+    backgroundColor: 'rgba(0, 0, 0, 0.55)',
+  },
+  tituloComponent: {
+    flex: 0.5,
+    alignItems: 'center',
+    justifyContent: 'center',
+
   },
   tituloApp: {
     fontSize: 30,
+    color: '#fff',
+    fontWeight: 'bold'
   },
-  tituloComponent: {
-    alignItems: "center",
-    justifyContent: "center",
-    paddingTop: 105,
-  }
-
+  autenticationContainer: {
+    backgroundColor: '#fff',
+    borderTopEndRadius: 30,
+    borderTopStartRadius: 30,
+    padding: 20,
+    bottom: 0,
+    width: '100%',
+    flex: 1,
+  },
 });
+
 
 export default AuthenticationScreen;
