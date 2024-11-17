@@ -1,7 +1,9 @@
 export const ENDPOINTS = {
     LOGIN: () => BASE_URL + "api/auth/login",
     REGISTER: () => BASE_URL + "api/auth/register",
-    SEARCH_PLACES: (query: string) => BASE_URL + `api/Location&query=${query}`
+    SEARCH_PLACES: (query: string) => BASE_URL + `api/Location/search?query=${query}`,
+    REPORTS_IN_RANGE: (lat: number, long: number) => BASE_URL + `api/Relato/search?lat=${lat}&long=${long}`,
+    REPORT_CATEGORIES: () => BASE_URL + `api/Relato/categories`,
     //caminho para os outros endpoints ficarao aqui 
 }
 const BASE_URL = "https://relatabh.azurewebsites.net/"

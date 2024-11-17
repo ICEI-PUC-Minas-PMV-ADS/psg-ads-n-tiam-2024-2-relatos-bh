@@ -1,8 +1,4 @@
-﻿using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using RelataBH.Authorization;
+﻿using Microsoft.AspNetCore.Mvc;
 using RelataBH.Model;
 using RelataBH.Service.Profile;
 using RelataBH.Service.Profile.Domain;
@@ -11,7 +7,7 @@ namespace RelataBH.Controllers
 {
     [Route("api/user")]
     [ApiController]
-    public class UserController(ILogger<WeatherForecastController> logger, IProfileService profileService) : ControllerBase
+    public class UserController(IProfileService profileService) : ControllerBase
     {
 
         [HttpPost("profile")]
