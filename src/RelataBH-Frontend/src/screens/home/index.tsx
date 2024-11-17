@@ -1,11 +1,9 @@
 import React from 'react';
-import { SafeAreaView, StatusBar, View } from 'react-native';
-import { BottomNavigation, Text } from 'react-native-paper';
+import { SafeAreaView, StatusBar } from 'react-native';
+import { BottomNavigation } from 'react-native-paper';
 import MapScreen from './map/MapScreen';
 import Report from './Report/Report';
 import { ProfileScreen } from './profile';
-import { RouteProp, useFocusEffect, useRoute } from '@react-navigation/native';
-import { AppStackNavigation } from '../../routes/app.routes';
 
 const MapRoute = () => <MapScreen />;
 
@@ -31,6 +29,7 @@ const HomeScreen: React.FC = () => {
     return (
         <SafeAreaView style={{ flex: 1, paddingTop: StatusBar.currentHeight }}>
             <BottomNavigation
+                key={index}
                 navigationState={{ index, routes }}
                 onIndexChange={setIndex}
                 renderScene={renderScene}
