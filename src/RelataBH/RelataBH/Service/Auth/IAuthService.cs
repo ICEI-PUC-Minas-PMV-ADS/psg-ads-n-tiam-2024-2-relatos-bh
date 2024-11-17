@@ -6,7 +6,7 @@ namespace RelataBH.Service.Auth
 {
     public interface IAuthService
     {
-        public Task<AppUser> Register(AuthUserRequest userRequest);
+        public Task<User> Register(AuthUserRequest userRequest);
         public Task<AuthUserResponse> Login(AuthUserRequest userRequest);
         public Task<SendEmailResponse> RecoverPassword(SendEmailRequest Request);
     }

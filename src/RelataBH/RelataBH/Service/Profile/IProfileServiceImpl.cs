@@ -4,11 +4,11 @@ using RelataBH.Model;
 
 namespace RelataBH.Service.Profile
 {
-    public class IProfileServiceImpl(AppUserContext appUser) : IProfileService
+    public class IProfileServiceImpl(ProfileContext profileContext) : IProfileService
     {
-        public async Task<AppUser> GetProfile(int userId)
+        public async Task<Model.Profile> GetProfile(int userId)
         {
-            return await appUser.AppUser
+            return await profileContext.Profile
                  .Where(user => user.id == userId)
                  .FirstAsync();
         }

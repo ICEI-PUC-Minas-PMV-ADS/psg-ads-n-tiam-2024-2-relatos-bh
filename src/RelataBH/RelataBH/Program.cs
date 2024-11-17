@@ -52,7 +52,7 @@ builder.Services.AddDbContext<LocationContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
 );
 
-builder.Services.AddDbContext<AppUserContext>(options =>
+builder.Services.AddDbContext<ProfileContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
 );
 

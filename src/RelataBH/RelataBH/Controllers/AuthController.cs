@@ -13,11 +13,11 @@ namespace RelataBH.Controllers
     public class AuthController(IAuthService authService): ControllerBase
     {
         [HttpPost("register")]
-        public async Task<ActionResult<AppUser>> Register(AuthUserRequest userRequest)
+        public async Task<ActionResult<User>> Register(AuthUserRequest userRequest)
         {
             try
             {
-                AppUser user = await authService.Register(userRequest);
+                User user = await authService.Register(userRequest);
                 return Ok(user);
             }
             catch (Exception exception)
