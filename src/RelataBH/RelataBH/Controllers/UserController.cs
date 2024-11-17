@@ -12,7 +12,7 @@ namespace RelataBH.Controllers
     [Route("api/user")]
     [ApiController]
     //[Authorize]
-    public class UserController(ILogger<WeatherForecastController> logger) : ControllerBase
+    public class UserController() : ControllerBase
     {
 
         [HttpGet]
