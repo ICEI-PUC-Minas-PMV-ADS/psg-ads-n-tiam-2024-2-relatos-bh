@@ -1,17 +1,18 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using RelataBH.Model.Relato;
+using RelataBH.Service.Auth.Domain.Relato;
 
 namespace RelataBH.Database
 {
     public class RelatoContext(DbContextOptions<RelatoContext> options) : DbContext(options)
     {
-        public DbSet<Relato> Relato { get; set; }
-        public DbSet<vwRelato> vwRelato { get; set; }
+        public DbSet<Relato> Relatos { get; set; }
+        public DbSet<VW_RELATOS> VW_RELATOS { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<vwRelato>().ToView("vw_relatos");
-            modelBuilder.Entity<Relato>().ToTable("relatos");
+            modelBuilder.Entity<Relato>().ToTable("RELATOS");
+            modelBuilder.Entity<VW_RELATOS>().ToView("VW_RELATOS");
         }
     }
 }
