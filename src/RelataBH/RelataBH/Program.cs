@@ -6,6 +6,7 @@ using RelataBH.Database;
 using RelataBH.Service.Auth;
 using RelataBH.Service.Auth.Api;
 using RelataBH.Service.Location;
+using RelataBH.Service.Profile;
 using RelataBH.Service.Relato;
 using RelataBH.Service.Relato.Category;
 
@@ -18,6 +19,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddMvc();
 builder.Services.AddTransient<IAuthService, IAuthServiceImpl>();
 builder.Services.AddTransient<ILocationService, ILocationServiceImpl>();
+builder.Services.AddTransient<IProfileService, IProfileServiceImpl>();
 builder.Services.AddTransient<IRelatoService, IRelatoServiceImpl>();
 builder.Services.AddTransient<ICategoryService, ICategoryServiceImpl>();
 
@@ -50,6 +52,10 @@ builder.Services.AddDbContext<UserContext>(options =>
 );
 
 builder.Services.AddDbContext<LocationContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
+);
+
+builder.Services.AddDbContext<ProfileContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
 );
 
