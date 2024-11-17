@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Http.HttpResults;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using RelataBH.Database;
 using RelataBH.Model.Relato;
 using RelataBH.Service.Auth.Domain.Relato;

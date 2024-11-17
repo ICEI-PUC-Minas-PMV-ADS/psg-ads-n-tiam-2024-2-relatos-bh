@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import { StyleProp, ViewStyle } from "react-native";
+import { StyleProp, ToastAndroid, ViewStyle } from "react-native";
 import MapView, { Marker, Region } from "react-native-maps";
 import * as Location from 'expo-location';
 import React from "react";
+import { ReportService } from "../../../../services/report/ReportService";
 
 type Props = {
-    reports: UserReport[] | null,
     onReportSelected: (report: UserReport | null) => void,
     onRegionChanged: (region: Region) => void,
     style?: StyleProp<ViewStyle>
@@ -15,10 +15,19 @@ export const MapComponent: React.FC<Props> = ({
     style,
     onReportSelected,
     onRegionChanged,
-    reports
 }) => {
     const [location, setLocation] = useState<Location.LocationObject | null>(null);
     const mapRef: React.LegacyRef<MapView> | undefined = React.createRef();
+    const [userReposts, setUserReports] = useState<UserReport[] | null>(null);
+
+    const fetchReports = async (lat: number, long: number) => {
+        let userReportsResponse = await ReportService.fetchInRange(lat, long);
+        if(userReportsResponse.success){
+            setUserReports(userReportsResponse.data);
+        } else {
+            ToastAndroid.show('[fetchReports] Erro! Tente novamente mais tarde.', ToastAndroid.SHORT);
+        }
+    }
 
     useEffect(() => {
         (async () => {
@@ -43,6 +52,10 @@ export const MapComponent: React.FC<Props> = ({
             },
             zoom: 14
         })
+        
+        if(location != null || location != undefined){
+            fetchReports(location?.coords.latitude, location?.coords.longitude)
+        }
     }, [location]);
 
     return (
@@ -56,8 +69,8 @@ export const MapComponent: React.FC<Props> = ({
             pitchEnabled={false}
             onRegionChange={onRegionChanged}
         >
-            {reports &&
-                reports.map((report: UserReport, index: number) => (
+            {userReposts &&
+                userReposts.map((report: UserReport, index: number) => (
                     <Marker
                         key={index}
                         coordinate={{
