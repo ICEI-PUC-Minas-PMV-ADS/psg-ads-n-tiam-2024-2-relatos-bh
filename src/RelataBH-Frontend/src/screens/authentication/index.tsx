@@ -35,10 +35,10 @@ const AuthenticationScreen: React.FC = () => {
             <View style={styles.tituloComponent}>
               <Text style={styles.tituloApp}>Relata BH</Text>
             </View>
+            <View style={styles.autenticationContainer}>
+              {renderScreen()}
+            </View>
           </ImageBackground>
-          <View style={styles.autenticationContainer}>
-            {renderScreen()}
-          </View>
         </View >
       </TouchableWithoutFeedback>
     </KeyboardAvoidingView >
@@ -61,12 +61,11 @@ const styles = StyleSheet.create({
     flex: 0.5,
     alignItems: 'center',
     justifyContent: 'center',
-
   },
   tituloApp: {
     fontSize: 30,
     color: '#fff',
-    fontWeight: 'bold'
+    fontWeight: 'bold',
   },
   autenticationContainer: {
     backgroundColor: '#fff',
@@ -74,6 +73,7 @@ const styles = StyleSheet.create({
     borderTopStartRadius: 30,
     padding: 20,
     bottom: 0,
+    position:'absolute',
     width: '100%',
     flex: 1,
   },
