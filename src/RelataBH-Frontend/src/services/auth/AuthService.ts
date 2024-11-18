@@ -1,7 +1,7 @@
 import axios from "axios";
 import api from "../axiosInstance";
 import { ENDPOINTS } from "../Endpoints";
-import AsyncStorage from '@react-native-async-storage/async-storage'
+import { TokenService } from "../TokenService";
 
 type LoginResponse = {
     id: string,
@@ -10,27 +10,13 @@ type LoginResponse = {
     token: string
 }
 
-type ErrorResponse = {
-    error: {
-        response: {
-            data: {
-                error: {
-                    message:string 
-
-                }
-            }
-        }
-    }
-}
-
 export class AuthService {
     login = async (email: string, password: string): Promise<ApiResponse<LoginResponse>> => {
         try {
             const url = ENDPOINTS.LOGIN();
             const body = JSON.stringify({email: email, password: password, returnSecureToken: true});
             const response = await api.post<LoginResponse>(url, body);
-            console.log(response.data)
-            AsyncStorage.setItem("token", response.data.token);
+            TokenService.saveUserToken(response.data.token);
             return { success: true, data: response.data }
         } catch (error) {
             if(axios.isAxiosError(error)){
@@ -57,8 +43,7 @@ export class AuthService {
             returnSecureToken: true
         });
         const response = (await api.post(url, body)).data
-
-        AsyncStorage.setItem("token", response.token)
+        TokenService.saveUserToken(response.data.token);
 
         return {
             id: response.id,
