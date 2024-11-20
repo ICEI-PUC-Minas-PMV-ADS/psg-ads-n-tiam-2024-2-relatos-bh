@@ -8,33 +8,28 @@ import { ReportService } from "../../../../services/report/ReportService";
 type Props = {
     onReportSelected: (report: UserReport | null) => void,
     onRegionChanged: (region: Region) => void,
+    points: UserReport[] | null,
     style?: StyleProp<ViewStyle>
 }
 
 export const MapComponent: React.FC<Props> = ({
     style,
+    points,
     onReportSelected,
-    onRegionChanged,
+    onRegionChanged
 }) => {
-    const [location, setLocation] = useState<Location.LocationObject | null>(null);
     const mapRef: React.LegacyRef<MapView> | undefined = React.createRef();
-    const [userReposts, setUserReports] = useState<UserReport[] | null>(null);
+    const [location, setLocation] = useState<Location.LocationObject | null>(null);
+    const [isMapReady, setMapReady] = useState<Boolean>(false);
 
     const fetchReports = async (lat: number, long: number) => {
-        let userReportsResponse = await ReportService.fetchInRange(lat, long);
-        if(userReportsResponse.success){
-            setUserReports(userReportsResponse.data);
-        } else {
-            ToastAndroid.show('[fetchReports] Erro! Tente novamente mais tarde.', ToastAndroid.SHORT);
-        }
+        //call backend
     }
 
     useEffect(() => {
         (async () => {
-
             let { status } = await Location.requestForegroundPermissionsAsync();
             if (status !== 'granted') {
-                //permission denied.
                 console.log("no permission.")
                 return;
             }
@@ -45,15 +40,16 @@ export const MapComponent: React.FC<Props> = ({
     }, []);
 
     useEffect(() => {
-        mapRef.current?.animateCamera({
-            center: {
-                "latitude": location?.coords.latitude ?? 0,
-                "longitude": location?.coords.longitude ?? 0
-            },
-            zoom: 14
-        })
-        
         if(location != null || location != undefined){
+            mapRef.current?.animateCamera({
+                center: {
+                    "latitude": location?.coords.latitude ?? 0,
+                    "longitude": location?.coords.longitude ?? 0
+                },
+                zoom: 14
+            },{ duration: 500 })
+        
+            setTimeout(() => { setMapReady(true) }, 1000);
             fetchReports(location?.coords.latitude, location?.coords.longitude)
         }
     }, [location]);
@@ -67,10 +63,10 @@ export const MapComponent: React.FC<Props> = ({
             showsMyLocationButton={false}
             showsCompass={false}
             pitchEnabled={false}
-            onRegionChange={onRegionChanged}
+            onRegionChangeComplete={(region) => { isMapReady ? onRegionChanged(region) : {}}}
         >
-            {userReposts &&
-                userReposts.map((report: UserReport, index: number) => (
+            {points &&
+                points.map((report: UserReport, index: number) => (
                     <Marker
                         key={index}
                         coordinate={{

@@ -14,6 +14,10 @@ export default function LogupComponent({onBack = () => {} }: signUpProps) {
     const [confirmarPassword, setConfirmarPassword] = useState("")
 
     const register = async () => {
+        await localStorage.getItem("profile")
+        if(a != null){
+            a
+        }
         new AuthService().register(name,email,password,confirmarPassword)
     }
 
