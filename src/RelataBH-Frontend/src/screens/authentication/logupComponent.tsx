@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View } from 'react-native';
-import { Button, Checkbox, IconButton, MD3Colors, TextInput } from 'react-native-paper';
+import { Button, IconButton, TextInput } from 'react-native-paper';
 import { useState } from 'react';
 import { AuthService } from '../../services/auth/AuthService';
 
@@ -14,10 +14,6 @@ export default function LogupComponent({onBack = () => {} }: signUpProps) {
     const [confirmarPassword, setConfirmarPassword] = useState("")
 
     const register = async () => {
-        await localStorage.getItem("profile")
-        if(a != null){
-            a
-        }
         new AuthService().register(name,email,password,confirmarPassword)
     }
 
