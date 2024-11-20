@@ -1,11 +1,49 @@
 # Plano de Testes de Usabilidade
 
-O teste de usabilidade permite avaliar a qualidade da interface com o usuário da aplicação interativa. O Plano de Testes de Software é gerado a partir da especificação do sistema e consiste em casos de testes que deverão ser executados quando a implementação estiver parcial ou totalmente pronta.
+### Login
+  Passos para teste:
+   - Ter uma conta registrada no sistema
+   - Preencher os campos de E-mail e Senha na aplicação
+   - Clicar em Login
+     
+  Resultados esperados: 
+   - O usuário é logado com sucesso.
+     
+  Caso alternativo:
+  
+  Usuário digita informações incompatíveis com o cadastrado:
+   - O sistema retorna mensagem de erro.
+     
+### Cadastro
+  Passos para teste:
+   - Preencher os campos de E-mail, Nome, Senha e Confirmar Senha na aplicação.
+   - Clicar em Registrar.
+     
+  Resultados esperados: 
+   - O usuário é cadastrado com sucesso.
+     
+  Caso alternativo:
+  
+  Usuário cadastra com o E-mail de um usuário previamente cadastrado:
+  
+   - Já possui um usuário cadastrado com o E-mail informado
+   - O sistema retorna uma mensagem de erro.
 
-As referências abaixo irão auxiliá-lo na geração do artefato "Plano de Testes de Usabilidade".
+  Usuário tenta cadastrar com senhas diferentes:
+   - O sistema retorna uma mensagem de erro.
 
-> **Links Úteis**:
-> - [Teste De Usabilidade: O Que É e Como Fazer Passo a Passo (neilpatel.com)](https://neilpatel.com/br/blog/teste-de-usabilidade/)
-> - [Teste de usabilidade: tudo o que você precisa saber! | by Jon Vieira | Aela.io | Medium](https://medium.com/aela/teste-de-usabilidade-o-que-voc%C3%AA-precisa-saber-39a36343d9a6/)
-> - [Planejando testes de usabilidade: o que (e o que não) fazer | iMasters](https://imasters.com.br/design-ux/planejando-testes-de-usabilidade-o-que-e-o-que-nao-fazer/)
-> - [Ferramentas de Testes de Usabilidade](https://www.usability.gov/how-to-and-tools/resources/templates.html)
+### Esqueci minha senha?
+   Passos para teste:
+   - Preencher os campos de E-mail.
+   - Clicar em recuperar senha.
+     
+  Resultados esperados: 
+   - O usuário recebe um E-mail para redefinição de senha.
+     
+  Caso alternativo:
+  
+  Usuário informa um E-mail não cadastrado:
+  
+   - O usuário não receberá o E-mail.
+
+

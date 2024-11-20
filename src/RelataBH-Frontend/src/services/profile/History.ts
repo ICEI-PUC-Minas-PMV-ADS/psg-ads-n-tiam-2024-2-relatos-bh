@@ -1,4 +1,4 @@
-type RepostHistory = {
+type ReportHistory = {
     id: number,
     image: string,
     name: string,

@@ -1,9 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using RelataBH.Model.Relato;
-using RelataBH.Service.Auth.Domain.Relato;
-using RelataBH.Model.Location;
-using RelataBH.Model.Relato;
-
 namespace RelataBH.Database
 {
     public class RelatoContext(DbContextOptions<RelatoContext> options) : DbContext(options)
@@ -18,5 +14,8 @@ namespace RelataBH.Database
             modelBuilder.Entity<VW_RELATOS>().ToView("VW_RELATOS");
             modelBuilder.Entity<Category>().ToTable("INDICADORES");
         }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) => optionsBuilder.UseSqlServer("Server=tcp:relatosbh.database.windows.net,1433;Initial Catalog=relatosbh;User ID=relatos-adm@relatosbh;Password=lsPFJ0iP7Y3GTCEe9kaR4yNs681;Encrypt=True;TrustServerCertificate=False;Connect Timeout=30;",
+            b => b.UseNetTopologySuite());
     }
 }
