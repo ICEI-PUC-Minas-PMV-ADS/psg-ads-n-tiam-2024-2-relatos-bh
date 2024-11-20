@@ -1,5 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using NetTopologySuite.Geometries;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace RelataBH.Model.Relato
 {
@@ -9,9 +11,9 @@ namespace RelataBH.Model.Relato
         [Column("ID")]
         public int id { get; set; }
         [Column("LATITUDE")]
-        public double latitude { get; set; }
+        public string latitude { get; set; }
         [Column("LONGITUDE")]
-        public double longitude { get; set; }
+        public string longitude { get; set; }
         [Column("ENDERECO")]
         public string endereco { get; set; }
         [Column("CREATED_AT")]

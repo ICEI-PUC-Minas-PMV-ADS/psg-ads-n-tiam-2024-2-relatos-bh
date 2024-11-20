@@ -1,7 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using NetTopologySuite.Geometries;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace RelataBH.Model.Relato
 {
@@ -11,9 +13,9 @@ namespace RelataBH.Model.Relato
         [Column("ID_RELATO")]
         public int IdRelato { get; set; }
         [Column("LATITUDE")]
-        public double Latitude { get; set; }
+        public string Latitude { get; set; }
         [Column("LONGITUDE")]
-        public double Longitude { get; set; }
+        public string Longitude { get; set; }
         [Column("ENDERECO")]
         public string Endereco { get; set; }
         [Column("CRIADO_QUANDO")]
@@ -36,5 +38,8 @@ namespace RelataBH.Model.Relato
         public int QuantLike { get; set; }
         [Column("QUANT_DESLIKE")]
         public int QuantDeslike { get; set; }
+        [Column(name: "POINT", TypeName = Geometry.TypeNamePoint)]
+        [JsonIgnore]
+        public Point point { get; set; }
     }
 }

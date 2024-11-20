@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using RelataBH.Model.Location;
 using RelataBH.Model.Relato;
 using RelataBH.Service.Auth.Domain.Relato;
 using RelataBH.Service.Relato;
@@ -22,6 +21,20 @@ namespace RelataBH.Controllers
             {
                 return BadRequest();
             }
+        }
+
+        [HttpGet("searchbylocation")]
+        public async Task<IEnumerable<VW_RELATOS>> GetRelatosPoint([FromQuery] string lat, [FromQuery] string log)
+        {
+            var relato = await relatoService.GetRelatosPoint(lat, log);
+            return relato;
+        }
+
+        [HttpGet("id")]
+        public async Task<VW_RELATOS> GetRelatoId([FromQuery] int Id)
+        {
+            var relato = await relatoService.GetRelatoId(Id);
+            return relato;
         }
 
         [HttpGet("")]
