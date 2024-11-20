@@ -6,7 +6,7 @@ import { useState } from "react";
 import { HistoryCard } from "./HistoryCard";
 
 export const ProfileScreen: React.FC = () => {
-    const [reports, setReports] = useState<RepostHistory[] | null>(createHistoryMock())
+    const [reports, setReports] = useState<ReportHistory[] | null>(createHistoryMock())
 
     return (
         <View style={{ flex: 1, alignItems: 'center' }}>
@@ -43,27 +43,27 @@ const createHistoryMock = () => {
             description: 'Buraco incomodando todos os vizinhos.',
             date: Date.now(),
             image: 'https://picsum.photos/700'
-        } as RepostHistory,
+        } as ReportHistory,
         {
             id: 2,
             name: 'Buraco na rua 2',
             description: 'Buraco incomodando todos os vizinhos.',
             date: Date.now(),
             image: 'https://picsum.photos/700'
-        } as RepostHistory,
+        } as ReportHistory,
         {
             id: 3,
             name: 'Buraco na rua 3',
             description: 'Buraco incomodando todos os vizinhos.',
             date: Date.now(),
             image: 'https://picsum.photos/700'
-        } as RepostHistory,
+        } as ReportHistory,
         {
             id: 4,
             name: 'Buraco na rua 4',
             description: 'Buraco incomodando todos os vizinhos.',
             date: Date.now(),
             image: 'https://picsum.photos/700'
-        } as RepostHistory
+        } as ReportHistory
     ]
 }

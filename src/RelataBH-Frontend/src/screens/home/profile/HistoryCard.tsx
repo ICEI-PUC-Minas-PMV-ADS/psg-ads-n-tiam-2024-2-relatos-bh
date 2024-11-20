@@ -14,10 +14,10 @@ export const HistoryCard: React.FC = () => {
                         }}
                     />
 
-                    <View style={{flexDirection: 'column', paddingHorizontal: 4}}>
+                    <View style={{flexDirection: 'column', paddingHorizontal: 4, flex: 1, marginTop: 8}}>
                         <Text>10/10/2021</Text>
                         <Text>Buraco na Rua Sergipe</Text>
-                        <Text style={{flexGrow: 1 ,flex: 1, flexWrap: 'wrap', flexShrink: 1, width: 'auto'}} numberOfLines={2} ellipsizeMode="tail">Buraco incomodando tooda a vozinhança! Não aguento mais :/</Text>
+                        <Text style={{flexGrow: 1 ,flex: 1, flexWrap: 'wrap', flexShrink: 1, width: 'auto'}} numberOfLines={2} ellipsizeMode="tail">Buraco incomodando tooda a vizinhança! Não aguento mais :/</Text>
                     </View>
                 </View>
             </Card.Content>
