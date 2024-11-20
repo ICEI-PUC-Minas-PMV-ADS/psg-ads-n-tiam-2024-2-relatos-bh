@@ -57,7 +57,7 @@ export default function LoginComponent({onSignUp = () => {} }: loginProps) {
             </Button>
             
             <View style={styles.row3}>
-                <Button mode="text" onPress={() => console.log('Pressed')}>
+                <Button mode="text" onPress={() => {onSignUp()}}>
                     Não tem uma conta?
                 </Button>
             </View>
