@@ -15,9 +15,15 @@ export class AuthService {
         try {
             const url = ENDPOINTS.LOGIN();
             const body = JSON.stringify({email: email, password: password, returnSecureToken: true});
-            const response = await api.post<LoginResponse>(url, body);
-            TokenService.saveUserToken(response.data.token);
-            return { success: true, data: response.data }
+            //const response = await api.post<LoginResponse>(url, body);
+            //TokenService.saveUserToken(response.data.token);
+            TokenService.saveUserToken("fake-token");
+            return { success: true, data: {
+                id: "response.id",
+                email: "response.email",
+                name: "response.name",
+                token: "response.token"
+            } }
         } catch (error) {
             if(axios.isAxiosError(error)){
                 console.log("ERROR> " + error.response?.data.error.message)
