@@ -1,8 +1,48 @@
 # Registro de Testes de Usabilidade
 
-Após realizar os testes de usabilidade, obtém-se um relatório a partir das análises realizadas. O Registro de Testes de Usabilidade é um relatório que contém as evidências dos testes e relatos dos usuários participantes, baseado no Plano de Testes de Usabilidade desenvolvido para os casos de uso desta etapa.
+### Login
+  Passos para teste:
+   - Ter uma conta registrada no sistema
+   - Preencher os campos de E-mail e Senha na aplicação
+   - Clicar em Login
+  Resultados esperados: 
+   - O usuário é logado com sucesso.
+     
+  Caso alternativo:
+  
+  Usuário digita informações incompatíveis com o cadastrado:
+   - O sistema retorna mensagem de erro.
+     
+### Cadastro
+  Passos para teste:
+   - Preencher os campos de E-mail, Nome, Senha e Confirmar Senha na aplicação.
+   - Clicar em Registrar.
+     
+  Resultados esperados: 
+   - O usuário é cadastrado com sucesso.
+     
+  Caso alternativo:
+  
+  Usuário cadastra com o E-mail de um usuário previamente cadastrado:
+  
+   - Já possui um usuário cadastrado com o E-mail informado
+   - O sistema retorna uma mensagem de erro.
 
-As referências abaixo irão auxiliá-lo na geração do artefato “Registro de Testes de Usabilidade”.
+  Usuário tenta cadastrar com senhas diferentes:
+   - O sistema retorna uma mensagem de erro.
 
-> **Links Úteis**:
-> - [Ferramentas de Testes de Usabilidade](https://www.usability.gov/how-to-and-tools/resources/templates.html)
+### Esqueci minha senha?
+   Passos para teste:
+   - Preencher os campos de E-mail.
+   - Clicar em recuperar senha.
+     
+  Resultados esperados: 
+   - O usuário recebe um E-mail para redefinição de senha.
+     
+  Caso alternativo:
+  
+  Usuário informa um E-mail não cadastrado:
+  
+   - O usuário não receberá o E-mail.
+
+
