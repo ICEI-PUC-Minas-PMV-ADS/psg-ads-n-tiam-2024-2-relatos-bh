@@ -7,6 +7,7 @@ using RelataBH.Service.Auth;
 using RelataBH.Service.Auth.Api;
 using RelataBH.Service.Location;
 using RelataBH.Service.Profile;
+using RelataBH.Service.Profile.RelatoHistoric;
 using RelataBH.Service.Relato;
 using RelataBH.Service.Relato.Category;
 
@@ -22,6 +23,7 @@ builder.Services.AddTransient<ILocationService, ILocationServiceImpl>();
 builder.Services.AddTransient<IProfileService, IProfileServiceImpl>();
 builder.Services.AddTransient<IRelatoService, IRelatoServiceImpl>();
 builder.Services.AddTransient<ICategoryService, ICategoryServiceImpl>();
+builder.Services.AddScoped<IRelatoHistoricService, IRelatoHistoricServiceImpl>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
