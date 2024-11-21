@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
-import { StyleProp, ToastAndroid, ViewStyle } from "react-native";
+import { StyleProp, ToastAndroid, View, ViewStyle } from "react-native";
 import MapView, { Marker, Region } from "react-native-maps";
 import * as Location from 'expo-location';
 import React from "react";
 import { ReportService } from "../../../../services/report/ReportService";
+import { Text } from "react-native-paper";
 
 type Props = {
     onReportSelected: (report: UserReport | null) => void,
@@ -21,6 +22,7 @@ export const MapComponent: React.FC<Props> = ({
     const mapRef: React.LegacyRef<MapView> | undefined = React.createRef();
     const [location, setLocation] = useState<Location.LocationObject | null>(null);
     const [isMapReady, setMapReady] = useState<Boolean>(false);
+    const [markers, setMarkers] = useState<UserReport[]>([]);
 
     const fetchReports = async (lat: number, long: number) => {
         //call backend
@@ -40,6 +42,14 @@ export const MapComponent: React.FC<Props> = ({
     }, []);
 
     useEffect(() => {
+        points?.map((report: UserReport, index: number) => {
+            console.log(report.latitude);
+            console.log(report.longitude);
+        })
+        setMarkers(points ?? [])
+    }, [points])
+
+    useEffect(() => {
         if(location != null || location != undefined){
             mapRef.current?.animateCamera({
                 center: {
@@ -48,9 +58,9 @@ export const MapComponent: React.FC<Props> = ({
                 },
                 zoom: 14
             },{ duration: 500 })
+
         
             setTimeout(() => { setMapReady(true) }, 1000);
-            fetchReports(location?.coords.latitude, location?.coords.longitude)
         }
     }, [location]);
 
@@ -63,21 +73,37 @@ export const MapComponent: React.FC<Props> = ({
             showsMyLocationButton={false}
             showsCompass={false}
             pitchEnabled={false}
+            showsPointsOfInterest = {false}
             onRegionChangeComplete={(region) => { isMapReady ? onRegionChanged(region) : {}}}
         >
+            {/* {markers.map((marker, index) => (
+                <Marker
+                    key={index}
+                    coordinate={{latitude: marker.latitude, longitude: marker.longitude}}
+                    title={marker.nomeCategoria}
+                    description={marker.emailUser}
+                    />
+            ))} */}
+
+            {/* <Marker
+            key={1}
+                        coordinate={{latitude: 1, longitude: 1}}
+                        title={"asas"}
+                    /> */}
             {points &&
-                points.map((report: UserReport, index: number) => (
-                    <Marker
+                points.map((report: UserReport, index: number) => {
+                    console.log("_______" + report.latitude);
+                    return <Marker
                         key={index}
                         coordinate={{
-                            latitude: report.lat,
-                            longitude: report.long
+                            latitude: -19.929290541374755,
+                            longitude: -43.93626102159546
                         }}
-                        title={report.type}
+                        title={report.nomeCategoria}
                         onSelect={() => { onReportSelected(report) }}
                         onDeselect={() => { onReportSelected(null) }}
                     />
-                ))
+})
             }
         </MapView>
     );

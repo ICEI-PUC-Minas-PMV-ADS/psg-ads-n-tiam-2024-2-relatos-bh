@@ -2,11 +2,21 @@ import { FlatList, ScrollView, View } from "react-native";
 import { Appbar, Avatar, Card, Text, Button, ActivityIndicator } from "react-native-paper";
 import { ProfileCard } from "./ProfileCard";
 import { HistoryList } from "./HistoryList";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { HistoryCard } from "./HistoryCard";
+import AppContext from "../../../context/app";
+import { useNavigation } from "@react-navigation/native";
+import { AppStackNavigation, StackTypes } from "../../../routes/routes";
 
 export const ProfileScreen: React.FC = () => {
     const [reports, setReports] = useState<ReportHistory[] | null>(createHistoryMock())
+    const { logout } = useContext(AppContext);
+    const navigation = useNavigation<StackTypes>();
+
+    const handleLogout = () => {
+        logout();
+        navigation.navigate("Auth");
+    }
 
     return (
         <View style={{ flex: 1, alignItems: 'center' }}>
@@ -28,7 +38,9 @@ export const ProfileScreen: React.FC = () => {
                     <HistoryCard />
                 )}
                 ListFooterComponent={() => (
-                    <ActivityIndicator size={'large'}/>
+                    <View>
+                        <Button onPress={() => { handleLogout() }}>Logout</Button>
+                    </View>
                 )}
             />
         </View>

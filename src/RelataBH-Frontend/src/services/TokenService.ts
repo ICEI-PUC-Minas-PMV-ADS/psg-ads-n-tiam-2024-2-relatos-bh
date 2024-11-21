@@ -11,7 +11,7 @@ export class TokenService {
         AsyncStorage.setItem(TokenService.tokenKey, token);
     }
 
-    static clearUserToken = () => {
+    static clearAppData = () => {
         AsyncStorage.clear();
     }
 }

@@ -12,6 +12,7 @@ import SearchBar from "react-native-screens/lib/typescript/components/SearchBar"
 import { ReportSearchBar } from "./components/ReportSearchBar";
 import { ReportSearchButton } from "./components/ReportSeachButton";
 import { ReportSearchLoading } from "./components/ReportSearchLoading";
+import { ReportService } from "../../../services/report/ReportService";
 
 const MapScreen: React.FC = () => {
 
@@ -48,13 +49,23 @@ const MapScreen: React.FC = () => {
         }, 1000);
     }
 
-    const handleSearchRegion = () => {
+    const handleSearchRegion = async () => {
         setLoadingRegion(true);
         setRegionToSearch(null);
-        console.log(`Searching (${regionToSearch?.latitude} ${regionToSearch?.longitude})...`);
-        setTimeout(() => {
-            setLoadingRegion(false);
-        }, 1000);
+
+        const reports = await ReportService.fetchByCoordinates(regionToSearch?.latitude, regionToSearch?.longitude);
+        if(reports.success){
+            ToastAndroid.show("Loaded!", ToastAndroid.SHORT);
+            setUserReports(reports.data);
+        } else {
+            ToastAndroid.show("Erro!", ToastAndroid.SHORT);
+        }
+
+        setLoadingRegion(false);
+        // console.log(`Searching (${regionToSearch?.latitude} ${regionToSearch?.longitude})...`);
+        // setTimeout(() => {
+        //     setLoadingRegion(false);
+        // }, 1000);
     }
 
     useEffect(() => {

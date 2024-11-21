@@ -4,10 +4,8 @@ import { ENDPOINTS } from "../Endpoints";
 import { TokenService } from "../TokenService";
 
 type LoginResponse = {
-    id: string,
-    email: string,
-    name: string,
-    token: string
+    idToken: string,
+    refreshToken: string
 }
 
 export class AuthService {
@@ -15,15 +13,9 @@ export class AuthService {
         try {
             const url = ENDPOINTS.LOGIN();
             const body = JSON.stringify({email: email, password: password, returnSecureToken: true});
-            //const response = await api.post<LoginResponse>(url, body);
-            //TokenService.saveUserToken(response.data.token);
-            TokenService.saveUserToken("fake-token");
-            return { success: true, data: {
-                id: "response.id",
-                email: "response.email",
-                name: "response.name",
-                token: "response.token"
-            } }
+            const response = await api.post<LoginResponse>(url, body);
+            TokenService.saveUserToken(response.data.idToken);
+            return { success: true, data: response.data }
         } catch (error) {
             if(axios.isAxiosError(error)){
                 console.log("ERROR> " + error.response?.data.error.message)
@@ -39,7 +31,7 @@ export class AuthService {
         email: string, 
         password: string, 
         confirmarPassword: string
-    ): Promise<LoginResponse> => {
+    ): Promise<ApiResponse<LoginResponse>> => {
         const url = ENDPOINTS.REGISTER();
         const body = JSON.stringify({
             name:name, 
@@ -49,14 +41,9 @@ export class AuthService {
             returnSecureToken: true
         });
         const response = (await api.post(url, body)).data
-        TokenService.saveUserToken(response.data.token);
+        TokenService.saveUserToken(response.data.idToken);
 
-        return {
-            id: response.id,
-            email: response.email,
-            name: response.name,
-            token: response.token
-        };
+        return { success: true, data: response.data };
     }
 
     recoverPassword = async () => {}

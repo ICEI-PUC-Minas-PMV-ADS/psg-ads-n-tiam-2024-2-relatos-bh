@@ -1,6 +1,6 @@
 import React from 'react';
 import { SafeAreaView, StatusBar } from 'react-native';
-import { BottomNavigation } from 'react-native-paper';
+import { BottomNavigation, TouchableRipple } from 'react-native-paper';
 import MapScreen from './map/MapScreen';
 import Report from './Report/Report';
 import { ProfileScreen } from './profile';
@@ -25,7 +25,7 @@ const HomeScreen: React.FC = () => {
         report: ReportRoute,
         profile: ProfileRoute,
     });
-
+    
     return (
         <SafeAreaView style={{ flex: 1, paddingTop: StatusBar.currentHeight }}>
             <BottomNavigation
@@ -33,6 +33,7 @@ const HomeScreen: React.FC = () => {
                 navigationState={{ index, routes }}
                 onIndexChange={setIndex}
                 renderScene={renderScene}
+                renderTouchable={({key, ...props}) => (<TouchableRipple key={key} {...props} />)}
             />
         </SafeAreaView>
     );

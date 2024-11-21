@@ -26,10 +26,18 @@ const Routes: React.FC = () => {
     }, [])
 
     useEffect(() => {
+        console.log('>>>' + isSplashRunning);
         if(!isSplashRunning){
             isAuthenticated ? navigation.navigate("Home") : navigation.navigate("Auth");
         }
     }, [isSplashRunning])
+
+    useEffect(() => {
+        console.log('++++: ' + isAuthenticated);
+        if(!isSplashRunning){
+            isAuthenticated ? navigation.navigate("Home") : navigation.navigate("Auth");
+        }
+    }, [isAuthenticated])
 
     return (
         <Stack.Navigator initialRouteName="Splash" screenOptions={{ headerShown: false }}>

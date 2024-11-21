@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, ToastAndroid, View } from 'react-native';
 import { ActivityIndicator, Button, Checkbox, TextInput } from 'react-native-paper';
 import { useContext, useState } from 'react';
 import AppContext from '../../context/app';
@@ -16,7 +16,11 @@ export default function LoginComponent({onSignUp = () => {} }: loginProps) {
 
     const login = async () => {
         const loggedIn = await signIn(email, password);
-        updateAuthentication(loggedIn);
+        if(loggedIn == true){
+            updateAuthentication(true);
+        } else {
+            ToastAndroid.show("Tente novamente mais tarde!", ToastAndroid.SHORT);
+        }
     }
 
     return (
