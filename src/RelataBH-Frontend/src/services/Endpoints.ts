@@ -1,5 +1,6 @@
 export const ENDPOINTS = {
     LOGIN: () => BASE_URL + "api/auth/login",
+    RECOVER_PASSWORD: () => BASE_URL + "api/auth/recoverPassword",
     REGISTER: () => BASE_URL + "api/auth/register",
     SEARCH_PLACES: (query: string) => BASE_URL + `api/Location/search?query=${query}`,
     REPORTS_IN_RANGE: (lat: number, long: number) => BASE_URL + `api/Relato/search?lat=${lat}&long=${long}`,

@@ -3,12 +3,14 @@ import { ActivityIndicator, Button, Checkbox, TextInput } from 'react-native-pap
 import { useContext, useState } from 'react';
 import AppContext from '../../context/app';
 import AuthContext from '../../context/auth';
+import EsqueciSenhaComponent from './esqueciSenhaComponent';
 
 export interface loginProps {
     onSignUp: () => void,
+    onRecoverPassword: () => void,
 }
 
-export default function LoginComponent({onSignUp = () => {} }: loginProps) {
+export default function LoginComponent({onSignUp = () => {},onRecoverPassword = () => {} }: loginProps) {
     const { updateAuthentication } = useContext(AppContext);
     const { signIn, isLoading } = useContext(AuthContext);
     const [email, setEmail] = useState("")
@@ -48,7 +50,7 @@ export default function LoginComponent({onSignUp = () => {} }: loginProps) {
                     />
                     <Text>Lembrar senha</Text>
                 </View>
-                <Button mode="text" onPress={() => console.log('Pressed')}>
+                <Button mode="text" onPress={() =>onRecoverPassword()}>
                     Esqueci minha senha
                 </Button>
             </View>
