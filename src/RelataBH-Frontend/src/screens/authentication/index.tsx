@@ -4,16 +4,20 @@ import LoginComponent from "../authentication/loginComponent";
 import { AuthStates } from "./AuthStates";
 import LogupComponent from "../authentication/logupComponent";
 import { useNavigation } from "@react-navigation/native";
+import EsqueciSenhaComponent from "./esqueciSenhaComponent";
 
 const AuthenticationScreen: React.FC = () => {
   const [screen, setScreen] = useState(AuthStates.LOGIN);
 
   const renderScreen = () => {
     if (screen == AuthStates.LOGIN) {
-      return <LoginComponent onSignUp={() => setScreen(AuthStates.LOGUP)} />
+      return <LoginComponent onSignUp={() => setScreen(AuthStates.LOGUP)} onRecoverPassword={() => setScreen(AuthStates.ESQUECISENHA)} />
     }
     else if (screen == AuthStates.LOGUP) {
       return <LogupComponent onBack={() => setScreen(AuthStates.LOGIN)} />
+    }
+    else if (screen == AuthStates.ESQUECISENHA){
+      return <EsqueciSenhaComponent onBack={() => setScreen(AuthStates.LOGIN)} onEsqueciSenha={() => setScreen(AuthStates.LOGIN)} />
     }
     else {
       return <View />

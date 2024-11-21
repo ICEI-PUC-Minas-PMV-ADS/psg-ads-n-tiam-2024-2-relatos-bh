@@ -59,5 +59,16 @@ export class AuthService {
         };
     }
 
-    recoverPassword = async () => {}
+  static  recoverPassword = async (email:string) :Promise<ApiResponse<boolean>>=> {
+        let requestType = "PASSWORD_RESET"
+        let body = JSON.stringify({
+            email: email,
+            requestType: requestType
+        })
+        let url = ENDPOINTS.RECOVER_PASSWORD()
+        const response = (await api.post(url, body)).data
+        return{
+            success:true,data:true
+        }
+    }
 }
