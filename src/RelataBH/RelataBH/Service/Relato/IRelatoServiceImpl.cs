@@ -1,13 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using NetTopologySuite.Geometries;
+﻿using Microsoft.EntityFrameworkCore;
 using RelataBH.Database;
 using RelataBH.Model.Relato;
 using RelataBH.Service.Auth.Domain.Relato;
-using System.Globalization;
-using System.Web.Http.Results;
-using static System.Net.Mime.MediaTypeNames;
+using RelataBH.Service.Relato.Mapper;
+using System.Text;
 
 namespace RelataBH.Service.Relato
 {
@@ -15,21 +11,22 @@ namespace RelataBH.Service.Relato
     {
         public async Task<IEnumerable<VW_RELATOS>> GetRelatos()
         {
-            return await relatoContext.VW_RELATOS.ToListAsync();
+            return await relatoContext
+                .VW_RELATOS
+                .ToListAsync();
         }
 
-        public async Task<VW_RELATOS> GetRelatoId(int Id)
+        public async Task<VW_RELATOS?> GetRelatoId(int Id)
         {
-            var relato =  await relatoContext.VW_RELATOS.FirstOrDefaultAsync(x => x.IdRelato == Id);
-            return relato;
+            return await relatoContext
+                .VW_RELATOS
+                .FirstOrDefaultAsync(x => x.IdRelato == Id);
         }
 
         public async Task<IEnumerable<VW_RELATOS>> GetRelatosPoint(string lat, string log)
         {
-            var pointCenter = new Point(double.Parse(log, CultureInfo.InvariantCulture), double.Parse(lat, CultureInfo.InvariantCulture)){SRID = 4326};
-
             var relatos = await relatoContext.VW_RELATOS
-                .Where(item => item.point.Distance(pointCenter) <= 0.025)
+                .FromSqlRaw(BuildSql(lat, log, 2))
                 .ToListAsync();
 
             return relatos;
@@ -37,23 +34,14 @@ namespace RelataBH.Service.Relato
 
         public async Task<Model.Relato.Relato> SaveRelato(RelatoRequest relato)
         {
-            var relatoSalvo = await relatoContext.Relatos.AddAsync(new()
-            {
-                latitude = relato.Latitude,
-                longitude = relato.Longitude,
-                endereco = relato.Endereco,
-                createdAt = DateOnly.FromDateTime(DateTime.Now),
-                dsc = relato.DescricaoRelato,
-                titulo = relato.Titulo,
-                codIndicador = relato.IdCategoria,
-                idUser = relato.IdUser,
-                idBairro = relato.IdBairro,
-            });
+            var relatoSalvo = await relatoContext
+                .Relatos
+                .AddAsync(RelatoMapper.MapRequestToModel(relato));
             await relatoContext.SaveChangesAsync();
             return relatoSalvo.Entity;
         }
 
-        public async Task<Model.Relato.Relato> UpdateRelato(RelatoRequest relato)
+        public async Task<Model.Relato.Relato?> UpdateRelato(RelatoRequest relato)
         {
             var relatoEditado = await relatoContext.Relatos.FirstOrDefaultAsync(x => x.id == relato.Id);
             if(relatoEditado != null)
@@ -75,13 +63,24 @@ namespace RelataBH.Service.Relato
         {
             try
             {
-                await relatoContext.Relatos.Where(x => x.id == Id).ExecuteDeleteAsync();
-                return true;
+                return await relatoContext
+                    .Relatos
+                    .Where(x => x.id == Id)
+                    .ExecuteDeleteAsync() > 0;
             }
             catch
             {
                 return false;
             }
+        }
+
+        private string BuildSql(string latitude, string longitude, int distanceInKM)
+        {
+            return new StringBuilder()
+                .Append("SELECT * FROM [VW_RELATOS] AS [v] ")
+                .Append($"WHERE [v].[POINT].STDistance(geography::Point({latitude}, {longitude}, 4326)) * 0.001E0 <= {distanceInKM}")
+                .ToString()
+            ;
         }
     }
 }

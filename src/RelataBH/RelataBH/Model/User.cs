@@ -8,7 +8,7 @@ namespace RelataBH.Model
         [Key]
         [Column("ID")]
         public int Id { get; set; }
-        [Column("NAME")]
+        [Column("NOME")]
         public string Name { get; set; }
         [Column("EMAIL")]
         public string Email { get; set; }

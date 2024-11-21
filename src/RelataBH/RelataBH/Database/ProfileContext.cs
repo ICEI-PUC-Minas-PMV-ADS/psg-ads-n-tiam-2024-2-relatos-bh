@@ -9,7 +9,7 @@ namespace RelataBH.Database
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Profile>().ToTable("VW_PERFIL");
+            modelBuilder.Entity<Profile>().ToView("VW_PERFIL");
         }
     }
 }

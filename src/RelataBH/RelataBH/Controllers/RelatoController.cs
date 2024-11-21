@@ -23,18 +23,18 @@ namespace RelataBH.Controllers
             }
         }
 
-        [HttpGet("searchbylocation")]
+        [HttpGet("searchByCoordinates")]
         public async Task<IEnumerable<VW_RELATOS>> GetRelatosPoint([FromQuery] string lat, [FromQuery] string log)
         {
             var relato = await relatoService.GetRelatosPoint(lat, log);
             return relato;
         }
 
-        [HttpGet("id")]
-        public async Task<VW_RELATOS> GetRelatoId([FromQuery] int Id)
+        [HttpGet("searchById")]
+        public async Task<ActionResult<VW_RELATOS?>> GetRelatoId([FromQuery] int Id)
         {
             var relato = await relatoService.GetRelatoId(Id);
-            return relato;
+            return Ok(relato);
         }
 
         [HttpGet("")]
