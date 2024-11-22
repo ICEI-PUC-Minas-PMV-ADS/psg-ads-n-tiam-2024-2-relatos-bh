@@ -1,5 +1,6 @@
 export const ENDPOINTS = {
     LOGIN: () => BASE_URL + "api/auth/login",
+    RECOVER_PASSWORD: () => BASE_URL + "api/auth/recoverPassword",
     REGISTER: () => BASE_URL + "api/auth/register",
     ESQUECI_SENHA: () => BASE_URL + "api/auth/recoverPassword",
     SEARCH_PLACES: (query: string) => BASE_URL + `api/Location/search?query=${query}`,

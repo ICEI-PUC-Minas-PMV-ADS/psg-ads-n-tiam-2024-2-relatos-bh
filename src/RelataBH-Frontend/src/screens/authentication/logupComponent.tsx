@@ -1,7 +1,9 @@
-import { StyleSheet, Text, View } from 'react-native';
-import { Button, IconButton, TextInput } from 'react-native-paper';
+import { StyleSheet, Text, ToastAndroid, View } from 'react-native';
+import { ActivityIndicator, Button, IconButton, TextInput } from 'react-native-paper';
 import { useState } from 'react';
 import { AuthService } from '../../services/auth/AuthService';
+import { RootStackTypes } from '../../routes/routes';
+import { useNavigation } from '@react-navigation/native';
 
 export interface signUpProps {
     onBack: () => void,
@@ -12,9 +14,18 @@ export default function LogupComponent({onBack = () => {} }: signUpProps) {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [confirmarPassword, setConfirmarPassword] = useState("")
+    const [isLoading, setLoading] = useState<boolean>(false);
+    const rootNavigation = useNavigation<RootStackTypes>();
 
     const register = async () => {
-        new AuthService().register(name,email,password,confirmarPassword)
+        setLoading(true);
+        const response = await AuthService.register(name,email,password,confirmarPassword);
+        setLoading(false);
+        if(response.success){
+            rootNavigation.replace("Home");
+        } else {
+            ToastAndroid.show("Tente novamente mais tarde!", ToastAndroid.SHORT);
+        }
     }
 
     return (
@@ -61,8 +72,8 @@ export default function LogupComponent({onBack = () => {} }: signUpProps) {
                 onChangeText={confirmarPassword => { setConfirmarPassword(confirmarPassword) }}
             />
 
-            <Button mode="outlined" textColor='#000' onPress={() => register()}>
-                    Registrar
+            <Button mode="outlined" textColor='#000' onPress={() => register()} disabled={isLoading}>
+                {isLoading ? <ActivityIndicator animating={true} color='#FFF' /> : <>Register</> }
             </Button>
             
         </View>

@@ -11,6 +11,11 @@ export class TokenService {
         AsyncStorage.setItem(TokenService.tokenKey, token);
     }
 
+    static isAuthenticated = async (): Promise<Boolean> => {
+        let token = await TokenService.getUserToken()
+        return token != null
+    }
+
     static clearAppData = () => {
         AsyncStorage.clear();
     }

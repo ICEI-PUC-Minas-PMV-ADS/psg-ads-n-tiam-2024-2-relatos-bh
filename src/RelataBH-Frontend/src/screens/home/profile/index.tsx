@@ -6,16 +6,16 @@ import { useContext, useState } from "react";
 import { HistoryCard } from "./HistoryCard";
 import AppContext from "../../../context/app";
 import { useNavigation } from "@react-navigation/native";
-import { AppStackNavigation, StackTypes } from "../../../routes/routes";
+import { RootStackTypes } from "../../../routes/routes";
 
 export const ProfileScreen: React.FC = () => {
     const [reports, setReports] = useState<ReportHistory[] | null>(createHistoryMock())
     const { logout } = useContext(AppContext);
-    const navigation = useNavigation<StackTypes>();
+    const navigation = useNavigation<RootStackTypes>();
 
     const handleLogout = () => {
         logout();
-        navigation.navigate("Auth");
+        navigation.replace("Auth")
     }
 
     return (

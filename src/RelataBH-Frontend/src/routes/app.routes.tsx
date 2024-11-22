@@ -2,20 +2,19 @@ import { createNativeStackNavigator, NativeStackNavigationProp } from "@react-na
 import React from 'react';
 import { SearchScreen } from "../screens/search";
 import HomeScreen from "../screens/home";
-import  { Region } from "react-native-maps"
 import { SelectLocationScreen } from "../screens/selectLocation";
 import BoxComponent from "../screens/home/Report/ReportBox";
 
-export type AppStackNavigation = {
+export type HomeStackNavigation = {
     BoxComponent: { region?: { latitude: number; longitude: number ; latitudeDelta: number ;longitudeDelta:number}; address?:string} ;
     HomeScreen: { searchedPlace: Place | null }
     SearchScreen: undefined
     SelectLocationScreen: undefined 
 }
 
-export type StackTypes = NativeStackNavigationProp<AppStackNavigation>;
+export type HomeStackTypes = NativeStackNavigationProp<HomeStackNavigation>;
 
-const AppStack = createNativeStackNavigator<AppStackNavigation>();
+const AppStack = createNativeStackNavigator<HomeStackNavigation>();
 
 const HomeStack: React.FC = () => {
     return (

@@ -1,14 +1,12 @@
 import { ToastAndroid, View } from "react-native";
 import React, { useEffect, useState } from "react";
-import { IconButton, Searchbar, Button, Icon, Badge, ActivityIndicator } from "react-native-paper";
 import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
-import { AppStackNavigation, StackTypes } from "../../../routes/app.routes";
+import { HomeStackNavigation, HomeStackTypes } from "../../../routes/app.routes";
 import { ReportDetail } from "./ReportDetail";
 import { ReportCategoryComponent } from "./components/ReportCategoryComponent";
 import { MapComponent } from "./components/MapComponent";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { Region } from "react-native-maps";
-import SearchBar from "react-native-screens/lib/typescript/components/SearchBar";
 import { ReportSearchBar } from "./components/ReportSearchBar";
 import { ReportSearchButton } from "./components/ReportSeachButton";
 import { ReportSearchLoading } from "./components/ReportSearchLoading";
@@ -16,8 +14,8 @@ import { ReportService } from "../../../services/report/ReportService";
 
 const MapScreen: React.FC = () => {
 
-    const navigation = useNavigation<StackTypes>();
-    const route = useRoute<RouteProp<AppStackNavigation, "HomeScreen">>();
+    const navigation = useNavigation<HomeStackTypes>();
+    const route = useRoute<RouteProp<HomeStackNavigation, "HomeScreen">>();
 
     const [selectedReport, setSelectedReport] = useState<UserReport | null>(null);
     const [searchedPlace, setSearchedPlace] = useState<Place | null>(null);

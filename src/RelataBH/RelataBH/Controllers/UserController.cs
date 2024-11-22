@@ -6,12 +6,13 @@ using RelataBH.Authorization;
 using RelataBH.Model;
 using RelataBH.Service.Profile;
 using RelataBH.Service.Profile.Domain;
+using RelataBH.Service.Profile.RelatoHistoric;
 
 namespace RelataBH.Controllers
 {
     [ApiController]
     [Route("api/user")]
-    public class UserController(IProfileService profileService) : ControllerBase
+    public class UserController(IProfileService profileService, IRelatoHistoricService historicService) : ControllerBase
     {
 
         [HttpPost("profile")]
@@ -28,6 +29,13 @@ namespace RelataBH.Controllers
             {
                 return BadRequest(ex);
             }
+        }
+
+        [HttpGet("historic")]
+        public async Task<IEnumerable<Model.Relato.Relato>> GetHistoricRelatosByUser([FromQuery] int userId)
+        {
+                var userHistoric = await historicService.GetRelatosByUser(userId);
+                return userHistoric;
         }
     }
 }
