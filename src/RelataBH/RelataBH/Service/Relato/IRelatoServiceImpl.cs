@@ -2,6 +2,7 @@
 using RelataBH.Database;
 using RelataBH.Model.Relato;
 using RelataBH.Service.Auth.Domain.Relato;
+using RelataBH.Service.Relato.Domain;
 using RelataBH.Service.Relato.Mapper;
 using System.Text;
 
@@ -25,11 +26,9 @@ namespace RelataBH.Service.Relato
 
         public async Task<IEnumerable<VW_RELATOS>> GetRelatosPoint(string lat, string log)
         {
-            var relatos = await relatoContext.VW_RELATOS
+            return await relatoContext.VW_RELATOS
                 .FromSqlRaw(BuildSql(lat, log, 2))
                 .ToListAsync();
-
-            return relatos;
         }
 
         public async Task<Model.Relato.Relato> SaveRelato(RelatoRequest relato)
@@ -74,7 +73,12 @@ namespace RelataBH.Service.Relato
             }
         }
 
-        private string BuildSql(string latitude, string longitude, int distanceInKM)
+        public async Task<IEnumerable<VW_RELATOS>> GetRelatosInArea(AreaRequest relatoArea)
+        {
+            return [];
+        }
+
+        private static string BuildSql(string latitude, string longitude, int distanceInKM)
         {
             return new StringBuilder()
                 .Append("SELECT * FROM [VW_RELATOS] AS [v] ")
