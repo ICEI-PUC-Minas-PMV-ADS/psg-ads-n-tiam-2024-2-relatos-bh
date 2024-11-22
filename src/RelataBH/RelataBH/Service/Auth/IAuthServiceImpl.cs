@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Http.HttpResults;
-using RelataBH.database;
+﻿using RelataBH.database;
 using RelataBH.Model;
 using RelataBH.Service.Auth.Api;
 using RelataBH.Service.Auth.Domain;

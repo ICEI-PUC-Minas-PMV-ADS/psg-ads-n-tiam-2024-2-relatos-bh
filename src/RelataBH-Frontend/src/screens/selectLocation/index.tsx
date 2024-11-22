@@ -3,10 +3,10 @@ import React, { useState, useEffect } from "react";
 import { View, Text, SafeAreaView, StatusBar, Button, Alert } from "react-native";
 import MapView, { LatLng, Marker, Region } from "react-native-maps";
 import * as Location from "expo-location";
-import { StackTypes } from "../../routes/app.routes";
+import { HomeStackTypes } from "../../routes/app.routes";
 
 export const SelectLocationScreen: React.FC = () => {
-  const navigation = useNavigation<StackTypes>();
+  const navigation = useNavigation<HomeStackTypes>();
   const [region, setRegion] = useState<Region | null>(null);
   const [markerCoordinate, setMarkerCoordinate] = useState<LatLng | null>(null);
   const [address, setAddress] = useState<string>("");

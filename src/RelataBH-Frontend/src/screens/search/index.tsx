@@ -2,14 +2,14 @@ import {  useNavigation } from "@react-navigation/native";
 import React, { useState } from "react";
 import { FlatList, SafeAreaView, StatusBar, StyleSheet, ToastAndroid, View } from "react-native";
 import { Button, Text, Searchbar, IconButton, Divider, ActivityIndicator } from "react-native-paper";
-import { StackTypes } from "../../routes/app.routes";
+import { HomeStackTypes } from "../../routes/app.routes";
 import { PlaceService } from "../../services/places/PlacesService";
 
 export const SearchScreen: React.FC = () => {
     const [searchQuery, setSearchQuery] = useState<string>("");
     const [searchedPlaces, setSearchedPlaces] = useState<Place[] | null>();
     const [loading, setLoading] = useState<Boolean>(false);
-    const navigation = useNavigation<StackTypes>();
+    const navigation = useNavigation<HomeStackTypes>();
 
     const search = async () => {
         setLoading(true);

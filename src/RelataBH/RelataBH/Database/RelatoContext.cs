@@ -10,12 +10,16 @@ namespace RelataBH.Database
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
             modelBuilder.Entity<Relato>().ToTable("RELATOS");
-            modelBuilder.Entity<VW_RELATOS>().ToView("VW_RELATOS");
+            modelBuilder
+                .Entity<VW_RELATOS>()
+                .ToView("VW_RELATOS")
+                .Property(x => x.Coordinates)
+                .HasColumnType("geography");
+
             modelBuilder.Entity<Category>().ToTable("INDICADORES");
         }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) => optionsBuilder.UseSqlServer("Server=tcp:relatosbh.database.windows.net,1433;Initial Catalog=relatosbh;User ID=relatos-adm@relatosbh;Password=lsPFJ0iP7Y3GTCEe9kaR4yNs681;Encrypt=True;TrustServerCertificate=False;Connect Timeout=30;",
-            b => b.UseNetTopologySuite());
     }
 }

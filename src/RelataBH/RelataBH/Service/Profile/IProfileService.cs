@@ -4,6 +4,6 @@ namespace RelataBH.Service.Profile
 {
     public interface IProfileService
     {
-        public Task<Model.Profile> GetProfile(int userId);
+        public Task<Model.Profile> GetProfile(string? email);
     }
 }
