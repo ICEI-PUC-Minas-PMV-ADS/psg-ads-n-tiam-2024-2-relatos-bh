@@ -28,10 +28,12 @@ namespace RelataBH.Service.Relato
                 .FirstOrDefaultAsync();
         }
 
-        public async Task<IEnumerable<VW_RELATOS>> GetRelatosPoint(string lat, string log)
+        public async Task<IEnumerable<Model.Relato.Relato>> GetRelatosPoint(string lat, string log)
         {
-            return await relatoContext.VW_RELATOS
+            return await relatoContext.Relatos
                 .FromSqlRaw(BuildSql(lat, log, 2))
+                .Include(r => r.feedback)
+                .Include(i => i.images)
                 .ToListAsync();
         }
 
@@ -86,8 +88,7 @@ namespace RelataBH.Service.Relato
         private static string BuildSql(string latitude, string longitude, int distanceInKM)
         {
             return new StringBuilder()
-                .Append("SELECT * FROM [VW_RELATOS] AS [v] ")
-                .Append($"WHERE [v].[POINT].STDistance(geography::Point({latitude}, {longitude}, 4326)) * 0.001E0 <= {distanceInKM}")
+                .Append($" SELECT * FROM RELATOS AS r WHERE geography::Point(CAST(r.LATITUDE AS FLOAT), CAST(r.LONGITUDE AS FLOAT), 4326).STDistance(geography::Point({latitude}, {longitude}, 4326)) * 0.001 <= {distanceInKM}")
                 .ToString()
             ;
         }

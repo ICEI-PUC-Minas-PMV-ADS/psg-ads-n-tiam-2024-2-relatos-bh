@@ -13,10 +13,10 @@ namespace RelataBH.Controllers
     public class RelatoController(IRelatoService relatoService) : ControllerBase
     {
         [HttpGet("searchByCoordinates")]
-        public async Task<IEnumerable<VW_RELATOS>> GetRelatosPoint([FromQuery] string lat, [FromQuery] string log)
+        public async Task<ActionResult<IEnumerable<Model.Relato.Relato>>> GetRelatosPoint([FromQuery] string lat, [FromQuery] string log)
         {
-            var relato = await relatoService.GetRelatosPoint(lat, log);
-            return relato;
+            var relatos = await relatoService.GetRelatosPoint(lat, log);
+            return Ok(relatos);
         }
 
         [HttpGet("searchById")]

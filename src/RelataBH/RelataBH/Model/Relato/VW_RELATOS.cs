@@ -38,7 +38,7 @@ namespace RelataBH.Model.Relato
         [Column("QUANT_LIKE")]
         public int QuantLike { get; set; } = 0;
         [Column("QUANT_DESLIKE")]
-        public int QuantDeslike { get; set; }
+        public int QuantDeslike { get; set; } = 0;
         [Column("POINT")]
         [JsonIgnore]
         public Point Coordinates { get; set; }
