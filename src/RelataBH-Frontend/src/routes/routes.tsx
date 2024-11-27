@@ -1,49 +1,23 @@
-import { useContext, useEffect } from "react";
-import { AuthProvider } from "../context/auth";
-import AppContext from "../context/app";
-import * as SplashScreen from 'expo-splash-screen';
 import { createNativeStackNavigator, NativeStackNavigationProp } from "@react-navigation/native-stack";
-import AuthenticationScreen from "../screens/authentication";
 import HomeStack from "./app.routes";
-import { useNavigation } from "@react-navigation/native";
 import { AppSplashScreen } from "../screens/splash";
+import { AuthRoute } from "./auth.routes.";
 
-export type AppStackNavigation = {
+export type RootStackNavigation = {
     Home: undefined,
     Auth: undefined,
     Splash: undefined
 }
-export type StackTypes = NativeStackNavigationProp<AppStackNavigation>;
+export type RootStackTypes = NativeStackNavigationProp<RootStackNavigation>;
 
 const Stack = createNativeStackNavigator();
 
-const Routes: React.FC = () => {
-    const { isAuthenticated, isSplashRunning } = useContext(AppContext);
-    const navigation = useNavigation<StackTypes>();
-
-    useEffect(() => {
-        SplashScreen.hideAsync();
-    }, [])
-
-    useEffect(() => {
-        if(!isSplashRunning){
-            isAuthenticated ? navigation.navigate("Home") : navigation.navigate("Auth");
-        }
-    }, [isSplashRunning])
-
+export const Routes: React.FC = () => {
     return (
         <Stack.Navigator initialRouteName="Splash" screenOptions={{ headerShown: false }}>
-            <Stack.Screen name="Splash" component={AppSplashScreen}/>
-            <Stack.Screen name='Auth' >
-                {() => (
-                    <AuthProvider>
-                        <AuthenticationScreen />
-                    </AuthProvider>
-                )}
-            </Stack.Screen>
-            <Stack.Screen name='Home' component={HomeStack} />
+            <Stack.Screen name="Splash" component={AppSplashScreen} />
+            <Stack.Screen name="Auth" component={AuthRoute} />
+            <Stack.Screen name="Home" component={HomeStack} />
         </Stack.Navigator>
     );
 }
-
-export default Routes;

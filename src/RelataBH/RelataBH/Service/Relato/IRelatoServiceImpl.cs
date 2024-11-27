@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using NetTopologySuite.Geometries;
 using RelataBH.Database;
 using RelataBH.Model.Relato;
@@ -12,24 +12,23 @@ namespace RelataBH.Service.Relato
     {
         public async Task<IEnumerable<VW_RELATOS>> GetRelatos()
         {
-            return await relatoContext.VW_RELATOS.ToListAsync();
+            return await relatoContext
+                .VW_RELATOS
+                .ToListAsync();
         }
 
-        public async Task<VW_RELATOS> GetRelatoId(int Id)
+        public async Task<VW_RELATOS?> GetRelatoId(int Id)
         {
-            var relato =  await relatoContext.VW_RELATOS.FirstOrDefaultAsync(x => x.IdRelato == Id);
-            return relato;
+            return await relatoContext
+                .VW_RELATOS
+                .FirstOrDefaultAsync(x => x.IdRelato == Id);
         }
 
         public async Task<IEnumerable<VW_RELATOS>> GetRelatosPoint(string lat, string log)
         {
-            var pointCenter = new Point(double.Parse(log, CultureInfo.InvariantCulture), double.Parse(lat, CultureInfo.InvariantCulture)){SRID = 4326};
-
-            var relatos = await relatoContext.VW_RELATOS
-                .Where(item => item.point.Distance(pointCenter) <= 0.025)
+            return await relatoContext.VW_RELATOS
+                .FromSqlRaw(BuildSql(lat, log, 2))
                 .ToListAsync();
-
-            return relatos;
         }
 
         public async Task<Model.Relato.Relato> SaveRelato(RelatoRequest relato, List<string> images)
@@ -61,13 +60,29 @@ namespace RelataBH.Service.Relato
         {
             try
             {
-                await relatoContext.Relatos.Where(x => x.id == Id).ExecuteDeleteAsync();
-                return true;
+                return await relatoContext
+                    .Relatos
+                    .Where(x => x.id == Id)
+                    .ExecuteDeleteAsync() > 0;
             }
             catch
             {
                 return false;
             }
+        }
+
+        public async Task<IEnumerable<VW_RELATOS>> GetRelatosInArea(AreaRequest relatoArea)
+        {
+            return [];
+        }
+
+        private static string BuildSql(string latitude, string longitude, int distanceInKM)
+        {
+            return new StringBuilder()
+                .Append("SELECT * FROM [VW_RELATOS] AS [v] ")
+                .Append($"WHERE [v].[POINT].STDistance(geography::Point({latitude}, {longitude}, 4326)) * 0.001E0 <= {distanceInKM}")
+                .ToString()
+            ;
         }
     }
 }

@@ -1,40 +1,37 @@
 import { useEffect, useState } from "react";
-import { StyleProp, ToastAndroid, ViewStyle } from "react-native";
+import { StyleProp, ToastAndroid, View, ViewStyle } from "react-native";
 import MapView, { Marker, Region } from "react-native-maps";
 import * as Location from 'expo-location';
 import React from "react";
 import { ReportService } from "../../../../services/report/ReportService";
+import { Text } from "react-native-paper";
 
 type Props = {
     onReportSelected: (report: UserReport | null) => void,
     onRegionChanged: (region: Region) => void,
+    points: UserReport[] | null,
     style?: StyleProp<ViewStyle>
 }
 
 export const MapComponent: React.FC<Props> = ({
     style,
+    points,
     onReportSelected,
-    onRegionChanged,
+    onRegionChanged
 }) => {
-    const [location, setLocation] = useState<Location.LocationObject | null>(null);
     const mapRef: React.LegacyRef<MapView> | undefined = React.createRef();
-    const [userReposts, setUserReports] = useState<UserReport[] | null>(null);
+    const [location, setLocation] = useState<Location.LocationObject | null>(null);
+    const [isMapReady, setMapReady] = useState<Boolean>(false);
+    const [markers, setMarkers] = useState<UserReport[]>([]);
 
     const fetchReports = async (lat: number, long: number) => {
-        let userReportsResponse = await ReportService.fetchInRange(lat, long);
-        if(userReportsResponse.success){
-            setUserReports(userReportsResponse.data);
-        } else {
-            ToastAndroid.show('[fetchReports] Erro! Tente novamente mais tarde.', ToastAndroid.SHORT);
-        }
+        //call backend
     }
 
     useEffect(() => {
         (async () => {
-
             let { status } = await Location.requestForegroundPermissionsAsync();
             if (status !== 'granted') {
-                //permission denied.
                 console.log("no permission.")
                 return;
             }
@@ -45,16 +42,25 @@ export const MapComponent: React.FC<Props> = ({
     }, []);
 
     useEffect(() => {
-        mapRef.current?.animateCamera({
-            center: {
-                "latitude": location?.coords.latitude ?? 0,
-                "longitude": location?.coords.longitude ?? 0
-            },
-            zoom: 14
+        points?.map((report: UserReport, index: number) => {
+            console.log(report.latitude);
+            console.log(report.longitude);
         })
-        
+        setMarkers(points ?? [])
+    }, [points])
+
+    useEffect(() => {
         if(location != null || location != undefined){
-            fetchReports(location?.coords.latitude, location?.coords.longitude)
+            mapRef.current?.animateCamera({
+                center: {
+                    "latitude": location?.coords.latitude ?? 0,
+                    "longitude": location?.coords.longitude ?? 0
+                },
+                zoom: 14
+            },{ duration: 500 })
+
+        
+            setTimeout(() => { setMapReady(true) }, 1000);
         }
     }, [location]);
 
@@ -67,21 +73,37 @@ export const MapComponent: React.FC<Props> = ({
             showsMyLocationButton={false}
             showsCompass={false}
             pitchEnabled={false}
-            onRegionChange={onRegionChanged}
+            showsPointsOfInterest = {false}
+            onRegionChangeComplete={(region) => { isMapReady ? onRegionChanged(region) : {}}}
         >
-            {userReposts &&
-                userReposts.map((report: UserReport, index: number) => (
-                    <Marker
+            {/* {markers.map((marker, index) => (
+                <Marker
+                    key={index}
+                    coordinate={{latitude: marker.latitude, longitude: marker.longitude}}
+                    title={marker.nomeCategoria}
+                    description={marker.emailUser}
+                    />
+            ))} */}
+
+            {/* <Marker
+            key={1}
+                        coordinate={{latitude: 1, longitude: 1}}
+                        title={"asas"}
+                    /> */}
+            {points &&
+                points.map((report: UserReport, index: number) => {
+                    console.log("_______" + report.latitude);
+                    return <Marker
                         key={index}
                         coordinate={{
-                            latitude: report.lat,
-                            longitude: report.long
+                            latitude: -19.929290541374755,
+                            longitude: -43.93626102159546
                         }}
-                        title={report.type}
+                        title={report.nomeCategoria}
                         onSelect={() => { onReportSelected(report) }}
                         onDeselect={() => { onReportSelected(null) }}
                     />
-                ))
+})
             }
         </MapView>
     );

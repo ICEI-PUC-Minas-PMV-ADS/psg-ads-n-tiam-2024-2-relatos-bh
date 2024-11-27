@@ -6,7 +6,7 @@ namespace RelataBH.Authorization
 {
     public class AuthorizationManager
     {
-        public static User? GetUserFromToken(string token)
+        public static string? GetUserFromToken(string token)
         {
             try {
                 if (AuthenticationHeaderValue.TryParse(token, out var headerValue))
@@ -14,11 +14,8 @@ namespace RelataBH.Authorization
                     var jwtToken = headerValue.Parameter;
                     var userData = new JwtSecurityToken(jwtToken);
 
-                    return new User()
-                    {
-                        IdFirebase = userData.Payload.GetValueOrDefault("user_id", "") as string ?? "",
-                        Email = userData.Payload.GetValueOrDefault("email", "") as string ?? ""
-                    };
+                    //return userData.Payload.GetValueOrDefault("user_id", "") as string ?? "";
+                    return userData.Payload.GetValueOrDefault("email", "") as string ?? "";
                 }
                 else
                 {

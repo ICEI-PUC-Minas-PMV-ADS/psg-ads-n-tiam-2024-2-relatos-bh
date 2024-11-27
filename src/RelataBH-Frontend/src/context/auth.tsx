@@ -12,11 +12,10 @@ const AuthContext = createContext({} as AuthContextData);
 export const AuthProvider: React.FC<any> = ({children}) => {
 
     const [isLoading, setLoading] = useState(false);
-    const [isAuthenticated, setIsAuthenticated] = useState(false);
 
     async function signIn(email: string, password: string): Promise<Boolean>{
         setLoading(true);
-        const response = await new AuthService().login(email, password);
+        const response = await AuthService.login(email, password);
         setLoading(false);
     
         return response.success == true;

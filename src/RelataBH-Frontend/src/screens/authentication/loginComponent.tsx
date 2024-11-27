@@ -1,22 +1,31 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, ToastAndroid, View } from 'react-native';
 import { ActivityIndicator, Button, Checkbox, TextInput } from 'react-native-paper';
-import { useContext, useState } from 'react';
-import AppContext from '../../context/app';
-import AuthContext from '../../context/auth';
+import { useState } from 'react';
+import { useNavigation } from '@react-navigation/native';
+import { RootStackTypes } from '../../routes/routes';
+import { AuthService } from '../../services/auth/AuthService';
 
 export interface loginProps {
     onSignUp: () => void,
+    onRecoverPassword: () => void,
 }
 
-export default function LoginComponent({onSignUp = () => {} }: loginProps) {
-    const { updateAuthentication } = useContext(AppContext);
-    const { signIn, isLoading } = useContext(AuthContext);
+export default function LoginComponent({onSignUp = () => {},onRecoverPassword = () => {} }: loginProps) {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    const rootNavigation = useNavigation<RootStackTypes>();
+    const [isLoading, setLoading] = useState<Boolean>(false);
 
     const login = async () => {
-        const loggedIn = await signIn(email, password);
-        updateAuthentication(loggedIn);
+        setLoading(true);
+        const response = await AuthService.login(email, password);
+        setLoading(false);
+    
+        if(response.success){
+                rootNavigation.replace("Home");
+        } else {
+            ToastAndroid.show("Tente novamente mais tarde!", ToastAndroid.SHORT);
+        }
     }
 
     return (
@@ -48,7 +57,7 @@ export default function LoginComponent({onSignUp = () => {} }: loginProps) {
                     />
                     <Text>Lembrar senha</Text>
                 </View>
-                <Button mode="text" onPress={() => console.log('Pressed')}>
+                <Button mode="text" onPress={() =>onRecoverPassword()}>
                     Esqueci minha senha
                 </Button>
             </View>

@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using RelataBH.Model.Location;
 using RelataBH.Model.Relato;
 namespace RelataBH.Database
