@@ -1,14 +1,15 @@
 using Microsoft.EntityFrameworkCore;
-using NetTopologySuite.Geometries;
 using RelataBH.Database;
 using RelataBH.Model.Relato;
 using RelataBH.Service.Auth.Domain.Relato;
+using RelataBH.Service.ImageUpload;
+using RelataBH.Service.Relato.Domain;
 using RelataBH.Service.Relato.Mapper;
-using System.Globalization;
+using System.Text;
 
 namespace RelataBH.Service.Relato
 {
-    public class IRelatoServiceImpl(RelatoContext relatoContext) : IRelatoService
+    public class IRelatoServiceImpl(RelatoContext relatoContext, IImageUploader imageUploader) : IRelatoService
     {
         public async Task<IEnumerable<VW_RELATOS>> GetRelatos()
         {
@@ -31,9 +32,12 @@ namespace RelataBH.Service.Relato
                 .ToListAsync();
         }
 
-        public async Task<Model.Relato.Relato> SaveRelato(RelatoRequest relato, List<string> images)
+        public async Task<Model.Relato.Relato> SaveRelato(RelatoRequest relato, List<IFormFile> images)
         {
-            var relatoSalvo = await relatoContext.Relatos.AddAsync(RelatoMapper.MapRequestToModel(relato, images));
+            var imagePaths = await imageUploader.UploadImage(images);
+            var relatoSalvo = await relatoContext
+                .Relatos
+                .AddAsync(RelatoMapper.MapRequestToModel(relato, imagePaths));
             await relatoContext.SaveChangesAsync();
             return relatoSalvo.Entity;
         }

@@ -12,8 +12,7 @@ namespace RelataBH.Controllers
     [ApiController]
     public class RelatoController(
         IRelatoService relatoService, 
-        ICategoryService categoryService,
-        IImageUploader imageUploader
+        ICategoryService categoryService
     ) : ControllerBase
     {
         [HttpGet("categories")]
@@ -56,17 +55,8 @@ namespace RelataBH.Controllers
             [FromForm] RelatoRequest relato,
             [FromForm] List<IFormFile> images
         ) {
-            var paths = await imageUploader.UploadImage(images);
-            var relatoSalvo = await relatoService.SaveRelato(relato, paths);
+            var relatoSalvo = await relatoService.SaveRelato(relato, images);
             return Ok(relatoSalvo);
-        }
-
-        [HttpPost("uploadRelatoImage")]
-        [Consumes("multipart/form-data")]
-        public async Task<IActionResult> SaveRelatoImage([FromForm] List<IFormFile> images)
-        {
-            var paths = await imageUploader.UploadImage(images);
-            return Ok(paths);
         }
 
         [HttpPatch("")]

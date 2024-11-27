@@ -5,6 +5,7 @@ using RelataBH.database;
 using RelataBH.Database;
 using RelataBH.Service.Auth;
 using RelataBH.Service.Auth.Api;
+using RelataBH.Service.ImageUpload;
 using RelataBH.Service.Location;
 using RelataBH.Service.Profile;
 using RelataBH.Service.Profile.RelatoHistoric;
@@ -24,6 +25,7 @@ builder.Services.AddTransient<IProfileService, IProfileServiceImpl>();
 builder.Services.AddTransient<IRelatoService, IRelatoServiceImpl>();
 builder.Services.AddTransient<ICategoryService, ICategoryServiceImpl>();
 builder.Services.AddScoped<IRelatoHistoricService, IRelatoHistoricServiceImpl>();
+builder.Services.AddScoped<IImageUploader, ImageUploaderImpl>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
