@@ -1,13 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
+﻿using Microsoft.EntityFrameworkCore;
 using NetTopologySuite.Geometries;
 using RelataBH.Database;
 using RelataBH.Model.Relato;
 using RelataBH.Service.Auth.Domain.Relato;
+using RelataBH.Service.Relato.Mapper;
 using System.Globalization;
-using System.Web.Http.Results;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace RelataBH.Service.Relato
 {
@@ -35,25 +32,14 @@ namespace RelataBH.Service.Relato
             return relatos;
         }
 
-        public async Task<Model.Relato.Relato> SaveRelato(RelatoRequest relato)
+        public async Task<Model.Relato.Relato> SaveRelato(RelatoRequest relato, List<string> images)
         {
-            var relatoSalvo = await relatoContext.Relatos.AddAsync(new()
-            {
-                latitude = relato.Latitude,
-                longitude = relato.Longitude,
-                endereco = relato.Endereco,
-                createdAt = DateOnly.FromDateTime(DateTime.Now),
-                dsc = relato.DescricaoRelato,
-                titulo = relato.Titulo,
-                codIndicador = relato.IdCategoria,
-                idUser = relato.IdUser,
-                idBairro = relato.IdBairro,
-            });
+            var relatoSalvo = await relatoContext.Relatos.AddAsync(RelatoMapper.MapRequestToModel(relato, images));
             await relatoContext.SaveChangesAsync();
             return relatoSalvo.Entity;
         }
 
-        public async Task<Model.Relato.Relato> UpdateRelato(RelatoRequest relato)
+        public async Task<Model.Relato.Relato?> UpdateRelato(RelatoRequest relato)
         {
             var relatoEditado = await relatoContext.Relatos.FirstOrDefaultAsync(x => x.id == relato.Id);
             if(relatoEditado != null)

@@ -8,9 +8,9 @@ namespace RelataBH.Service.Relato
     {
         public Task<IEnumerable<VW_RELATOS>> GetRelatos();
         public Task<IEnumerable<VW_RELATOS>> GetRelatosPoint(string lat, string log);
-        public Task<VW_RELATOS> GetRelatoId(int Id);
-        public Task<Model.Relato.Relato> SaveRelato(RelatoRequest relato);
-        public Task<Model.Relato.Relato> UpdateRelato(RelatoRequest relato);
+        public Task<VW_RELATOS?> GetRelatoId(int Id);
+        public Task<Model.Relato.Relato> SaveRelato(RelatoRequest relato, List<string> images);
+        public Task<Model.Relato.Relato?> UpdateRelato(RelatoRequest relato);
         public Task<bool> DeleteRelato(int id);
     }
 }
