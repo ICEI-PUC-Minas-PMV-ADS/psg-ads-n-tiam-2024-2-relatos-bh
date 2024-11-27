@@ -13,7 +13,17 @@ export class ReportService {
                 throw new Error("undefined lat/long");
             }
         } catch (error) {
-            return { success: false, error: error instanceof Error ? error.message : 'Unknown error' };
+            return { success: false, error: error instanceof Error ? error?.message : 'Unknown error' };
+        }
+    }
+
+    static fetchByCategorie = async (categorieId: number, lat: number, long: number): Promise<ApiResponse<UserReport[]>> => {
+        try {
+            let url = ENDPOINTS.REPORTS_BY_COORDINATES(lat, long);
+            const response = await api.get<UserReport[]>(url);
+            return { success: true, data: response.data };
+        } catch (error) {
+            return { success: false, error: error instanceof Error ? error?.message : 'Unknown error' };
         }
     }
 
@@ -23,47 +33,18 @@ export class ReportService {
             const response = await api.get<ReportCategory[]>(url);
             return { success: true, data: response.data }
         } catch (error) {
-            return { success: false, error: error instanceof Error ? error.message : 'Unknown error' };
+            return { success: false, error: error instanceof Error ? error?.message : 'Unknown error' };
         }
     }
 }
 
-const createReportMock = (): UserReport[] => {
-    return [
-        {
-            name: "Buraco na rua",
-            description: "Faz meses que esse buraco está incomodando a vizinhança!",
-            address: "Rua Walter Ianni, 255 - São Gabriel",
-            lat: -19.8157,
-            long: -43.9542,
-            photos: ["https://picsum.photos/700", "https://picsum.photos/700", "https://picsum.photos/700", "https://picsum.photos/700", "https://picsum.photos/700"],
-            type: "buraco",
-            likeNumber: 10,
-            createdAt: Date.now()
-        } as UserReport,
-
-        {
-            name: "Problema 2",
-            description: "Descrição 2",
-            address: "Endereço 2",
-            lat: 49,
-            long: 12,
-            photos: ["", ""],
-            type: "buraco",
-            likeNumber: 10,
-            createdAt: Date.now()
-        } as UserReport,
-
-        {
-            name: "Problema 3",
-            description: "Descrição 3",
-            address: "Endereço 3",
-            lat: 21,
-            long: 12,
-            photos: ["", ""],
-            type: "buraco",
-            likeNumber: 10,
-            createdAt: Date.now()
-        } as UserReport,
-    ]
+    static fetchReportByCityId = async (cityId: number): Promise<ApiResponse<UserReport[]>> => {
+        try {
+            let url = ENDPOINTS.REPORT_BY_CITY_ID(cityId);
+            const response = await api.get<UserReport[]>(url);
+            return { success: true, data: response.data }
+        } catch (error) {
+            return { success: false, error: error instanceof Error ? error.message : 'Unknown error' };
+        }
+    }
 }

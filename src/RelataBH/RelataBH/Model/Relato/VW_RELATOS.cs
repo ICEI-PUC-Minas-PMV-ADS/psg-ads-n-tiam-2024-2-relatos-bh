@@ -35,10 +35,10 @@ namespace RelataBH.Model.Relato
         [Column("EMAIL_USER")]
         public string EmailUser { get; set; }
         [Column("QUANT_LIKE")]
-        public int QuantLike { get; set; }
+        public int QuantLike { get; set; } = 0;
         [Column("QUANT_DESLIKE")]
         public int QuantDeslike { get; set; }
-        [Column(name: "POINT", TypeName = Geometry.TypeNamePoint)]
+        [Column("POINT")]
         [JsonIgnore]
         public Point point { get; set; }
     }
