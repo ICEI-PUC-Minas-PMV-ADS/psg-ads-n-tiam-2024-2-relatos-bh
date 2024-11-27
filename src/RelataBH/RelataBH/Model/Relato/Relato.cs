@@ -28,5 +28,7 @@ namespace RelataBH.Model.Relato
         public int idUser { get; set; }
         [Column("ID_BAIRRO")]
         public int idBairro { get; set; }
+        public ICollection<RelatoImage> images { get; set; }
+        public RelatoFeedback feedback { get; set; }
     }
 }

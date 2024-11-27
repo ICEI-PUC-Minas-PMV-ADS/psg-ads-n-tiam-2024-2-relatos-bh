@@ -16,7 +16,17 @@ export class ReportService {
                 throw new Error("undefined lat/long");
              }
         } catch (error) {
-            return { success: false, error: error instanceof Error ? error.message : 'Unknown error' };
+            return { success: false, error: error instanceof Error ? error?.message : 'Unknown error' };
+        }
+    }
+
+    static fetchByCategorie = async (categorieId: number, lat: number, long: number): Promise<ApiResponse<UserReport[]>> => {
+        try {
+            let url = ENDPOINTS.REPORTS_BY_COORDINATES(lat, long);
+            const response = await api.get<UserReport[]>(url);
+            return { success: true, data: response.data };
+        } catch (error) {
+            return { success: false, error: error instanceof Error ? error?.message : 'Unknown error' };
         }
     }
 
@@ -43,7 +53,8 @@ export class ReportService {
             const response = await api.get<UserReport[]>(url);
             return { success: true, data: response.data }
         } catch (error) {
-            return { success: false, error: error instanceof Error ? error.message : 'Unknown error' };
+            return { success: false, error: error instanceof Error ? error?.message : 'Unknown error' };
         }
     }
 }
+

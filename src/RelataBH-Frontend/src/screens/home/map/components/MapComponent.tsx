@@ -5,6 +5,7 @@ import * as Location from 'expo-location';
 import React from "react";
 import { ReportService } from "../../../../services/report/ReportService";
 import { Text } from "react-native-paper";
+import { Double } from "react-native/Libraries/Types/CodegenTypes";
 
 type Props = {
     onReportSelected: (report: UserReport | null) => void,
@@ -96,8 +97,8 @@ export const MapComponent: React.FC<Props> = ({
                     return <Marker
                         key={index}
                         coordinate={{
-                            latitude: -19.929290541374755,
-                            longitude: -43.93626102159546
+                            latitude: Number(report.latitude),
+                            longitude: Number(report.longitude)
                         }}
                         title={report.nomeCategoria}
                         onSelect={() => { onReportSelected(report) }}

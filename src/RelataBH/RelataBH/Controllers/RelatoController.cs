@@ -4,31 +4,19 @@ using RelataBH.Service.Auth.Domain.Relato;
 using RelataBH.Service.Relato;
 using RelataBH.Service.Relato.Category;
 using RelataBH.Service.Relato.Domain;
+using RelataBH.Service.Relato.Feedback;
 
 namespace RelataBH.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class RelatoController(IRelatoService relatoService, ICategoryService categoryService) : ControllerBase
+    public class RelatoController(IRelatoService relatoService) : ControllerBase
     {
-        [HttpGet("categories")]
-        public async Task<ActionResult<List<Category>>> GetCategories()
-        {
-            try
-            {
-                return Ok(await categoryService.GetCategories());
-            }
-            catch
-            {
-                return BadRequest();
-            }
-        }
-
         [HttpGet("searchByCoordinates")]
-        public async Task<IEnumerable<VW_RELATOS>> GetRelatosPoint([FromQuery] string lat, [FromQuery] string log)
+        public async Task<ActionResult<IEnumerable<Model.Relato.Relato>>> GetRelatosPoint([FromQuery] string lat, [FromQuery] string log)
         {
-            var relato = await relatoService.GetRelatosPoint(lat, log);
-            return relato;
+            var relatos = await relatoService.GetRelatosPoint(lat, log);
+            return Ok(relatos);
         }
 
         [HttpGet("searchById")]
@@ -46,9 +34,12 @@ namespace RelataBH.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> SaveRelato([FromBody] RelatoRequest relato)
-        {
-            var relatoSalvo = await relatoService.SaveRelato(relato);
+        [Consumes("multipart/form-data")]
+        public async Task<ActionResult<Relato>> SaveRelato(
+            [FromForm] RelatoRequest relato,
+            [FromForm] List<IFormFile> images
+        ) {
+            var relatoSalvo = await relatoService.SaveRelato(relato, images);
             return Ok(relatoSalvo);
         }
 
@@ -77,6 +68,5 @@ namespace RelataBH.Controllers
         {
             return Ok(await relatoService.GetRelatosInArea(area));
         }
-
     }
 }
