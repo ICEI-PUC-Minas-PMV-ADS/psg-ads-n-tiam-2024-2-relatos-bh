@@ -9,6 +9,7 @@ namespace RelataBH.Service.Auth.Mapper
         {
             Email = userResponse.Email,
             Name = userRequest.Name ?? "",
+            createdAt = DateOnly.FromDateTime(DateTime.Now),
             IdFirebase = userResponse.LocalId,
             Token = userResponse.IdToken
         };

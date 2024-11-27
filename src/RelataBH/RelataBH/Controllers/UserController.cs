@@ -1,27 +1,41 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using RelataBH.Authorization;
 using RelataBH.Model;
 using RelataBH.Service.Profile;
 using RelataBH.Service.Profile.Domain;
+using RelataBH.Service.Profile.RelatoHistoric;
 
 namespace RelataBH.Controllers
 {
-    [Route("api/user")]
     [ApiController]
-    public class UserController(IProfileService profileService) : ControllerBase
+    [Route("api/user")]
+    public class UserController(IProfileService profileService, IRelatoHistoricService historicService) : ControllerBase
     {
 
         [HttpPost("profile")]
-        public async Task<ActionResult<ProfileRequest>> Post([FromBody] ProfileRequest profileRequest)
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        public async Task<ActionResult<ProfileRequest>> Post([FromHeader] string Authorization)
         {
             try
             {
-                Profile appUser = await profileService.GetProfile(profileRequest.UserId);
+                var userEmail = AuthorizationManager.GetUserFromToken(token: Authorization);
+                Profile appUser = await profileService.GetProfile(userEmail);
                 return Ok(appUser);
             }
             catch (Exception ex)
             {
                 return BadRequest(ex);
             }
+        }
+
+        [HttpGet("historic")]
+        public async Task<IEnumerable<Model.Relato.Relato>> GetHistoricRelatosByUser([FromQuery] int userId)
+        {
+                var userHistoric = await historicService.GetRelatosByUser(userId);
+                return userHistoric;
         }
     }
 }

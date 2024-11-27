@@ -1,4 +1,4 @@
-﻿using RelataBH.Model.Relato;
+using RelataBH.Model.Relato;
 using RelataBH.Service.Auth.Domain.Relato;
 
 namespace RelataBH.Service.Relato.Mapper

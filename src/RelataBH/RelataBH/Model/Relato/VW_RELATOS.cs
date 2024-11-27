@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Microsoft.SqlServer.Types;
 using NetTopologySuite.Geometries;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -40,6 +41,6 @@ namespace RelataBH.Model.Relato
         public int QuantDeslike { get; set; }
         [Column("POINT")]
         [JsonIgnore]
-        public Point point { get; set; }
+        public Point Coordinates { get; set; }
     }
 }

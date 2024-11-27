@@ -6,10 +6,10 @@ namespace RelataBH.Service.Profile
 {
     public class IProfileServiceImpl(ProfileContext profileContext) : IProfileService
     {
-        public async Task<Model.Profile> GetProfile(int userId)
+        public async Task<Model.Profile> GetProfile(string? email)
         {
             return await profileContext.Profile
-                 .Where(user => user.id == userId)
+                 .Where(user => user.email == email)
                  .FirstAsync();
         }
     }
