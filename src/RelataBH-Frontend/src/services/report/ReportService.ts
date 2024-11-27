@@ -58,10 +58,3 @@ export class ReportService {
     }
 }
 
-    static fetchReportByCityId = async (cityId: number): Promise<ApiResponse<UserReport[]>> => {
-            let url = ENDPOINTS.REPORT_BY_CITY_ID(cityId);
-            const response = await api.get<UserReport[]>(url);
-            return { success: true, data: response.data }
-        }
-    }
-}

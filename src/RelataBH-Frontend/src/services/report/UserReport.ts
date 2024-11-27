@@ -1,16 +1,21 @@
 type UserReport = {
-    idRelato: number,
-    latitude: number,
-    longitude: number,
+    id: number,
+    latitude: string,
+    longitude: string,
     endereco: string,
-    criadoQuando: Date,
-    descricaoRelato: string,
+    createdAt: string,
+    dsc: string,
     titulo: string,
     nomeCategoria: string,
     descricaoCategoria: string,
-    idCategoria: number,
+    codIndicador: number,
     nomeUser: string,
     emailUser: string,
     quantLike: number,
     quantDeslike: number,
+    images: [{url:string}],
+    feedback: {
+        like: number,
+        dislike: number
+    } | null
 }

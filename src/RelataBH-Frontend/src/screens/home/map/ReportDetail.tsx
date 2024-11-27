@@ -15,21 +15,21 @@ export const ReportDetail: React.FC<Props> = ({ report, style }) => {
                 <Card>
                     <Card.Content>
 
-                        {/* <ImageViewPager images={report.photos} /> */}
+                        <ImageViewPager images={report.images} />
 
                         <View style={{ flexDirection: "row" }}>
                             <View style={{ flex: 1 }}>
                                 <Text variant="titleMedium" numberOfLines={2} ellipsizeMode='tail' style={styles.bold}>{report.titulo}</Text>
-                                <Text variant="bodyMedium" style={styles.bold} numberOfLines={2} ellipsizeMode='tail'>{report.descricaoRelato}</Text>
+                                <Text variant="bodyMedium" style={styles.bold} numberOfLines={2} ellipsizeMode='tail'>{report.dsc}</Text>
                             </View>
-                            <Text>Desde{"\n"}{report.criadoQuando.toLocaleDateString()}</Text>
+                            <Text>Desde{"\n"}{report.createdAt}</Text>
                         </View>
 
                         <View style={{ flexDirection: "row" }}>
                             <Text variant="bodyMedium" style={{ color: '#65558F', flex: 1 }} numberOfLines={2} ellipsizeMode='tail'>
                                 {report.endereco}
                             </Text>
-                            <LikeComponent likeCount={report.quantLike} />
+                            <LikeComponent likeCount={report.feedback?.like ?? 0} />
                         </View>
                     </Card.Content>
                 </Card>

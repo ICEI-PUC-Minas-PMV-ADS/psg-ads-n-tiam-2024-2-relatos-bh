@@ -1,7 +1,7 @@
 import { StyleSheet, View, StyleProp, ViewStyle, Image, FlatList } from "react-native"
 
 type Props = {
-    images: string[],
+    images: [{url:string}],
     style?: StyleProp<ViewStyle>
 }
 
@@ -17,7 +17,7 @@ export const ImageViewPager: React.FC<Props> = ({ images, style }) => {
                     <Image
                         style={styles.image}
                         source={{
-                            uri: item,
+                            uri: item.url,
                         }}
                     />
                 }
