@@ -1,5 +1,4 @@
 using Microsoft.EntityFrameworkCore;
-using RelataBH.Model.Location;
 using RelataBH.Model.Relato;
 namespace RelataBH.Database
 {
@@ -9,25 +8,35 @@ namespace RelataBH.Database
         public DbSet<VW_RELATOS> VW_RELATOS { get; set; }
         public DbSet<Category> Category { get; set; }
         public DbSet<RelatoImage> Images { get; set; }
+        public DbSet<RelatoFeedback> Feedback { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
+            modelBuilder.Entity<RelatoImage>().ToTable("FOTOS");
+            modelBuilder.Entity<RelatoFeedback>().ToTable("CURTIDAS");
+            modelBuilder.Entity<VW_RELATOS>().ToView("VW_RELATOS");
+            modelBuilder.Entity<Category>().ToTable("INDICADORES");
+
             modelBuilder
                 .Entity<Relato>()
-                .ToTable("RELATOS")
-                .HasMany(r => r.images);
+                .HasMany(r => r.images)
+                .WithOne(f => f.Relato)
+                .HasForeignKey(i => i.IdRelato)
+                .OnDelete(DeleteBehavior.Cascade);
 
-            modelBuilder.Entity<RelatoImage>().ToTable("FOTOS");
+            modelBuilder
+                .Entity<Relato>()
+                .HasOne(r => r.feedback)
+                .WithOne(f => f.Relato)
+                .HasForeignKey<RelatoFeedback>(f => f.IdRelato)
+                .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder
                 .Entity<VW_RELATOS>()
-                .ToView("VW_RELATOS")
                 .Property(x => x.Coordinates)
                 .HasColumnType("geography");
-
-            modelBuilder.Entity<Category>().ToTable("INDICADORES");
         }
     }
 }

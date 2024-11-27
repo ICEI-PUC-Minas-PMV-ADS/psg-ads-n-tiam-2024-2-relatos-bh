@@ -1,16 +1,4 @@
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.EntityFrameworkCore;
-using Refit;
-using RelataBH.database;
-using RelataBH.Database;
-using RelataBH.Service.Auth;
-using RelataBH.Service.Auth.Api;
-using RelataBH.Service.ImageUpload;
-using RelataBH.Service.Location;
-using RelataBH.Service.Profile;
-using RelataBH.Service.Profile.RelatoHistoric;
-using RelataBH.Service.Relato;
-using RelataBH.Service.Relato.Category;
+using RelataBH.Config;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,56 +7,11 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddMvc();
-builder.Services.AddTransient<IAuthService, IAuthServiceImpl>();
-builder.Services.AddTransient<ILocationService, ILocationServiceImpl>();
-builder.Services.AddTransient<IProfileService, IProfileServiceImpl>();
-builder.Services.AddTransient<IRelatoService, IRelatoServiceImpl>();
-builder.Services.AddTransient<ICategoryService, ICategoryServiceImpl>();
-builder.Services.AddScoped<IRelatoHistoricService, IRelatoHistoricServiceImpl>();
-builder.Services.AddScoped<IImageUploader, ImageUploaderImpl>();
-
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-
-builder.Services.AddAuthentication()
-    .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, token =>
-{
-    token.Authority = "https://securetoken.google.com/relata-bh";
-    token.Audience = "relata-bh";
-    token.TokenValidationParameters.ValidIssuer = "https://securetoken.google.com/relata-bh";
-});
-
-
-builder.Services.AddRefitClient<IAuthApi>().ConfigureHttpClient(
-    client => client.BaseAddress = new Uri("https://identitytoolkit.googleapis.com")
-);
+builder.Services.AddServices();
 builder.Services.AddHealthChecks();
 
-////Database
-//builder
-//    .Services
-//    .AddSqlite<DatabaseContext>(builder.Configuration.GetConnectionString("SqliteConnectionString"));
-
-//Database
-builder.Services.AddDbContext<UserContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
-);
-
-builder.Services.AddDbContext<LocationContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
-);
-
-builder.Services.AddDbContext<ProfileContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
-);
-
-builder.Services.AddDbContext<RelatoContext>(options =>
-    options.UseSqlServer(
-        builder.Configuration.GetConnectionString("DefaultConnection"), 
-        x => x.UseNetTopologySuite()
-    )
-);
+builder.Services.AddContexts(builder.Configuration);
+builder.Services.ConfigureAuthentication();
 
 //CORS
 builder.Services.AddCors(option =>
@@ -83,24 +26,13 @@ builder.Services.AddCors(option =>
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
-
+app.UseSwagger();
+app.UseSwaggerUI();
 app.UseHttpsRedirection();
-
 app.UseCors("AllowAllHeaders");
-
 app.UseAuthorization();
-
 app.UseAuthentication();
-
 app.MapControllers();
-
 app.MapHealthChecks("/health");
-
 app.Run();
 

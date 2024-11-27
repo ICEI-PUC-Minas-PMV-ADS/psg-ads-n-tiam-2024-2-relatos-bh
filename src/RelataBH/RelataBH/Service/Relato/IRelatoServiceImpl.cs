@@ -18,11 +18,14 @@ namespace RelataBH.Service.Relato
                 .ToListAsync();
         }
 
-        public async Task<VW_RELATOS?> GetRelatoId(int Id)
+        public async Task<Model.Relato.Relato?> GetRelatoId(int Id)
         {
             return await relatoContext
-                .VW_RELATOS
-                .FirstOrDefaultAsync(x => x.IdRelato == Id);
+                .Relatos
+                .Where(x => x.id == Id)
+                .Include(r => r.feedback)
+                .Include(i => i.images)
+                .FirstOrDefaultAsync();
         }
 
         public async Task<IEnumerable<VW_RELATOS>> GetRelatosPoint(string lat, string log)
