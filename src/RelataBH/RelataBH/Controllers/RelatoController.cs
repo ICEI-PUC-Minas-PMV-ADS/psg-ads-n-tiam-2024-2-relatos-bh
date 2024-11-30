@@ -3,7 +3,6 @@ using RelataBH.Model.Relato;
 using RelataBH.Service.Auth.Domain.Relato;
 using RelataBH.Service.ImageUpload;
 using RelataBH.Service.Relato;
-using RelataBH.Service.Relato.Category;
 using RelataBH.Service.Relato.Domain;
 
 namespace RelataBH.Controllers

@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using RelataBH.Authorization;
@@ -32,10 +31,10 @@ namespace RelataBH.Controllers
         }
 
         [HttpGet("historic")]
-        public async Task<IEnumerable<Model.Relato.Relato>> GetHistoricRelatosByUser([FromQuery] int userId)
+        public async Task<ActionResult<IEnumerable<Model.Relato.Relato>>> GetHistoricRelatosByUser([FromQuery] int userId)
         {
                 var userHistoric = await historicService.GetRelatosByUser(userId);
-                return userHistoric;
+                return Ok(userHistoric);
         }
     }
 }
