@@ -1,5 +1,4 @@
-﻿using RelataBH.Model;
-using System.IdentityModel.Tokens.Jwt;
+﻿using System.IdentityModel.Tokens.Jwt;
 using System.Net.Http.Headers;
 
 namespace RelataBH.Authorization

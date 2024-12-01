@@ -1,14 +1,15 @@
 using Microsoft.EntityFrameworkCore;
-using NetTopologySuite.Geometries;
 using RelataBH.Database;
 using RelataBH.Model.Relato;
 using RelataBH.Service.Auth.Domain.Relato;
+using RelataBH.Service.ImageUpload;
+using RelataBH.Service.Relato.Domain;
 using RelataBH.Service.Relato.Mapper;
-using System.Globalization;
+using System.Text;
 
 namespace RelataBH.Service.Relato
 {
-    public class IRelatoServiceImpl(RelatoContext relatoContext) : IRelatoService
+    public class IRelatoServiceImpl(RelatoContext relatoContext, IImageUploader imageUploader) : IRelatoService
     {
         public async Task<IEnumerable<VW_RELATOS>> GetRelatos()
         {
@@ -17,23 +18,31 @@ namespace RelataBH.Service.Relato
                 .ToListAsync();
         }
 
-        public async Task<VW_RELATOS?> GetRelatoId(int Id)
+        public async Task<Model.Relato.Relato?> GetRelatoId(int Id)
         {
             return await relatoContext
-                .VW_RELATOS
-                .FirstOrDefaultAsync(x => x.IdRelato == Id);
+                .Relatos
+                .Where(x => x.id == Id)
+                .Include(r => r.feedback)
+                .Include(i => i.images)
+                .FirstOrDefaultAsync();
         }
 
-        public async Task<IEnumerable<VW_RELATOS>> GetRelatosPoint(string lat, string log)
+        public async Task<IEnumerable<Model.Relato.Relato>> GetRelatosPoint(string lat, string log)
         {
-            return await relatoContext.VW_RELATOS
+            return await relatoContext.Relatos
                 .FromSqlRaw(BuildSql(lat, log, 2))
+                .Include(r => r.feedback)
+                .Include(i => i.images)
                 .ToListAsync();
         }
 
-        public async Task<Model.Relato.Relato> SaveRelato(RelatoRequest relato, List<string> images)
+        public async Task<Model.Relato.Relato> SaveRelato(RelatoRequest relato, List<IFormFile> images)
         {
-            var relatoSalvo = await relatoContext.Relatos.AddAsync(RelatoMapper.MapRequestToModel(relato, images));
+            var imagePaths = await imageUploader.UploadImage(images);
+            var relatoSalvo = await relatoContext
+                .Relatos
+                .AddAsync(RelatoMapper.MapRequestToModel(relato, imagePaths));
             await relatoContext.SaveChangesAsync();
             return relatoSalvo.Entity;
         }
@@ -79,8 +88,7 @@ namespace RelataBH.Service.Relato
         private static string BuildSql(string latitude, string longitude, int distanceInKM)
         {
             return new StringBuilder()
-                .Append("SELECT * FROM [VW_RELATOS] AS [v] ")
-                .Append($"WHERE [v].[POINT].STDistance(geography::Point({latitude}, {longitude}, 4326)) * 0.001E0 <= {distanceInKM}")
+                .Append($" SELECT * FROM RELATOS AS r WHERE geography::Point(CAST(r.LATITUDE AS FLOAT), CAST(r.LONGITUDE AS FLOAT), 4326).STDistance(geography::Point({latitude}, {longitude}, 4326)) * 0.001 <= {distanceInKM}")
                 .ToString()
             ;
         }

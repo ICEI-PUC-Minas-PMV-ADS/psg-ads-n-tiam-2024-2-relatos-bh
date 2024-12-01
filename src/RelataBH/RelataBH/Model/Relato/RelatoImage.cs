@@ -14,6 +14,8 @@ namespace RelataBH.Model.Relato
         public string Url { get; set; }
         [JsonIgnore]
         [Column("ID_RELATO")]
-        public int RelatoId { get; set; }
+        public int IdRelato { get; set; }
+        [JsonIgnore]
+        public Relato Relato { get; set; }
     }
 }

@@ -4,10 +4,10 @@ using Azure.Storage.Blobs.Models;
 
 namespace RelataBH.Service.ImageUpload
 {
-    public class ImageUploaderImpl: IImageUploader
+    public class ImageUploaderImpl(IConfiguration config) : IImageUploader
     {
-        private static readonly string connectionString = "DefaultEndpointsProtocol=https;AccountName=relatabh;AccountKey=tapdz3NR0jSb5fxn1GFc3Ca49y1Eyyi0FLICe2mmSOUVTrV3gbOPlL8uBudvgWBFUD77I1Q843vH+AStdh2bjg==;EndpointSuffix=core.windows.net";
-        private static readonly string containerName = "relatabh";
+        private readonly string connectionString = config["AzureBlobConnectionString"] ?? "";
+        private readonly string containerName = "relatabh";
 
         public async Task<List<string>> UploadImage(List<IFormFile> files)
         {
