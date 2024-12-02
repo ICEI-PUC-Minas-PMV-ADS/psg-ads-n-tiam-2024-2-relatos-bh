@@ -1,81 +1,106 @@
-import { FlatList, ScrollView, View } from "react-native";
-import { Appbar, Avatar, Card, Text, Button, ActivityIndicator } from "react-native-paper";
+import { ScrollView, View } from "react-native";
+import { Text } from "react-native-paper";
 import { ProfileCard } from "./ProfileCard";
-import { HistoryList } from "./HistoryList";
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { HistoryCard } from "./HistoryCard";
-import AppContext from "../../../context/app";
-import { useNavigation } from "@react-navigation/native";
-import { RootStackTypes } from "../../../routes/routes";
+import { WhoAreWeCard } from "./WhoAreWe";
+import { ProfileSettingsComponent } from "./ProfileSettingsComponent";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { HistoriesUpdateDelete } from "./HistoriesUpdateDeleteComponent";
 
 export const ProfileScreen: React.FC = () => {
-    const [reports, setReports] = useState<ReportHistory[] | null>(createHistoryMock())
-    const { logout } = useContext(AppContext);
-    const navigation = useNavigation<RootStackTypes>();
+    const [visibleSettings, setVisibleSettings] = useState(false);
+    const [visible, setVisible] = useState(false);
 
-    const handleLogout = () => {
-        logout();
-        navigation.replace("Auth")
-    }
+    const [selectedHistory, setSelectedHistory] = useState<{ id: number, titulo: string | null }>({ id: -1, titulo: null });
+
+    const showBottomSheet = (id: number, titulo: string) => {
+        setSelectedHistory({id, titulo}); 
+        setVisible(true);
+    };
+
+    const hideBottomSheet = () => {
+        setSelectedHistory({id: -1, titulo: null}); 
+        setVisible(false);
+    };
+
+    const showBottomSheetSettings = () => {
+        setVisibleSettings(true);
+    };
+
+    const hideBottomSheetSettings = () => {
+        setVisibleSettings(false);
+    };
 
     return (
-        <View style={{ flex: 1, alignItems: 'center' }}>
-            <FlatList
-                style={{ width: '100%' }}
-                data={reports}
-                ListHeaderComponent={() => (
-                    <View >
-                        <Text variant="titleLarge" style={{ marginVertical: 32, textAlign: 'center', fontWeight: 'bold', color: '#65558F' }}>Perfil</Text>
-                        <ProfileCard />
-                        <Text variant="titleMedium" style={{color: '#65558F', fontWeight: 'bold', marginTop: 12}}>Meus relatos</Text>
-                    </View>
-                )}
+        <GestureHandlerRootView style={{ flex: 1 }}>
+            <ScrollView
+                style={{ flex: 1, paddingHorizontal: 16 }}
+                contentContainerStyle={{ paddingBottom: 24 }}
                 showsHorizontalScrollIndicator={false}
                 showsVerticalScrollIndicator={false}
-                ListHeaderComponentStyle={{ marginBottom: 12 }}
-                contentContainerStyle={{ paddingHorizontal: 16 }}
-                renderItem={(report) => (
-                    <HistoryCard />
-                )}
-                ListFooterComponent={() => (
-                    <View>
-                        <Button onPress={() => { handleLogout() }}>Logout</Button>
-                    </View>
-                )}
-            />
-        </View>
-    );
-}
+            >
+                <Text
+                    variant="titleLarge"
+                    style={{
+                        marginVertical: 32,
+                        textAlign: "center",
+                        fontWeight: "bold",
+                        color: "#65558F",
+                    }}
+                >
+                    Perfil
+                </Text>
 
-const createHistoryMock = () => {
-    return [
-        {
-            id: 1,
-            name: 'Buraco na rua 1',
-            description: 'Buraco incomodando todos os vizinhos.',
-            date: Date.now(),
-            image: 'https://picsum.photos/700'
-        } as ReportHistory,
-        {
-            id: 2,
-            name: 'Buraco na rua 2',
-            description: 'Buraco incomodando todos os vizinhos.',
-            date: Date.now(),
-            image: 'https://picsum.photos/700'
-        } as ReportHistory,
-        {
-            id: 3,
-            name: 'Buraco na rua 3',
-            description: 'Buraco incomodando todos os vizinhos.',
-            date: Date.now(),
-            image: 'https://picsum.photos/700'
-        } as ReportHistory,
-        {
-            id: 4,
-            name: 'Buraco na rua 4',
-            description: 'Buraco incomodando todos os vizinhos.',
-            date: Date.now(),
-            image: 'https://picsum.photos/700'
-        } as ReportHistory
-    ]
-}
+                {/* Passando as funções para o ProfileCard */}
+                <ProfileCard
+                    showBottomSheet={showBottomSheetSettings} 
+                />
+
+                <Text
+                    variant="titleMedium"
+                    style={{
+                        color: "#65558F",
+                        fontWeight: "bold",
+                        marginTop: 12,
+                    }}
+                >
+                    Meus relatos
+                </Text>
+
+                <HistoryCard 
+                    showBottomSheet={showBottomSheet}
+                />
+
+                <Text
+                    variant="titleMedium"
+                    style={{
+                        color: "#65558F",
+                        fontWeight: "bold",
+                        marginTop: 12,
+                    }}
+                >
+                    Quem somos?
+                </Text>
+
+                <WhoAreWeCard />
+            </ScrollView>
+
+            {/* Componente de Configurações do Perfil */}
+            <ProfileSettingsComponent
+                visible={visibleSettings}
+                hideBottomSheet={hideBottomSheetSettings}
+            />
+            {/* Componente de editar/excluir de histórico de relados */}
+            <HistoriesUpdateDelete
+                visible={visible}
+                hideBottomSheet={hideBottomSheet}
+                id={selectedHistory.id}
+                titulo={selectedHistory.titulo}
+          
+            />
+        </GestureHandlerRootView>
+    );
+};
+
+export default ProfileScreen;

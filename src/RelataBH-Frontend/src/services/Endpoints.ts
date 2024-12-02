@@ -8,6 +8,8 @@ export const ENDPOINTS = {
     REPORT_CATEGORIES: () => BASE_URL + `api/Relato/categories`,
     GET_PROFILE_INFOS: () => BASE_URL + `api/user/profile`,
     REPORT_BY_CITY_ID: (cityId: number) => BASE_URL + `api/Relato?cityId=${cityId}`,
+    REPORTS_BY_USER: (userId: number) => BASE_URL + `api/user/historic?userId=${userId}`,
+    
     //caminho para os outros endpoints ficarao aqui 
 }
 const BASE_URL = "https://relatabh.azurewebsites.net/"
