@@ -4,14 +4,12 @@ namespace RelataBH.Model.Location
 {
     public class Cidade
     {
-        [Column("id_cidade")]
+        [Column("id")]
         public int ID { get; set; }
         [Column("nome")]
         public string Name { get; set; }
-        [Column("estado")]
+        [Column("uf")]
         public int EstadoId { get; set; }
         public Estado Estado { get; set; }
-
-        public ICollection<Bairro> Bairros { get; set; }
     }
 }

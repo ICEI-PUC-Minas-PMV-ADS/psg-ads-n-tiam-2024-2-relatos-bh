@@ -4,6 +4,6 @@ namespace RelataBH.Service.Relato.Domain
 {
     public class RelatoFeedbackRequest
     {
-        public int Id { get; set; }
+        public int IdRelato { get; set; }
     }
 }

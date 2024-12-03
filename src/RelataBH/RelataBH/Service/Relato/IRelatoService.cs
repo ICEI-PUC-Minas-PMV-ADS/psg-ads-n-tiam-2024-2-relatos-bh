@@ -13,6 +13,6 @@ namespace RelataBH.Service.Relato
         public Task<Model.Relato.Relato> SaveRelato(RelatoRequest relato, List<IFormFile> images);
         public Task<Model.Relato.Relato?> UpdateRelato(RelatoRequest relato);
         public Task<bool> DeleteRelato(int id);
-        public Task<IEnumerable<VW_RELATOS>> GetRelatosInArea(AreaRequest area);
+        public Task<IEnumerable<Model.Relato.Relato>> GetRelatosInArea(AreaRequest area);
     }
 }

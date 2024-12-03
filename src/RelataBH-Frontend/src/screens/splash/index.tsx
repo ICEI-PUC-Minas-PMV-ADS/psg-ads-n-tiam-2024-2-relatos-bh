@@ -21,7 +21,7 @@ export const AppSplashScreen: React.FC = () => {
 
     const handleAuthentication = async () => {
         const isAuthenticated = await TokenService.isAuthenticated();
-        isAuthenticated ? rootNavigation.replace("Home") : rootNavigation.replace("Auth");
+        isAuthenticated ? rootNavigation.navigate("Home") : rootNavigation.replace("Auth");
     }
 
     useEffect(() => {

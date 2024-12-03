@@ -11,8 +11,8 @@ namespace RelataBH.Controllers
     [ApiController]
     public class RelatoController(IRelatoService relatoService) : ControllerBase
     {
-        [HttpGet("searchByCoordinates")]
-        public async Task<ActionResult<IEnumerable<Model.Relato.Relato>>> GetRelatosPoint([FromQuery] string lat, [FromQuery] string log)
+        [HttpGet("searchByCentralPoint")]
+        public async Task<ActionResult<IEnumerable<Relato>>> GetRelatosPoint([FromQuery] string lat, [FromQuery] string log)
         {
             var relatos = await relatoService.GetRelatosPoint(lat, log);
             return Ok(relatos);
@@ -32,6 +32,12 @@ namespace RelataBH.Controllers
             return Ok(relatos);
         }
 
+        [HttpGet("searchByArea")]
+        public async Task<ActionResult<IEnumerable<Relato>>> SearchByArea([FromQuery] AreaRequest area)
+        {
+            return Ok(await relatoService.GetRelatosInArea(area));
+        }
+
         [HttpPost]
         [Consumes("multipart/form-data")]
         public async Task<ActionResult<Relato>> SaveRelato(
@@ -43,7 +49,7 @@ namespace RelataBH.Controllers
         }
 
         [HttpPatch("")]
-        public async Task<ActionResult> UpdateRelatos([FromBody] RelatoRequest relato)
+        public async Task<ActionResult<Relato>> UpdateRelatos([FromBody] RelatoRequest relato)
         {
             var relatoEditado = await relatoService.UpdateRelato(relato);
             return Ok(relatoEditado);
@@ -60,12 +66,6 @@ namespace RelataBH.Controllers
             {
                 return BadRequest();
             }
-        }
-
-        [HttpPost("searchByArea")]
-        public async Task<ActionResult<IEnumerable<VW_RELATOS>>> SearchByArea([FromBody] AreaRequest area)
-        {
-            return Ok(await relatoService.GetRelatosInArea(area));
         }
     }
 }
