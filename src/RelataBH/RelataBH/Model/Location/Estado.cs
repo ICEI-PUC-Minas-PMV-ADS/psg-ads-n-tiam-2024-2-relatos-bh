@@ -5,7 +5,7 @@ namespace RelataBH.Model.Location
 
     public class Estado
     {
-        [Column("id_estado")]
+        [Column("id")]
         public int ID { get; set; }
         [Column("uf")]
         public required string UF { get; set; }

@@ -11,14 +11,14 @@ namespace RelataBH.Controllers
         [HttpPost("like")]
         public async Task<IActionResult> LikeRelato(RelatoFeedbackRequest body)
         {
-            int likeCount = await feedbackService.Like(body.Id);
+            int likeCount = await feedbackService.Like(body.IdRelato);
             return Ok(likeCount);
         }
 
         [HttpPost("dislike")]
         public async Task<IActionResult> DislikeRelato(RelatoFeedbackRequest body)
         {
-            int dislikeCount = await feedbackService.Dislike(body.Id);
+            int dislikeCount = await feedbackService.Dislike(body.IdRelato);
             return Ok(dislikeCount);
         }
     }

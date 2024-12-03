@@ -80,17 +80,56 @@ namespace RelataBH.Service.Relato
             }
         }
 
-        public async Task<IEnumerable<VW_RELATOS>> GetRelatosInArea(AreaRequest relatoArea)
+        public async Task<IEnumerable<Model.Relato.Relato>> GetRelatosInArea(AreaRequest relatoArea)
         {
-            return [];
+            var sqlToSearchInArea = BuildPolygonSql(
+                relatoArea.TopLeft.Latitude, 
+                relatoArea.TopLeft.Longitude, 
+                relatoArea.BottomRight.Latitude, 
+                relatoArea.BottomRight.Longitude
+            );
+
+            return await relatoContext.Relatos
+                .FromSqlRaw(sqlToSearchInArea)
+                .Include(r => r.feedback)
+                .Include(i => i.images)
+                .ToListAsync();
         }
 
         private static string BuildSql(string latitude, string longitude, int distanceInKM)
         {
             return new StringBuilder()
-                .Append($" SELECT * FROM RELATOS AS r WHERE geography::Point(CAST(r.LATITUDE AS FLOAT), CAST(r.LONGITUDE AS FLOAT), 4326).STDistance(geography::Point({latitude}, {longitude}, 4326)) * 0.001 <= {distanceInKM}")
+                .Append($"SELECT * FROM RELATOS AS r WHERE geography::Point(CAST(r.LATITUDE AS FLOAT), CAST(r.LONGITUDE AS FLOAT), 4326).STDistance(geography::Point({latitude}, {longitude}, 4326)) * 0.001 <= {distanceInKM}")
                 .ToString()
             ;
+        }
+
+        private static string BuildPolygonSql(string point1Lat, string point1Lng, string point2Lat, string point2Lng)
+        {
+            return new StringBuilder()
+
+                // Add DECLARE statements to define input parameters for the points
+                .AppendLine($"DECLARE @Point1_Lat FLOAT = {point1Lat},")
+                .AppendLine($"        @Point1_Lng FLOAT = {point1Lng},")
+                .AppendLine($"        @Point2_Lat FLOAT = {point2Lat},")
+                .AppendLine($"        @Point2_Lng FLOAT = {point2Lng};")
+                .AppendLine()
+
+                // Build the SQL query using the STWithin function to find points inside the polygon
+                .AppendLine("SELECT * FROM RELATOS AS r")
+                .AppendLine("WHERE geography::Point(CAST(r.LATITUDE AS FLOAT), CAST(r.LONGITUDE AS FLOAT), 4326)")
+                .AppendLine("      .STWithin(")
+                .AppendLine("          geography::STGeomFromText(")
+                .AppendLine("              POLYGON(( ")
+                .AppendLine("              CAST(MIN(@Point1_Lng, @Point2_Lng) AS VARCHAR) CAST(MIN(@Point1_Lat, @Point2_Lat) AS VARCHAR),")
+                .AppendLine("              CAST(MIN(@Point1_Lng, @Point2_Lng) AS VARCHAR) CAST(MAX(@Point1_Lat, @Point2_Lat) AS VARCHAR),")
+                .AppendLine("              CAST(MAX(@Point1_Lng, @Point2_Lng) AS VARCHAR) CAST(MAX(@Point1_Lat, @Point2_Lat) AS VARCHAR),")
+                .AppendLine("              CAST(MAX(@Point1_Lng, @Point2_Lng) AS VARCHAR) CAST(MIN(@Point1_Lat, @Point2_Lat) AS VARCHAR),")
+                .AppendLine("              CAST(MIN(@Point1_Lng, @Point2_Lng) AS VARCHAR) CAST(MIN(@Point1_Lat, @Point2_Lat) AS VARCHAR))),")
+                .AppendLine("              4326")
+                .AppendLine("          )")
+                .AppendLine("      ) = 1;")
+                .ToString();
         }
     }
 }

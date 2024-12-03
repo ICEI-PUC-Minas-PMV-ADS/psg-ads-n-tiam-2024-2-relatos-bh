@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using RelataBH.Model.Location;
 using RelataBH.Service.Location;
 
@@ -11,10 +9,17 @@ namespace RelataBH.Controllers
     public class LocationController(ILocationService locationService) : ControllerBase
     {
         [HttpGet("search")]
-        public async Task<ActionResult<List<Place>>> Search([FromQuery] String query)
+        public async Task<ActionResult<List<Place>>> Search([FromQuery] string query)
         {
-            IEnumerable<Place> cidades = await locationService.SearchLocation(query);
-            return Ok(cidades);
+            try
+            {
+                IEnumerable<Place> cidades = await locationService.SearchLocation(query);
+                return Ok(cidades);
+            }
+            catch(Exception exception)
+            {
+                return BadRequest(exception.Message);
+            }
         }
     }
 }
