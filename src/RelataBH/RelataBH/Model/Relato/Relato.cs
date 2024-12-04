@@ -1,7 +1,5 @@
-﻿using NetTopologySuite.Geometries;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text.Json.Serialization;
 
 namespace RelataBH.Model.Relato
 {
@@ -26,8 +24,8 @@ namespace RelataBH.Model.Relato
         public int codIndicador { get; set; }
         [Column("ID_USER")]
         public int idUser { get; set; }
-        [Column("ID_BAIRRO")]
-        public int idBairro { get; set; }
+        [Column("ID_CIDADE")]
+        public int idCidade { get; set; }
         public ICollection<RelatoImage> images { get; set; }
         public RelatoFeedback feedback { get; set; }
     }

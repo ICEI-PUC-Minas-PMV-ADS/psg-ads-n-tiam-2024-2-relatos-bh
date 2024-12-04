@@ -14,8 +14,5 @@ type UserReport = {
     quantLike: number,
     quantDeslike: number,
     images: [{url:string}],
-    feedback: {
-        like: number,
-        dislike: number
-    } | null
+    feedback: Feedback | null
 }

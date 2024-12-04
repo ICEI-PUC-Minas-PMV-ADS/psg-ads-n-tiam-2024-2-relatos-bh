@@ -12,6 +12,6 @@ namespace RelataBH.Service.Auth.Domain.Relato
         public string Titulo { get; set; }
         public int IdCategoria { get; set; }
         public int IdUser { get; set; }
-        public int IdBairro { get; set; } = 0;
+        public string NomeCidade { get; set; }
     }
 }

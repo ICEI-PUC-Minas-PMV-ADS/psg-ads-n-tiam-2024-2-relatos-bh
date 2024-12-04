@@ -29,13 +29,18 @@ const MapScreen: React.FC = () => {
         setSearchedPlace(route.params?.searchedPlace ?? null);
     }, [route.params?.searchedPlace]);
 
-    const handleSearchPlace = (place: Place) => {
+    const handleSearchPlace = async (place: Place) => {
         setLoadingRegion(true);
         setRegionToSearch(null);
-        console.log(`[handleSearchPlace] Searching ${place?.name}...`);
-        setTimeout(() => {
-            setLoadingRegion(false);
-        }, 1000);
+        const reports = await ReportService.fetchReportByCityId(place.id);
+        setLoadingRegion(false);
+        setRegionToSearch(null);
+        if(reports.success){
+            ToastAndroid.show("Loaded!", ToastAndroid.SHORT);
+            setUserReports(reports.data);
+        } else {
+            ToastAndroid.show("Erro!", ToastAndroid.SHORT);
+        }
     }
 
     const handleSearchByCategory = () => {
@@ -52,6 +57,7 @@ const MapScreen: React.FC = () => {
         setRegionToSearch(null);
 
         const reports = await ReportService.fetchByCoordinates(regionToSearch?.latitude, regionToSearch?.longitude);
+        setLoadingRegion(false);
         if(reports.success){
             ToastAndroid.show("Loaded!", ToastAndroid.SHORT);
             setUserReports(reports.data);

@@ -9,7 +9,11 @@ using System.Text;
 
 namespace RelataBH.Service.Relato
 {
-    public class IRelatoServiceImpl(RelatoContext relatoContext, IImageUploader imageUploader) : IRelatoService
+    public class IRelatoServiceImpl(
+        RelatoContext relatoContext, 
+        IImageUploader imageUploader,
+        LocationContext locationContext
+    ) : IRelatoService
     {
         public async Task<IEnumerable<VW_RELATOS>> GetRelatos()
         {
@@ -37,12 +41,27 @@ namespace RelataBH.Service.Relato
                 .ToListAsync();
         }
 
+        public async Task<IEnumerable<Model.Relato.Relato>> SearchByCidade(int id)
+        {
+            return await relatoContext.Relatos
+                .Where(x => x.idCidade == id)
+                .Include(r => r.feedback)
+                .Include(i => i.images)
+                .ToListAsync();
+        }
+
         public async Task<Model.Relato.Relato> SaveRelato(RelatoRequest relato, List<IFormFile> images)
         {
             var imagePaths = await imageUploader.UploadImage(images);
+
+            var idCidade = await locationContext
+                .Cidade
+                .FirstOrDefaultAsync(x => x.Name.ToLower().Contains(relato.NomeCidade.ToLower()));
+
             var relatoSalvo = await relatoContext
                 .Relatos
-                .AddAsync(RelatoMapper.MapRequestToModel(relato, imagePaths));
+                .AddAsync(RelatoMapper.MapRequestToModel(relato, idCidade?.ID ?? -1, imagePaths));
+
             await relatoContext.SaveChangesAsync();
             return relatoSalvo.Entity;
         }
@@ -59,7 +78,7 @@ namespace RelataBH.Service.Relato
                 relatoEditado.titulo = relato.Titulo;
                 relatoEditado.codIndicador = 50;
                 relatoEditado.idUser = 100;
-                relatoEditado.idBairro = 321;
+                relatoEditado.idCidade = 321;
             }
             await relatoContext.SaveChangesAsync();
             return relatoEditado;

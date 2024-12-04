@@ -3,11 +3,12 @@ import React from 'react';
 import { SearchScreen } from "../screens/search";
 import HomeScreen from "../screens/home";
 import { SelectLocationScreen } from "../screens/selectLocation";
-import BoxComponent from "../screens/home/Report/ReportBox";
 
 export type HomeStackNavigation = {
-    BoxComponent: { region?: { latitude: number; longitude: number ; latitudeDelta: number ;longitudeDelta:number}; address?:string} ;
-    HomeScreen: { searchedPlace: Place | null }
+    HomeScreen: { 
+        searchedPlace: Place | null,
+        region: RelatoRegion | null;
+    }
     SearchScreen: undefined
     SelectLocationScreen: undefined 
 }
@@ -20,7 +21,6 @@ const HomeStack: React.FC = () => {
     return (
         <AppStack.Navigator initialRouteName="HomeScreen" screenOptions={{ headerShown: false }}>
             <AppStack.Screen name="HomeScreen" component={HomeScreen} />
-            <AppStack.Screen name="BoxComponent" component={BoxComponent} />
             <AppStack.Screen name="SearchScreen" component={SearchScreen} />
             <AppStack.Screen name="SelectLocationScreen" component={SelectLocationScreen} />
         </AppStack.Navigator>

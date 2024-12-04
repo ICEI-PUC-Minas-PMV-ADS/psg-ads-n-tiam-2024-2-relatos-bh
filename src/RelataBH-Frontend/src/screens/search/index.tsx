@@ -48,7 +48,7 @@ export const SearchScreen: React.FC = () => {
                                 <Button
                                     key={item.id}
                                     mode="text"
-                                    onPress={() => { navigation.navigate("HomeScreen", { searchedPlace: item }) }}>
+                                    onPress={() => { navigation.navigate("HomeScreen", { searchedPlace: item, region: null }) }}>
                                     <Text style={{ textAlign: 'left', flex: 1 }}>{item.name}</Text>
                                 </Button>
                                 <Divider />

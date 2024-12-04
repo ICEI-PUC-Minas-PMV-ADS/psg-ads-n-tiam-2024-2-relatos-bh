@@ -38,6 +38,13 @@ namespace RelataBH.Controllers
             return Ok(await relatoService.GetRelatosInArea(area));
         }
 
+        [HttpGet("searchByCidade")]
+        public async Task<ActionResult<IEnumerable<Relato>>> SearchByCidade([FromQuery] int id)
+        {
+            IEnumerable<Relato> relatos = await relatoService.SearchByCidade(id);
+            return Ok(relatos);
+        }
+
         [HttpPost]
         [Consumes("multipart/form-data")]
         public async Task<ActionResult<Relato>> SaveRelato(
