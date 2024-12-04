@@ -12,7 +12,7 @@ export const ReportScreen: React.FC = () => {
     const navigation = useNavigation<HomeStackTypes>();
     const route = useRoute<RouteProp<HomeStackNavigation, "HomeScreen">>();
 
-    const [region, setRegion] = useState<{ latitude: number; longitude: number; latitudeDelta: number; longitudeDelta: number, address?:string } | null>(null);
+    const [region, setRegion] = useState<RelatoRegion | null>(null);
     const [images, setImages] = useState<string[]>([]);
     const [adress, setAdress] = useState<string | null | undefined>("");
     const [categories, setCategories] = useState<ReportCategory[]>([]);
@@ -25,7 +25,7 @@ export const ReportScreen: React.FC = () => {
         Titulo: '',
         IdCategoria: 0,
         IdUser: 0,
-        IdBairro: 0,
+        NomeCidade: "",
         images: [''],
     });
 
@@ -37,7 +37,6 @@ export const ReportScreen: React.FC = () => {
     const fetchCategories = async () => {
         const result = await ReportService.fetchCategories();
         if (result.success) {
-            console.log(result.data)
             setCategories(result.data);
         }
     }
@@ -48,10 +47,11 @@ export const ReportScreen: React.FC = () => {
 
     useEffect(() => {
         setRegion(route.params?.region ?? null);
-        setRelato(prevRelato  => ({...prevRelato, Endereco: route.params?.region?.address ?? ""})); 
-        setRelato(prevRelato  => ({...prevRelato, Latitude: `${route.params?.region?.latitude}`}));
-        setRelato(prevRelato  => ({...prevRelato, Longitude: `${route.params?.region?.longitude}`}));
-        console.log(">>>>" + route.params?.region?.longitude); 
+        console.log(JSON.stringify(region));
+        setRelato(prevRelato  => ({...prevRelato, Endereco: route.params?.region?.address ?? "aa"})); 
+        setRelato(prevRelato  => ({...prevRelato, Latitude: String(route.params?.region?.latitude ?? 0)}));
+        setRelato(prevRelato  => ({...prevRelato, Longitude: String(route.params?.region?.longitude ?? 0)}));
+        setRelato(prevRelato  => ({...prevRelato, NomeCidade: route.params?.region?.city ?? ""}));
     }, [route.params?.region]);
 
     useEffect(() => {

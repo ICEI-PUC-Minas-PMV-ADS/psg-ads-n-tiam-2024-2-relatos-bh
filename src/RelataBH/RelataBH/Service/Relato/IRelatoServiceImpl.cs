@@ -9,7 +9,11 @@ using System.Text;
 
 namespace RelataBH.Service.Relato
 {
-    public class IRelatoServiceImpl(RelatoContext relatoContext, IImageUploader imageUploader) : IRelatoService
+    public class IRelatoServiceImpl(
+        RelatoContext relatoContext, 
+        IImageUploader imageUploader,
+        LocationContext locationContext
+    ) : IRelatoService
     {
         public async Task<IEnumerable<VW_RELATOS>> GetRelatos()
         {
@@ -37,17 +41,27 @@ namespace RelataBH.Service.Relato
                 .ToListAsync();
         }
 
-        public async Task<IEnumerable<VW_RELATOS>> SearchByCidade(int id)
+        public async Task<IEnumerable<Model.Relato.Relato>> SearchByCidade(int id)
         {
-            return await relatoContext.VW_RELATOS.Where(x => x.IdCidade == id).ToListAsync();
+            return await relatoContext.Relatos
+                .Where(x => x.idCidade == id)
+                .Include(r => r.feedback)
+                .Include(i => i.images)
+                .ToListAsync();
         }
 
         public async Task<Model.Relato.Relato> SaveRelato(RelatoRequest relato, List<IFormFile> images)
         {
             var imagePaths = await imageUploader.UploadImage(images);
+
+            var idCidade = await locationContext
+                .Cidade
+                .FirstOrDefaultAsync(x => x.Name.ToLower().Contains(relato.NomeCidade.ToLower()));
+
             var relatoSalvo = await relatoContext
                 .Relatos
-                .AddAsync(RelatoMapper.MapRequestToModel(relato, imagePaths));
+                .AddAsync(RelatoMapper.MapRequestToModel(relato, idCidade?.ID ?? -1, imagePaths));
+
             await relatoContext.SaveChangesAsync();
             return relatoSalvo.Entity;
         }

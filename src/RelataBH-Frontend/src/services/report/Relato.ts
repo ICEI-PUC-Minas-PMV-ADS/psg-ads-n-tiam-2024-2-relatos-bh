@@ -6,6 +6,6 @@ type Relato = {
     Titulo: string,
     IdCategoria: number,
     IdUser: number,
-    IdBairro: number,
+    NomeCidade: string,
     images: [String]
 }

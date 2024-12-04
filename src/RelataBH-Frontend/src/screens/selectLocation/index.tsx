@@ -16,20 +16,20 @@ export const SelectLocationScreen: React.FC = () => {
   const fetchAddress = async (latitude: number, longitude: number) => {
     try {
       const response = await fetch(
-        `https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json&addressdetails=1`, 
+        `https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json&addressdetails=1`,
         {
           headers: {
-            'User-Agent': 'SeuAppName/1.0 (email@dominio.com)',  
+            'User-Agent': 'SeuAppName/1.0 (email@dominio.com)',
           }
         }
       );
-      
+
       if (!response.ok) {
         throw new Error("Erro na requisição, status: " + response.status);
       }
-  
+
       const data = await response.json();
-      
+
       if (data && data.address) {
         const road = data.address.road || "Rua não encontrada";
         const city = data.address.city || "Cidadde Não Encontrada"
@@ -43,7 +43,7 @@ export const SelectLocationScreen: React.FC = () => {
       setAddress("Erro ao buscar endereço");
     }
   };
-  
+
   useEffect(() => {
     (async () => {
       const { status } = await Location.requestForegroundPermissionsAsync();
@@ -66,7 +66,7 @@ export const SelectLocationScreen: React.FC = () => {
       fetchAddress(latitude, longitude);
     })();
   }, []);
- 
+
   const onRegionChangeComplete = (region: Region) => {
     setRegion(region);
     const { latitude, longitude } = region;
@@ -75,18 +75,26 @@ export const SelectLocationScreen: React.FC = () => {
   };
 
   const handleBackButtonPress = () => {
-    console.log(region);
+    console.log({
+      latitude: region?.latitude ?? 0,
+      longitude: region?.longitude ?? 0,
+      latitudeDelta: region?.latitudeDelta ?? 0,
+      longitudeDelta: region?.longitudeDelta ?? 0,
+      address: `${address}, ${city}`,
+      city: city
+    } as RelatoRegion);
     if (region) {
-      navigation.navigate("HomeScreen", { 
-        searchedPlace: null, 
-        region: { 
+      navigation.navigate("HomeScreen", {
+        searchedPlace: null,
+        region: {
           latitude: region?.latitude ?? 0,
           longitude: region?.longitude ?? 0,
           latitudeDelta: region?.latitudeDelta ?? 0,
           longitudeDelta: region?.longitudeDelta ?? 0,
-          address: address
-      }
-       })
+          address: `${address}, ${city}`,
+          city: city
+        } as RelatoRegion
+      })
     }
   };
 
@@ -98,7 +106,7 @@ export const SelectLocationScreen: React.FC = () => {
         initialRegion={region || undefined}
         onRegionChangeComplete={onRegionChangeComplete}
       >
-      
+
         {markerCoordinate && (
           <Marker
             coordinate={markerCoordinate}
@@ -112,7 +120,7 @@ export const SelectLocationScreen: React.FC = () => {
           />
         )}
       </MapView>
-      
+
       <View style={{ position: "absolute", bottom: 50, alignSelf: "center" }}>
         <Text>Endereço: {address}, {city}</Text>
       </View>

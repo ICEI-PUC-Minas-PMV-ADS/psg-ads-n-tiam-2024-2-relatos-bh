@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import { StyleProp, ToastAndroid, View, ViewStyle } from "react-native";
-import MapView, { Marker, Region } from "react-native-maps";
+import { Platform, StyleProp, ToastAndroid, View, ViewStyle } from "react-native";
+import MapView, { Marker, Region, PROVIDER_GOOGLE, PROVIDER_DEFAULT } from "react-native-maps";
 import * as Location from 'expo-location';
 import React from "react";
 import { ReportService } from "../../../../services/report/ReportService";
-import { Text } from "react-native-paper";
+import { Icon, Text } from "react-native-paper";
 import { Double } from "react-native/Libraries/Types/CodegenTypes";
 
 type Props = {
@@ -25,10 +25,6 @@ export const MapComponent: React.FC<Props> = ({
     const [isMapReady, setMapReady] = useState<Boolean>(false);
     const [markers, setMarkers] = useState<UserReport[]>([]);
 
-    const fetchReports = async (lat: number, long: number) => {
-        //call backend
-    }
-
     useEffect(() => {
         (async () => {
             let { status } = await Location.requestForegroundPermissionsAsync();
@@ -43,11 +39,10 @@ export const MapComponent: React.FC<Props> = ({
     }, []);
 
     useEffect(() => {
-        points?.map((report: UserReport, index: number) => {
-            console.log(report.latitude);
-            console.log(report.longitude);
-        })
-        setMarkers(points ?? [])
+        setMarkers(points ?? []);
+        if(mapRef.current){
+            mapRef.current.fitToSuppliedMarkers(markers.map(({ id }) => String(id)));
+        }
     }, [points])
 
     useEffect(() => {
@@ -67,8 +62,10 @@ export const MapComponent: React.FC<Props> = ({
 
     return (
         <MapView
+            provider={ Platform.OS === 'android' ? PROVIDER_GOOGLE : PROVIDER_DEFAULT }
             style={style}
             ref={mapRef}
+            initialRegion={undefined}
             showsUserLocation={true}
             rotateEnabled={false}
             showsMyLocationButton={false}
@@ -77,25 +74,11 @@ export const MapComponent: React.FC<Props> = ({
             showsPointsOfInterest = {false}
             onRegionChangeComplete={(region) => { isMapReady ? onRegionChanged(region) : {}}}
         >
-            {/* {markers.map((marker, index) => (
-                <Marker
-                    key={index}
-                    coordinate={{latitude: marker.latitude, longitude: marker.longitude}}
-                    title={marker.nomeCategoria}
-                    description={marker.emailUser}
-                    />
-            ))} */}
-
-            {/* <Marker
-            key={1}
-                        coordinate={{latitude: 1, longitude: 1}}
-                        title={"asas"}
-                    /> */}
             {points &&
                 points.map((report: UserReport, index: number) => {
-                    console.log("_______" + report.latitude);
                     return <Marker
-                        key={index}
+                        key={String(report.id)}
+                        identifier={String(report.id)}
                         coordinate={{
                             latitude: Number(report.latitude),
                             longitude: Number(report.longitude)
@@ -103,7 +86,12 @@ export const MapComponent: React.FC<Props> = ({
                         title={report.nomeCategoria}
                         onSelect={() => { onReportSelected(report) }}
                         onDeselect={() => { onReportSelected(null) }}
-                    />
+                    >
+                        <Icon
+                            source="camera"
+                            size={20}
+                        />
+                    </Marker>
 })
             }
         </MapView>

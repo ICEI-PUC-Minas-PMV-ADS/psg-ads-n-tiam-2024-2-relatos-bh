@@ -8,17 +8,17 @@ export class ReportService {
     static saveRelato = async (relato: Relato) : Promise<ApiResponse<Boolean>> => {
         try {
             const formData = new FormData();
-            formData.append("Latitude", relato.Latitude);
-            formData.append("Longitude", relato.Longitude);
-            formData.append("Endereco", "Meu endereco");
-            formData.append("DescricaoRelato", relato.DescricaoRelato);
-            formData.append("Titulo", relato.Titulo);
-            formData.append("IdCategoria", '50');
-            formData.append("IdUser", "100");
-            formData.append("IdBairro", "5");
+            formData.append('IdUser', '100');
+            formData.append('Endereco', relato.Endereco);
+            formData.append('Latitude', relato.Latitude);
+            formData.append('DescricaoRelato', relato.DescricaoRelato);
+            formData.append('Longitude', relato.Longitude);
+            formData.append('IdCategoria', String(relato.IdCategoria));
+            formData.append('Titulo', relato.Titulo);
+            formData.append('NomeCidade', relato.NomeCidade);
             
             let url = ENDPOINTS.CREATE_RELATO();
-            const response = await api.post(url, formData, { headers: {'Content-Type': 'multipart/form-data'}});
+            const response = await api.post(url, formData, { headers: {'Content-Type': 'multipart/form-data', 'accept': 'application/json'}});
             return { success: true, data: true }
         } catch (error) {
             return { success: false, error: "Error saving relato" }

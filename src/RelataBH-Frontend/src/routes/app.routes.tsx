@@ -7,13 +7,7 @@ import { SelectLocationScreen } from "../screens/selectLocation";
 export type HomeStackNavigation = {
     HomeScreen: { 
         searchedPlace: Place | null,
-        region?: { 
-            latitude: number; 
-            longitude: number ; 
-            latitudeDelta: number ;
-            longitudeDelta:number; 
-            address?:string
-        } | null;
+        region: RelatoRegion | null;
     }
     SearchScreen: undefined
     SelectLocationScreen: undefined 

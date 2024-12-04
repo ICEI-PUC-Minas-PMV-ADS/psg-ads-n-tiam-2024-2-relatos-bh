@@ -5,7 +5,11 @@ namespace RelataBH.Service.Relato.Mapper
 {
     public class RelatoMapper
     {
-        static public Model.Relato.Relato MapRequestToModel(RelatoRequest relato, List<string> images) => new()
+        static public Model.Relato.Relato MapRequestToModel(
+            RelatoRequest relato,
+            int idCidade,
+            List<string> images
+        ) => new()
         {
             latitude = relato.Latitude,
             longitude = relato.Longitude,
@@ -15,7 +19,7 @@ namespace RelataBH.Service.Relato.Mapper
             titulo = relato.Titulo,
             codIndicador = relato.IdCategoria,
             idUser = relato.IdUser,
-            idCidade = relato.IdBairro,
+            idCidade = idCidade,
             images = images.Select(item => new RelatoImage() { Url = item }).ToList()
         };
     }
