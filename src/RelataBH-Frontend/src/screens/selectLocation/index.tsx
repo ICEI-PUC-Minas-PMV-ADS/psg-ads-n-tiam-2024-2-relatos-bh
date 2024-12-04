@@ -75,12 +75,18 @@ export const SelectLocationScreen: React.FC = () => {
   };
 
   const handleBackButtonPress = () => {
-    if (region ) {
-      navigation.navigate({
-        name: "BoxComponent",
-        params: { region: region, address:address},
-        merge: true,
-      });
+    console.log(region);
+    if (region) {
+      navigation.navigate("HomeScreen", { 
+        searchedPlace: null, 
+        region: { 
+          latitude: region?.latitude ?? 0,
+          longitude: region?.longitude ?? 0,
+          latitudeDelta: region?.latitudeDelta ?? 0,
+          longitudeDelta: region?.longitudeDelta ?? 0,
+          address: address
+      }
+       })
     }
   };
 

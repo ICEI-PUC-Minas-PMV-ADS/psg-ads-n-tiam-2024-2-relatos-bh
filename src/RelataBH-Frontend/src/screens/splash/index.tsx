@@ -1,15 +1,13 @@
 import LottieView from 'lottie-react-native';
-import { useContext, useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { Animated, Easing, View, Text } from 'react-native';
-import AppContext from '../../context/app';
 import { useNavigation } from '@react-navigation/native';
-import { RootStackNavigation, RootStackTypes } from '../../routes/routes';
+import { RootStackTypes } from '../../routes/routes';
 import { TokenService } from '../../services/TokenService';
 
 const AnimatedLottieView = Animated.createAnimatedComponent(LottieView);
 
 export const AppSplashScreen: React.FC = () => {
-    const { updateSplashRunning } = useContext(AppContext);
     const animationProgress = useRef(new Animated.Value(0));
     const rootNavigation = useNavigation<RootStackTypes>();
 
