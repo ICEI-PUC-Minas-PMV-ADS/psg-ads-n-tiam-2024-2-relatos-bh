@@ -2,8 +2,7 @@ import React from 'react';
 import { SafeAreaView, StatusBar } from 'react-native';
 import { BottomNavigation, TouchableRipple } from 'react-native-paper';
 import MapScreen from './map/MapScreen';
-import Report from './report/Report';
-import { ProfileScreen } from './profile';
+import  ProfileScreen  from './profile';
 import { ReportScreen } from './report';
 
 const MapRoute = () => <MapScreen />;
