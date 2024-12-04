@@ -1,6 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using Microsoft.SqlServer.Types;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using NetTopologySuite.Geometries;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -25,6 +23,8 @@ namespace RelataBH.Model.Relato
         public string DescricaoRelato { get; set; }
         [Column("TITULO")]
         public string Titulo { get; set; }
+        [Column("ID_CIDADE")]
+        public int IdCidade { get; set; }
         [Column("NOME_CATEGORIA")]
         public string NomeCategoria { get; set; }
         [Column("DESCRICAO_CATEGORIA")]

@@ -37,6 +37,11 @@ namespace RelataBH.Service.Relato
                 .ToListAsync();
         }
 
+        public async Task<IEnumerable<VW_RELATOS>> SearchByCidade(int id)
+        {
+            return await relatoContext.VW_RELATOS.Where(x => x.IdCidade == id).ToListAsync();
+        }
+
         public async Task<Model.Relato.Relato> SaveRelato(RelatoRequest relato, List<IFormFile> images)
         {
             var imagePaths = await imageUploader.UploadImage(images);
@@ -59,7 +64,7 @@ namespace RelataBH.Service.Relato
                 relatoEditado.titulo = relato.Titulo;
                 relatoEditado.codIndicador = 50;
                 relatoEditado.idUser = 100;
-                relatoEditado.idBairro = 321;
+                relatoEditado.idCidade = 321;
             }
             await relatoContext.SaveChangesAsync();
             return relatoEditado;

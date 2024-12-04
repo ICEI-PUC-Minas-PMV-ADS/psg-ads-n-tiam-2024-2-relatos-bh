@@ -15,7 +15,7 @@ namespace RelataBH.Service.Relato.Mapper
             titulo = relato.Titulo,
             codIndicador = relato.IdCategoria,
             idUser = relato.IdUser,
-            idBairro = relato.IdBairro,
+            idCidade = relato.IdBairro,
             images = images.Select(item => new RelatoImage() { Url = item }).ToList()
         };
     }
