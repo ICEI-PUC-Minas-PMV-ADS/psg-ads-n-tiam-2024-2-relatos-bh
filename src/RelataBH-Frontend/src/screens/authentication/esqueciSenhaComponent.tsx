@@ -38,7 +38,6 @@ export default function EsqueciSenhaComponent({ onEsqueciSenha = () => { }, onBa
                 Recuperar Senha
             </Button>
 
-            { }
             <View style={styles.backButtonContainer}>
                 <IconButton
                     icon="arrow-left"

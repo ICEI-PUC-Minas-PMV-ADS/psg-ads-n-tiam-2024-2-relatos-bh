@@ -5,12 +5,6 @@ import MapScreen from './map/MapScreen';
 import  ProfileScreen  from './profile';
 import { ReportScreen } from './report';
 
-const MapRoute = () => <MapScreen />;
-
-const ReportRoute = () => <ReportScreen/>
-
-const ProfileRoute = () => <ProfileScreen />;
-
 const HomeScreen: React.FC = () => {
 
     const [index, setIndex] = React.useState(0);
@@ -19,6 +13,12 @@ const HomeScreen: React.FC = () => {
         { key: 'report', title: 'Relatar', focusedIcon: 'plus-circle', unfocusedIcon: 'plus-circle-outline' },
         { key: 'profile', title: 'Perfil', focusedIcon: 'account', unfocusedIcon: 'account-outline' },
     ]);
+
+    const MapRoute = () => <MapScreen />;
+
+    const ReportRoute = () => <ReportScreen goToMap={() => { setIndex(0); }}/>
+
+    const ProfileRoute = () => <ProfileScreen />;
 
     const renderScene = BottomNavigation.SceneMap({
         map: MapRoute,

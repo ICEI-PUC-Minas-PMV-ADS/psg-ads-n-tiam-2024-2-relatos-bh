@@ -3,6 +3,7 @@ import React from 'react';
 import { SearchScreen } from "../screens/search";
 import HomeScreen from "../screens/home";
 import { SelectLocationScreen } from "../screens/selectLocation";
+import { ReportDetail } from "../screens/relatodetail";
 
 export type HomeStackNavigation = {
     HomeScreen: { 
@@ -10,7 +11,11 @@ export type HomeStackNavigation = {
         region: RelatoRegion | null;
     }
     SearchScreen: undefined
-    SelectLocationScreen: undefined 
+    SelectLocationScreen: undefined,
+    ReportDetailScreen: {
+        relato: UserReport | null,
+        isEdit: boolean | null
+    };
 }
 
 export type HomeStackTypes = NativeStackNavigationProp<HomeStackNavigation>;
@@ -23,6 +28,7 @@ const HomeStack: React.FC = () => {
             <AppStack.Screen name="HomeScreen" component={HomeScreen} />
             <AppStack.Screen name="SearchScreen" component={SearchScreen} />
             <AppStack.Screen name="SelectLocationScreen" component={SelectLocationScreen} />
+            <AppStack.Screen name="ReportDetailScreen" component={ReportDetail} options={{headerShown: true}}/>
         </AppStack.Navigator>
     );
 }

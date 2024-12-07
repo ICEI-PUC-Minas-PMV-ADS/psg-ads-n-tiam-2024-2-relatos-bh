@@ -82,7 +82,7 @@ const MapScreen: React.FC = () => {
         if(searchedPlace != null){
             handleSearchPlace(searchedPlace)
         }
-    }, [searchedPlace])
+    }, [searchedPlace]);
 
     return (
         <GestureHandlerRootView style={{ flex: 1 }}>
