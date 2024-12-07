@@ -1,9 +1,7 @@
 import axios from "axios";
 import axiosInstance from "../axiosInstance";
 import { ENDPOINTS } from "../Endpoints";
-import AsyncStorage, { useAsyncStorage } from "@react-native-async-storage/async-storage";
-import { executeNativeBackPress } from "react-native-screens";
-import { useState } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export class ProfileService {
     static fetchProfile = async (): Promise<ApiResponse<Profile>> => {
@@ -30,15 +28,15 @@ export class ProfileService {
     }
 
     static fetchProfileHistoryReports = async (): Promise<ApiResponse<ReportHistory>> => {
-        const profileString = await AsyncStorage.getItem("profile");
-        if (profileString === null) {
-            throw new Error("Profile not found in storage.");
+        const history = await AsyncStorage.getItem("history");
+        if (history != null) {
+            return { success: true, data: JSON.parse(history) } as SuccessResponse<ReportHistory>
+        } else {
+            const response = await axiosInstance.get<ReportHistory>(ENDPOINTS.REPORTS_BY_USER(100));
+            AsyncStorage.setItem("history", JSON.stringify(response.data));
+            return { success: true, data: response.data } as SuccessResponse<ReportHistory>
         }
-        const profile: Profile = JSON.parse(profileString);
-        const response = await axiosInstance.get<ReportHistory>(ENDPOINTS.REPORTS_BY_USER(profile.id))
-        return { success: true, data: response.data } as SuccessResponse<ReportHistory>
     }
-
 
     static fetchProfileHistoryReports2 = async (): Promise<ApiResponse<ReportHistory[]>> => {
         const ListReportHistories: ReportHistory[] =

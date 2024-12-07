@@ -3,9 +3,6 @@ import { Platform, StyleProp, ToastAndroid, View, ViewStyle } from "react-native
 import MapView, { Marker, Region, PROVIDER_GOOGLE, PROVIDER_DEFAULT } from "react-native-maps";
 import * as Location from 'expo-location';
 import React from "react";
-import { ReportService } from "../../../../services/report/ReportService";
-import { Icon, Text } from "react-native-paper";
-import { Double } from "react-native/Libraries/Types/CodegenTypes";
 
 type Props = {
     onReportSelected: (report: UserReport | null) => void,
@@ -86,12 +83,7 @@ export const MapComponent: React.FC<Props> = ({
                         title={report.nomeCategoria}
                         onSelect={() => { onReportSelected(report) }}
                         onDeselect={() => { onReportSelected(null) }}
-                    >
-                        <Icon
-                            source="camera"
-                            size={20}
-                        />
-                    </Marker>
+                    />
 })
             }
         </MapView>

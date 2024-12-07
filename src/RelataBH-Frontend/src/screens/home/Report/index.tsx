@@ -2,7 +2,7 @@ import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
 import { useEffect, useState } from "react";
 import { ScrollView, View, Image } from "react-native";
 import MapView from "react-native-maps";
-import { Appbar, Button, Card, Chip, Text, TextInput, Title } from "react-native-paper";
+import { Appbar, Button, Card, Chip, Icon, IconButton, Text, TextInput, Title } from "react-native-paper";
 import { HomeStackNavigation, HomeStackTypes } from "../../../routes/app.routes";
 import * as ImagePicker from 'expo-image-picker';
 import { ReportService } from "../../../services/report/ReportService";
@@ -29,6 +29,14 @@ export const ReportScreen: React.FC = () => {
         images: [''],
     });
 
+    const requestPermission = async () => {
+        // Request permission to access media library
+        const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+        if (status !== 'granted') {
+            alert('Permission to access media library is required!');
+        }
+    };
+
     const handleCategorySelected = (category: ReportCategory) => {
         setSelectedCategory(category);
         setRelato(prevRelato  => ({...prevRelato, IdCategoria: category.id})); 
@@ -42,8 +50,12 @@ export const ReportScreen: React.FC = () => {
     }
 
     const saveRelato = async () => {
-        await ReportService.saveRelato(relato);
+        let relatoSalvo = await ReportService.saveRelato(relato);
     }
+
+    const removeImage = (index: number) => {
+        setImages(images.filter((_, i) => i !== index));
+    };
 
     useEffect(() => {
         setRegion(route.params?.region ?? null);
@@ -59,6 +71,7 @@ export const ReportScreen: React.FC = () => {
     }, []);
 
     const pickImages = async () => {
+        await requestPermission();
         let result = await ImagePicker.launchImageLibraryAsync({
             mediaTypes: ImagePicker.MediaTypeOptions.Images,
             allowsEditing: false,
@@ -68,6 +81,8 @@ export const ReportScreen: React.FC = () => {
         });
         if (!result.canceled) {
             const uris = result.assets.map((asset) => asset.uri);
+            console.log("selecionou!");
+            setRelato(prevRelato  => ({...prevRelato, images: uris ?? []}));
             setImages(uris);
         }
     };
@@ -162,8 +177,9 @@ export const ReportScreen: React.FC = () => {
                             <Text variant="bodyMedium">Imagens</Text>
                             <ScrollView horizontal showsHorizontalScrollIndicator={false} >
                                 {images.map((uri, index) => (
-                                    <View key={index}>
-                                        <Image source={{ uri }} />
+                                    <View key={index} style={{marginVertical: 6}}>
+                                        <Image source={{ uri }} style={{width: 150, height: 200, borderRadius: 5, marginEnd: 4}}/>
+                                        <IconButton icon={"close"} onPress={() => { removeImage(index) }} style={{position: 'absolute', right: 0, backgroundColor: '#CCC'}}/>
                                     </View>
                                 ))}
                             </ScrollView>

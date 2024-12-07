@@ -21,14 +21,13 @@ export const HistoryCard: React.FC<HistoryCardProps> = ({ showBottomSheet }) => 
     };
 
     const fetchHistoryProfile = async () => {
-        const historyResponse = await ProfileService.fetchProfileHistoryReports2();
+        const historyResponse = await ProfileService.fetchProfileHistoryReports();
         if (historyResponse.success) {
             const data = Array.isArray(historyResponse.data) ? historyResponse.data : [historyResponse.data];
             setHistory(data);
         }
         setLoading(false);
     };
-
 
     useEffect(() => {
         fetchQtdRelatosProfile();
@@ -62,23 +61,16 @@ export const HistoryCard: React.FC<HistoryCardProps> = ({ showBottomSheet }) => 
                                     <Text>{item.titulo}</Text>
                                     <Text>{item.dsc.length > 100 ? item.dsc.slice(0, 104) + '...' : item.dsc}</Text>
                                 </View>
-
-
                             </View>
-                            <View style={{ position: 'absolute' }}>
+                            <View style={{ position: 'absolute', right: 0 }}>
                                 <IconButton
                                     icon="dots-vertical"
                                     size={20}
-                                    onPress={() => showBottomSheet(item.id, item.titulo)}
-                                    style={{
-                                        left: '700%',
-                                        bottom: '10%' 
-                                    }}
+                                    onPressOut={() => showBottomSheet(item.id, item.titulo)}
                                 />
                             </View>
                         </Card.Content>
                     </Card>
-
                 ))
             )}
         </View>

@@ -47,10 +47,11 @@ export const ProfileSettingsComponent: React.FC<Props> = ({ visible, hideBottomS
                 snapPoints={snapPoints}
                 enableDynamicSizing={false}
                 enablePanDownToClose={true}
+                enableContentPanningGesture={false}
                 onChange={handleSheetChanges}
-                style={{ padding: 6 }}
+                style={{ padding: 6}}
             >
-                <View style={{ padding: 10 }}>
+                <View style={{ padding: 10, zIndex: 2 }}>
                     <Text
                         style={{
                             textAlign: "center",
@@ -65,7 +66,7 @@ export const ProfileSettingsComponent: React.FC<Props> = ({ visible, hideBottomS
 
                     <Button textColor="black">Editar Perfil</Button>
 
-                    <Button onPress={handleLogout} textColor="#B61B1B">
+                    <Button onPressOut={handleLogout} textColor="#B61B1B">
                         Sair
                     </Button>
                 </View>

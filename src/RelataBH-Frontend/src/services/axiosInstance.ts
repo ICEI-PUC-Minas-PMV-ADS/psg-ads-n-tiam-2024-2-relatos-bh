@@ -27,7 +27,7 @@ api.interceptors.response.use(
         return response;
     },
     (error) => {
-        console.error('Response error:', error.response);
+        console.error('Response error:', JSON.stringify(error));
         return Promise.reject(error);
     }
 )
@@ -35,6 +35,7 @@ api.interceptors.response.use(
 const logResponse = (response: AxiosResponse<any, any>) => {
     if(__DEV__){
         console.log('Response:', {
+            a: JSON.stringify(response),
             statusCode: response.status,
             body: response.data,
         });
