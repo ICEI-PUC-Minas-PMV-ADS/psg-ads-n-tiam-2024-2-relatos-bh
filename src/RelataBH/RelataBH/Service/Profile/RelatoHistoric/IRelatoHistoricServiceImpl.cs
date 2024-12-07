@@ -9,6 +9,7 @@ namespace RelataBH.Service.Profile.RelatoHistoric
         {
             var relatosUser = await relatoContext.Relatos
                .Where(x => x.idUser == userId)
+               .OrderByDescending(item => item.createdAt)
                .ToListAsync();
 
             return relatosUser;
