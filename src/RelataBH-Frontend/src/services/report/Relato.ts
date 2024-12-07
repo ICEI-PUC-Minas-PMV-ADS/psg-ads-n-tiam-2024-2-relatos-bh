@@ -7,5 +7,5 @@ type Relato = {
     IdCategoria: number,
     IdUser: number,
     NomeCidade: string,
-    images: [String]
+    images: string[]
 }

@@ -50,9 +50,9 @@ export const ProfileCard: React.FC<ProfileCardProps> = ({ showBottomSheet }) => 
                     />
                 </ShimmerPlaceHolder>
 
-                <Card style={{ marginTop: 75, paddingTop: 64, width: '100%', backgroundColor: '#FEF7FF' }}>
-                    <Card.Content>
-                        <View style={{ alignItems: 'center' }}>
+                <Card style={{ width: '100%', backgroundColor: '#FEF7FF', marginTop: 75 }}>
+                    <Card.Content style={{paddingTop: 64}}>
+                        <View style={{ alignItems: 'center', marginTop: 12 }}>
                             <ShimmerPlaceHolder
                                 shimmerColors={["#E0E0E0", "#F5F5F5", "#E0E0E0"]}
                                 LinearGradient={LinearGradient}
@@ -80,7 +80,7 @@ export const ProfileCard: React.FC<ProfileCardProps> = ({ showBottomSheet }) => 
 
                         <Divider style={{ marginVertical: 12 }} />
 
-                        <View style={{ alignItems: 'center' }}>
+                        <View style={{ alignItems: 'center', marginBottom: 14 }}>
                             <ShimmerPlaceHolder
                                 shimmerColors={["#E0E0E0", "#F5F5F5", "#E0E0E0"]}
                                 LinearGradient={LinearGradient}
@@ -105,20 +105,14 @@ export const ProfileCard: React.FC<ProfileCardProps> = ({ showBottomSheet }) => 
                                 </Text>
                             </ShimmerPlaceHolder>
                         </View>
+                    </Card.Content>
 
-                        <View style={{ position: 'absolute' }}>
-                            <IconButton
+                    <IconButton
                                 icon="cog"
                                 size={30}
-                                onPress={showBottomSheet} 
-                                style={{
-                                    left: '565%',
-                                    top: '-115%',
-                                    zIndex: 2,
-                                }}
+                                onPress={showBottomSheet}
+                                style={{position: 'absolute', top: 0, right: 0}}
                             />
-                        </View>
-                    </Card.Content>
                 </Card>
             </View>
         </GestureHandlerRootView>
