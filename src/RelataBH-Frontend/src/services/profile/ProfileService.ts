@@ -27,14 +27,14 @@ export class ProfileService {
         return { success: true, data: profileData.qntRelatos }
     }
 
-    static fetchProfileHistoryReports = async (): Promise<ApiResponse<ReportHistory>> => {
+    static fetchProfileHistoryReports = async (): Promise<ApiResponse<UserReport[]>> => {
         const history = await AsyncStorage.getItem("history");
         if (history != null) {
-            return { success: true, data: JSON.parse(history) } as SuccessResponse<ReportHistory>
+            return { success: true, data: JSON.parse(history) } as SuccessResponse<UserReport[]>
         } else {
-            const response = await axiosInstance.get<ReportHistory>(ENDPOINTS.REPORTS_BY_USER(100));
+            const response = await axiosInstance.get<UserReport[]>(ENDPOINTS.REPORTS_BY_USER(100));
             AsyncStorage.setItem("history", JSON.stringify(response.data));
-            return { success: true, data: response.data } as SuccessResponse<ReportHistory>
+            return { success: true, data: response.data } as SuccessResponse<UserReport[]>
         }
     }
 

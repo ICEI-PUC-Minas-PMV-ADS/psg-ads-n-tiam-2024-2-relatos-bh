@@ -12,15 +12,15 @@ export const ProfileScreen: React.FC = () => {
     const [visibleSettings, setVisibleSettings] = useState(false);
     const [visible, setVisible] = useState(false);
 
-    const [selectedHistory, setSelectedHistory] = useState<{ id: number, titulo: string | null }>({ id: -1, titulo: null });
+    const [selectedHistory, setSelectedHistory] = useState<UserReport|null>(null);
 
-    const showBottomSheet = (id: number, titulo: string) => {
-        setSelectedHistory({id, titulo}); 
+    const showBottomSheet = (history: UserReport) => {
+        setSelectedHistory(history); 
         setVisible(true);
     };
 
     const hideBottomSheet = () => {
-        setSelectedHistory({id: -1, titulo: null}); 
+        setSelectedHistory(null); 
         setVisible(false);
     };
 
@@ -33,7 +33,7 @@ export const ProfileScreen: React.FC = () => {
     };
 
     return (
-        <GestureHandlerRootView style={{ flex: 1 }}>
+        <View style={{ flex: 1 }}>
             <ScrollView
                 style={{ flex: 1, paddingHorizontal: 16 }}
                 contentContainerStyle={{ paddingBottom: 24 }}
@@ -85,8 +85,7 @@ export const ProfileScreen: React.FC = () => {
 
                 <WhoAreWeCard />
             </ScrollView>
-
-            {/* Componente de Configurações do Perfil */}
+                    {/* Componente de Configurações do Perfil */}
             <ProfileSettingsComponent
                 visible={visibleSettings}
                 hideBottomSheet={hideBottomSheetSettings}
@@ -95,11 +94,10 @@ export const ProfileScreen: React.FC = () => {
             <HistoriesUpdateDelete
                 visible={visible}
                 hideBottomSheet={hideBottomSheet}
-                id={selectedHistory.id}
-                titulo={selectedHistory.titulo}
-          
+                relato={selectedHistory}
+                
             />
-        </GestureHandlerRootView>
+        </View>
     );
 };
 

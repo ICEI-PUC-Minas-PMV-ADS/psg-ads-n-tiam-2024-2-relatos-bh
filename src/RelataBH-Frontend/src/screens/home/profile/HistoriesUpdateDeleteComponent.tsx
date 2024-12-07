@@ -1,18 +1,21 @@
 import React, { useRef, useState, useEffect, useMemo, useContext } from "react";
 import { View, StyleSheet, TouchableWithoutFeedback } from "react-native";
-import { Button, Text } from "react-native-paper";
+import { Button, Divider, Text } from "react-native-paper";
 import BottomSheet from "@gorhom/bottom-sheet";
+import { useNavigation } from "@react-navigation/native";
+import { HomeStackTypes } from "../../../routes/app.routes";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 
 type Props = {
     hideBottomSheet: () => void;
     visible: boolean;
-    id: number | null;
-    titulo: string | null;
+    relato: UserReport | null
 };
 
-export const HistoriesUpdateDelete: React.FC<Props> = ({ visible, hideBottomSheet, id, titulo }) => {
+export const HistoriesUpdateDelete: React.FC<Props> = ({ visible, hideBottomSheet, relato }) => {
     const SheetRef = useRef<BottomSheet>(null);
+    const navigation = useNavigation<HomeStackTypes>();
 
     useEffect(() => {
         visible ? SheetRef.current?.expand() : SheetRef.current?.close();
@@ -53,12 +56,19 @@ export const HistoriesUpdateDelete: React.FC<Props> = ({ visible, hideBottomShee
                             marginBottom: 8,
                         }}
                     >
-                        {titulo}
+                        {relato?.titulo}
                     </Text>
-                    <View style={{ padding: 2, justifyContent:"center" }}>
-                        <Button textColor="black">Editar Relato</Button>
+                    <View style={{ padding: 2, justifyContent: "center" }}>
+                        <TouchableOpacity onPress={() => {
+                            hideBottomSheet()
+                            navigation.navigate("ReportDetailScreen", { relato: relato, isEdit: true })
+                        }}>
+                            <Button textColor="black">Editar Relato</Button>
+                        </TouchableOpacity>
 
+                        <Divider />
                         <Button textColor="#B61B1B"> Excluir </Button>
+                        <Divider />
                     </View>
                 </View>
             </BottomSheet>

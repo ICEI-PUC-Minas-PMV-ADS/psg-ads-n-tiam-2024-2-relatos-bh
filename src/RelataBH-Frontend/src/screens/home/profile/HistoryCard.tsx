@@ -1,15 +1,19 @@
-import { View, Image, Button, TouchableOpacity, ActivityIndicator } from "react-native";
-import { Card, IconButton, Text } from "react-native-paper";
+import { View, Image, Button, ActivityIndicator } from "react-native";
+import { Card, Icon, IconButton, Text } from "react-native-paper";
 import { ProfileService } from "../../../services/profile/ProfileService";
 import { useEffect, useState } from "react";
+import { useNavigation } from "@react-navigation/native";
+import { HomeStackTypes } from "../../../routes/app.routes";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 
 interface HistoryCardProps {
-    showBottomSheet: (id: number, titulo: string) => void;
+    showBottomSheet: (history: UserReport) => void;
 }
 
 export const HistoryCard: React.FC<HistoryCardProps> = ({ showBottomSheet }) => {
-    const [history, setHistory] = useState<ReportHistory[]>([]);
+    const navigation = useNavigation<HomeStackTypes>();
+    const [history, setHistory] = useState<UserReport[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
     const [qtdRelatos, setQtdRelatos] = useState<Number>();
 
@@ -47,29 +51,32 @@ export const HistoryCard: React.FC<HistoryCardProps> = ({ showBottomSheet }) => 
             ) : (
                 history.map((item, index) => (
                     <Card mode="contained" style={{ paddingHorizontal: 0, marginBottom: 12 }} key={index} >
-                        <Card.Content style={{ paddingHorizontal: 0, paddingVertical: 0 }}>
+                        <TouchableOpacity onPress={() => { navigation.navigate("ReportDetailScreen", {relato: item, isEdit: false}) }} >
+                        <Card.Content style={{ paddingHorizontal: 0, paddingVertical: 0 }} >
                             <View style={{ flexDirection: "row", height: 108 }}>
                                 <Image
                                     source={{
-                                        uri: "https://picsum.photos/700",
+                                        uri: item.images?.[0]?.url ?? "https://picsum.photos/700"
                                     }}
                                     style={{ width: "40%", height: "100%", borderRadius: 6 }}
                                 />
 
                                 <View style={{ flexDirection: "column", paddingHorizontal: 4, flex: 1, marginTop: 8 }}>
-                                    <Text>{item.createdAt}</Text>
-                                    <Text>{item.titulo}</Text>
-                                    <Text>{item.dsc.length > 100 ? item.dsc.slice(0, 104) + '...' : item.dsc}</Text>
+                                    <Text>{item?.createdAt ?? 0}</Text>
+                                    <Text>{item?.titulo}</Text>
+                                    <Text>{item?.dsc.length > 100 ? item.dsc.slice(0, 104) + '...' : item.dsc}</Text>
                                 </View>
                             </View>
-                            <View style={{ position: 'absolute', right: 0 }}>
-                                <IconButton
-                                    icon="dots-vertical"
+                            <View style={{ position: 'absolute', right: 0, paddingHorizontal: 10, paddingVertical: 10 }}>
+                                <TouchableOpacity onPress={() => showBottomSheet(item)}>
+                                <Icon
+                                    source="dots-vertical"
                                     size={20}
-                                    onPressOut={() => showBottomSheet(item.id, item.titulo)}
                                 />
+                                </TouchableOpacity>
                             </View>
                         </Card.Content>
+                        </TouchableOpacity>
                     </Card>
                 ))
             )}
