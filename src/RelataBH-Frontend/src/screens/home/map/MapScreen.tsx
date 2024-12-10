@@ -11,6 +11,7 @@ import { ReportSearchBar } from "./components/ReportSearchBar";
 import { ReportSearchButton } from "./components/ReportSeachButton";
 import { ReportSearchLoading } from "./components/ReportSearchLoading";
 import { ReportService } from "../../../services/report/ReportService";
+import { Button, IconButton } from "react-native-paper";
 
 const MapScreen: React.FC = () => {
 
@@ -32,10 +33,11 @@ const MapScreen: React.FC = () => {
     const handleSearchPlace = async (place: Place) => {
         setLoadingRegion(true);
         setRegionToSearch(null);
+        console.log("Search by place");
         const reports = await ReportService.fetchReportByCityId(place.id);
         setLoadingRegion(false);
         setRegionToSearch(null);
-        if(reports.success){
+        if (reports.success) {
             ToastAndroid.show("Loaded!", ToastAndroid.SHORT);
             setUserReports(reports.data);
         } else {
@@ -43,22 +45,40 @@ const MapScreen: React.FC = () => {
         }
     }
 
-    const handleSearchByCategory = () => {
+    const handleSearchByCategory = async () => {
         setLoadingRegion(true);
         setRegionToSearch(null);
-        console.log(`Searching ${searchedPlace?.name}...`);
-        setTimeout(() => {
+        if(regionToSearch == null){
             setLoadingRegion(false);
-        }, 1000);
+            return;
+        }
+        if(selectedCategories == null){
+            setLoadingRegion(false);
+            return;
+        }
+
+        const reports = await ReportService.fetchByCategory(regionToSearch?.latitude, regionToSearch?.longitude, selectedCategories[0]?.id ?? 0);
+        if (reports.success) {
+            ToastAndroid.show("Loaded!", ToastAndroid.SHORT);
+            setUserReports(reports.data ?? []);
+        } else {
+            ToastAndroid.show("Erro! " + reports.error, ToastAndroid.SHORT);
+        }
+        // setTimeout(() => {
+        //     setLoadingRegion(false);
+        // }, 1000);
     }
 
     const handleSearchRegion = async () => {
         setLoadingRegion(true);
         setRegionToSearch(null);
-
+        if(regionToSearch == null){
+            setLoadingRegion(false);
+            return;
+        }
         const reports = await ReportService.fetchByCoordinates(regionToSearch?.latitude, regionToSearch?.longitude);
         setLoadingRegion(false);
-        if(reports.success){
+        if (reports.success) {
             ToastAndroid.show("Loaded!", ToastAndroid.SHORT);
             setUserReports(reports.data);
         } else {
@@ -72,51 +92,67 @@ const MapScreen: React.FC = () => {
         // }, 1000);
     }
 
+    const searchUserLocation = async (latitude: number, longitude: number) => {
+        setLoadingRegion(true);
+        const reports = await ReportService.fetchByCoordinates(latitude, longitude);
+        if (reports.success) {
+            ToastAndroid.show("Loaded!", ToastAndroid.SHORT);
+            setUserReports(reports.data);
+        } else {
+            ToastAndroid.show("Erro!", ToastAndroid.SHORT);
+        }
+        setLoadingRegion(false);
+    }
+
     useEffect(() => {
-        if(selectedCategories != null){
+        if (selectedCategories != null) {
             handleSearchByCategory()
         }
     }, [selectedCategories]);
 
     useEffect(() => {
-        if(searchedPlace != null){
+        if (searchedPlace != null) {
             handleSearchPlace(searchedPlace)
         }
     }, [searchedPlace]);
 
     return (
         <GestureHandlerRootView style={{ flex: 1 }}>
-            <ReportSearchBar 
+            <ReportSearchBar
                 onSearchClicked={() => { navigation.navigate("SearchScreen") }}
-                onCategoryClicked = {() => { setShowCategory(!showCategory) }}
-                place = { searchedPlace }
-                categoryCount={ selectedCategories?.length ?? 0 }
+                onCategoryClicked={() => { 
+                    setSelectedReport(null);
+                    setShowCategory(!showCategory)
+                 }}
+                place={searchedPlace}
+                categoryCount={selectedCategories?.length ?? 0}
             />
             <View style={{ flex: 1 }}>
 
-                { regionToSearch && <ReportSearchButton onSeachClicked={() => handleSearchRegion()}/> }
+                {regionToSearch && <ReportSearchButton onSeachClicked={() => handleSearchRegion()} />}
 
-                { loadingRegion && <ReportSearchLoading /> }
+                {loadingRegion && <ReportSearchLoading />}
 
                 <MapComponent
                     style={{ width: '100%', height: '100%', zIndex: 0 }}
-                    points={ userReposts }
+                    points={userReposts}
+                    searchOnUserLocation={(latitude, longitude) => { searchUserLocation(latitude, longitude) }}
                     onReportSelected={(report) => { setSelectedReport(report) }}
                     onRegionChanged={(region) => { setRegionToSearch(region) }}
                 />
 
-                <ReportDetail report={selectedReport} style={{ position: 'absolute', bottom: 0, zIndex: 1 }} />
-
-                <ReportCategoryComponent 
-                    style={{ position: 'absolute', bottom: 0, zIndex: 1 }} 
+                <ReportCategoryComponent
+                    style={{ position: 'absolute', bottom: 0, zIndex: 1 }}
                     isVisible={showCategory}
-                    onCategorySelected={(categories) => { 
+                    onCategorySelected={(categories) => {
                         setShowCategory(false)
-                        setSelectedCategories(categories) 
+                        setSelectedCategories(categories)
                     }}
                     selectedCategories={selectedCategories}
-                    onClose={() => { setShowCategory(false) } }
-                    />
+                    onClose={() => { setShowCategory(false) }}
+                />
+                
+                <ReportDetail report={selectedReport} style={{ position: 'absolute', bottom: 0, zIndex: 1 }} />
             </View>
         </GestureHandlerRootView>
     );

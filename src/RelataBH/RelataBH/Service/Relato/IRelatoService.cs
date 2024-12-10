@@ -15,5 +15,6 @@ namespace RelataBH.Service.Relato
         public Task<bool> DeleteRelato(int id);
         public Task<IEnumerable<Model.Relato.Relato>> GetRelatosInArea(AreaRequest area);
         public Task<IEnumerable<Model.Relato.Relato>> SearchByCidade(int id);
+        public Task<IEnumerable<Model.Relato.Relato>> SearchByCategory(string lat, string log, int categoryId);
     }
 }

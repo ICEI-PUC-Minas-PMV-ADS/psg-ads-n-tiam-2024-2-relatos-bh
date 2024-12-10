@@ -71,7 +71,7 @@ export const ReportCategoryComponent: React.FC<Props> = ({ style, isVisible, onC
             enablePanDownToClose={true}
             onChange={handleOnDrag}
         >
-            <View style={{ flex: 1, justifyContent: 'space-between' }}>
+            <View style={{ flex: 1, justifyContent: 'space-between', zIndex: 2 }}>
                 <View >
                     <Text style={{ textAlign: 'center', marginVertical: 4, fontWeight: 'bold' }} variant="titleMedium">Categorias</Text>
                     <Divider style={{ marginBottom: 12 }} />
