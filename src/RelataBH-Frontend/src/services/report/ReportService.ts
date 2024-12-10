@@ -55,6 +55,20 @@ export class ReportService {
         }
     }
 
+    static fetchByCategory = async (lat: number | undefined, long: number | undefined, categoryId: number) => {
+        try {
+            if (lat != undefined && long != undefined) {
+                 let url = ENDPOINTS.SEARCH_RELATO_BY_CATEGORY(lat, long, categoryId);
+                 const response = await api.get<UserReport[]>(url);
+                 return { success: true, data: response.data };
+             } else {
+                throw new Error("undefined lat/long");
+             }
+        } catch (error) {
+            return { success: false, error: error instanceof Error ? error?.message : 'Unknown error' };
+        }
+    }
+
     static fetchByCategorie = async (categorieId: number, lat: number, long: number): Promise<ApiResponse<UserReport[]>> => {
         try {
             let url = ENDPOINTS.SEARCH_BY_CENTRAL_POINT(lat, long);

@@ -50,6 +50,16 @@ namespace RelataBH.Service.Relato
                 .ToListAsync();
         }
 
+        public async Task<IEnumerable<Model.Relato.Relato>> SearchByCategory(string lat, string log, int categoryId)
+        {
+            return await relatoContext.Relatos
+                .FromSqlRaw(BuildSql(lat, log, 2))
+                .Where(x => x.codIndicador == categoryId)
+                .Include(r => r.feedback)
+                .Include(i => i.images)
+                .ToListAsync();
+        }
+
         public async Task<Model.Relato.Relato> SaveRelato(RelatoRequest relato, List<IFormFile> images)
         {
             var imagePaths = await imageUploader.UploadImage(images);

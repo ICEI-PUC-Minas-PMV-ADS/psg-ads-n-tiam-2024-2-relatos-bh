@@ -11,6 +11,7 @@ export const ENDPOINTS = {
     CREATE_RELATO: () => BASE_URL + `api/Relato`,
     REPORT_BY_CITY_ID: (cityId: number) => BASE_URL + `api/Relato/searchByCidade?id=${cityId}`,
     REPORTS_BY_USER: (userId: number) => BASE_URL + `api/user/historic?userId=${userId}`,
+    SEARCH_RELATO_BY_CATEGORY: (lat: number, log: number, categoryId: number) => BASE_URL + `api/Relato/searchByCategory?lat=${lat}&log=${log}&categoryId=${categoryId}`
     
     //caminho para os outros endpoints ficarao aqui 
 }

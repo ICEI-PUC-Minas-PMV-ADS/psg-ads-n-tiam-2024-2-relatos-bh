@@ -18,7 +18,7 @@ export const ReportSearchBar: React.FC<Props> = ({
         <View style={{ flexDirection: 'row', justifyContent: 'center', alignContent: 'center', alignItems: 'center', marginRight: 6 }}>
                 <Searchbar
                     style={{ marginStart: 8, marginVertical: 16, flex: 1 }}
-                    placeholder="Buscar bairro..."
+                    placeholder="Buscar cidade..."
                     focusable={false}
                     onPress={() => { onSearchClicked() }}
                     onChangeText={(text) => { }}

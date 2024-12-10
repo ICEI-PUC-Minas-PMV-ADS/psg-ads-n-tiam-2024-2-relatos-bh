@@ -28,7 +28,7 @@ export const SearchScreen: React.FC = () => {
                 <IconButton icon={"keyboard-backspace"} onPress={() => navigation.goBack()} />
                 <Searchbar
                     style={{ marginHorizontal: 8, marginVertical: 16, flex: 1 }}
-                    placeholder="Buscar bairro..."
+                    placeholder="Buscar cidade..."
                     autoFocus={true}
                     returnKeyType="search"
                     onSubmitEditing={search}

@@ -45,6 +45,13 @@ namespace RelataBH.Controllers
             return Ok(relatos);
         }
 
+        [HttpGet("searchByCategory")]
+        public async Task<ActionResult<IEnumerable<Relato>>> SearchByCategory([FromQuery] string lat, [FromQuery] string log, [FromQuery] int categoryId)
+        {
+            IEnumerable<Relato> relatos = await relatoService.SearchByCategory(lat, log, categoryId);
+            return Ok(relatos);
+        }
+
         [HttpPost]
         [Consumes("multipart/form-data")]
         public async Task<ActionResult<Relato>> SaveRelato(
